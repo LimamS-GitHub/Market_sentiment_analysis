@@ -1,4 +1,4 @@
-# Market_sentiment_analysis
+# Market sentiment analysis
 
 This project aims to analyze market sentiment based on Twitter data and investigate its potential impact on stock performance.
 
