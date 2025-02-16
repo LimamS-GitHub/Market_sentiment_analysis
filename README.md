@@ -1,7 +1,8 @@
-# Market Sentiment Analysis !
+# Market Sentiment Analysis
 
 This project explores the relationship between Twitter sentiment and Tesla's stock performance. By analyzing public sentiment, we investigate whether trends in online discourse can be leveraged to inform trading strategies.
 
+yes we can
 ---
 
 ## Project Overview
