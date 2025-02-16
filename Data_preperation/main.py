@@ -22,7 +22,7 @@ def main():
             df_tweet['CLEANED_TWEET'] = df_tweet['text'].apply(clean_tweet)
             df_tweet['SENTIMENT'] = df_tweet['text'].apply(analyze_sentiment_vader)
             print(f'Total number of tweets: {len(df_tweet)}')
-            df_tweet.to_csv("tweets.csv", index=False, encoding="utf-8-sig")
+            df_tweet.to_csv("data_example.csv", index=False, encoding="utf-8-sig")
     finally:
         driver.quit()
 
