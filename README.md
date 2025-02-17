@@ -55,8 +55,8 @@ This project explores the relationship between Twitter sentiment and Tesla's sto
 
 ---
 
-## Get Involved
+## Referances
 
-Feel free to explore the code, data, and visualizations in this repository. Your feedback is welcome—if you have questions or suggestions, please reach out!
+> Hutto, C.J. & Gilbert, E.E. (2014). VADER: A Parsimonious Rule-based Model for Sentiment Analysis of Social Media Text. Eighth International Conference on Weblogs and Social Media (ICWSM-14). Ann Arbor, MI, June 2014.
 
 ---
