@@ -1,57 +1,63 @@
 # Market Sentiment Analysis
 
-This project explores the relationship between Twitter sentiment and Tesla's stock performance. By analyzing public sentiment, we investigate whether trends in online discourse can be leveraged to inform trading strategies.
+This project investigates the relationship between Twitter sentiment and Tesla's stock performance. By analyzing public sentiment, we aim to determine whether trends in online discourse can be leveraged to inform trading strategies.
 
 ---
 
 ## Project Overview
 
-### Objective
-- **Analyze** how sentiment expressed on Twitter correlates with Tesla's stock performance.
-- **Evaluate** the potential of using sentiment data as a signal for trading decisions.
+### **Objective**
+- **Analyze** the correlation between Twitter sentiment and Tesla’s stock movements.
+- **Evaluate** the potential of sentiment data as a predictive signal for trading decisions.
 
-### Data Sources
-- **Twitter Data:** Scraped via Selenium using the Nitter interface.
+### **Data Sources**
+- **Twitter Data:** Collected via Selenium using the Nitter interface.  
 - **Stock Market Data:** Retrieved from Yahoo Finance.
 
 ---
 
 ## Workflow
 
-### 1. Data Preparation
+### **1. Data Preparation**
 
-- **Data Collection**
-  - **Twitter:** Scrape tweets from Nitter with Selenium.
-  - **Financial Data:** Fetch stock market info from Yahoo Finance.
+#### **Data Collection**
+- **Twitter Sentiment:** Scraped from Nitter using Selenium.  
+- **Financial Data:** Extracted from Yahoo Finance.  
 
-- **Data Cleaning**
-  - Remove duplicates for unique entries.
-  - Eliminate URLs and special characters to refine the text.
-  - Normalize the text (e.g., lowercasing, punctuation handling) to prepare for analysis.
+#### **Data Cleaning**
+- Remove duplicate tweets to ensure uniqueness.  
+- Filter out URLs, special characters, and irrelevant content.  
+- Normalize text (e.g., lowercase conversion, punctuation removal) to optimize sentiment analysis.  
 
-- **Sentiment Analysis**
-  - Utilize **VADER (Valence Aware Dictionary and sEntiment Reasoner)** to compute sentiment scores for each tweet on a scale from -1 (negative) to +1 (positive).
-
----
-
-### 2. Data Analysis
-
-- **Exploratory Data Analysis (EDA)**
-  - Visualize the distribution of sentiment scores.
-  - Identify the most frequently mentioned companies.
-  - Chart sentiment trends over time.
-
-- **Correlation with Market Data**
-  - Compare sentiment scores with key stock market indicators.
-  - Investigate possible relationships between social media sentiment and market performance.
+#### **Sentiment Analysis**
+- **VADER (Valence Aware Dictionary and sEntiment Reasoner):** Computes sentiment scores ranging from -1 (negative) to +1 (positive).  
+- **BERT-based Model:** Classifies sentiment into discrete categories (-1 for negative, +1 for positive).  
+- **Additional Models:** Test alternative sentiment analysis approaches to enhance accuracy.  
 
 ---
 
-### 3. Trading Strategy Development
+### **2. Data Analysis**
 
-- **Signal Generation**
-  - Transform sentiment analysis and financial indicators into potential buy/sell signals.
-  - Evaluate the efficiency of these signals through backtesting.
+#### **Exploratory Data Analysis (EDA)**
+- Visualize the distribution of sentiment scores.  
+- Identify sentiment trends over time.  
+- Compare sentiment variations across different timeframes.  
+
+#### **Correlation with Market Data**
+- Examine relationships between sentiment scores and key stock market indicators.  
+- Investigate whether social media sentiment can anticipate market fluctuations.  
+- Develop predictive models to assess the influence of sentiment on Tesla's stock price.  
+
+#### **Refining Sentiment Analysis**
+- Implement a **sentiment calibration method** to better align sentiment scores with stock market movements.  
+
+---
+
+### **3. Trading Strategy Development**
+
+#### **Signal Generation**
+- Convert refined sentiment scores and financial indicators (e.g., MACD, moving averages) into actionable buy/sell signals.  
+- Assess the effectiveness of these signals through backtesting.  
 
 ---
 
