@@ -2,8 +2,6 @@ import time
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
 
 #------------------------------------------------------------------------------------------------------------------
@@ -12,7 +10,12 @@ def initialize_driver():
     """Initializes and returns a Selenium driver in headless mode."""
     service = Service(ChromeDriverManager().install())
     options = webdriver.ChromeOptions()
-    options.add_argument("--headless")  # Silent mode
+    options.add_argument("--headless")
+    options.add_argument(
+        "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+        "AppleWebKit/537.36 (KHTML, like Gecko) "
+        "Chrome/58.0.3029.110 Safari/537.3"
+    )
     return webdriver.Chrome(service=service, options=options)
 
 #------------------------------------------------------------------------------------------------------------------
@@ -35,11 +38,11 @@ def click_load_more(driver):
     try:
         load_more_buttons = driver.find_elements(By.CSS_SELECTOR, "div.show-more a")
         for button in load_more_buttons:
-            if "Load more" in button.text:  # Checks if it's indeed 'Load more'
+            if "Load more" in button.text:
                 button.click()
-                time.sleep(2)  # Wait for new tweets to load
+                time.sleep(2)
                 return True
-        return False  # No 'Load more' button found
+        return False
     except Exception as e:
         print(f"Error clicking 'Load more': {e}")
         return False

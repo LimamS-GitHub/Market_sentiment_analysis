@@ -3,6 +3,7 @@ from driver import scroll_page, click_load_more
 from utils import is_english_text
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
+from datetime import timedelta,datetime
 from selenium.webdriver.support import expected_conditions as EC
 
 #----------------------------------------------------------------------------------------------------------------------------
@@ -18,7 +19,7 @@ def extract_tweets(driver, date_):
         tweet_id = div.find_element(By.CSS_SELECTOR, ".tweet-date a").get_attribute("href").split("/")[-1] if div.find_elements(By.CSS_SELECTOR, ".tweet-date a") else ""
         verified = div.find_elements(By.CSS_SELECTOR, "span.icon-ok.verified-icon.blue[title='Verified blue account']")
         if is_english_text(tweet_text):
-            tweet_data.append({"id": tweet_id, "query_date": date_, "text": tweet_text, "verified": bool(verified)})
+            tweet_data.append({"id": tweet_id, "query_date": datetime.strptime(date_, "%Y-%m-%d") - timedelta(days=1), "text": tweet_text, "verified": bool(verified)})
             
     print(f"{len(tweet_divs)} tweets found for {date_} with {len(tweet_data)} in English")
     return tweet_data, len(tweet_divs)
@@ -33,7 +34,7 @@ def scrape_nitter_date_range(driver, date_list, number_tweets_per_day):
         print("Processing date:", date_)
         total_tweets_day = 0
         try:
-            url = f"https://nitter.net/search?f=tweets&q=Tesla&until={date_}"
+            url = f"https://nitter.net/search?f=tweets&q=tesla&f-verified=on&until={date_}"
             driver.get(url)
             
             # Wait for tweets to load

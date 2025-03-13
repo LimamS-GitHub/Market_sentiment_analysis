@@ -17,7 +17,7 @@ def clean_tweet(tweet):
     """Cleans a tweet by removing mentions, links, special characters, and numbers."""
     tweet = re.sub(r'@', '', tweet)
     tweet = re.sub(r'http\S+|www\S+', '', tweet)
-    #tweet = re.sub(r'[^\w\s]', '', tweet)
+    tweet = re.sub(r'[^\w\s]', '', tweet)
     tweet = re.sub(r'\d+', '', tweet)
     tweet = re.sub(r'\n', '', tweet)
     tweet = tweet.strip()
