@@ -13,18 +13,31 @@ def main():
 
     minimum_number_tweets_per_day = 50
     all_tweets = []
+    monthly_buffer = []
     current_month = None
-    monthly_dfs = {}  # Pour la sauvegarde par mois
+    proxy = None
 
     for single_date in date_list:
         valide = 1
         attempt = 0
 
+        date_obj = datetime.strptime(single_date, "%Y-%m-%d").date()
+        month_key = date_obj.strftime("%Y-%m")
+
+        # 🔁 Nouveau mois ? → sauvegarder l'ancien
+        if current_month is not None and month_key != current_month:
+            if monthly_buffer:
+                monthly_df = pd.concat(monthly_buffer, ignore_index=True)
+                filename = f"C:\\Users\\selim\\Desktop\\Market_sentiment_analysis\\Data_preperation\\{current_month}.csv"
+                monthly_df.to_csv(filename, index=False, encoding="utf-8-sig")
+                print(f"💾 Mois {current_month} sauvegardé avec {len(monthly_df)} tweets.")
+                monthly_buffer = []  # reset
+
+        current_month = month_key  # Mise à jour du mois courant
+
         while valide:
             print(f'📅 {single_date} | Attempt: {attempt}')
-            current_month_ = datetime.strptime(single_date, "%Y-%m-%d").date().month
-            if current_month_ != current_month or attempt > 0:
-                current_month = current_month_
+            if attempt > 2:
                 proxy = valid_proxy()
 
             driver = None
@@ -38,17 +51,11 @@ def main():
                     df_tweet['SENTIMENT_VADER'] = df_tweet['text'].apply(analyze_sentiment_vader)
 
                     for model in models:
-                        df_tweet[f'SENTIMENT_{model.model.name_or_path.split("/")[-1]}'] = df_tweet['CLEANED_TWEET'].apply(
-                            lambda x: sentiment(x, model)
-                        )
+                        model_name = model.model.name_or_path.split("/")[-1]
+                        df_tweet[f'SENTIMENT_{model_name}'] = df_tweet['CLEANED_TWEET'].apply(lambda x: sentiment(x, model))
 
                     all_tweets.append(df_tweet)
-                    month_key = single_date[:7]  # Format 'YYYY-MM'
-
-                    if month_key not in monthly_dfs:
-                        monthly_dfs[month_key] = []
-
-                    monthly_dfs[month_key].append(df_tweet)
+                    monthly_buffer.append(df_tweet)
                     valide = 0
                     print(f"✅ {len(df_tweet)} tweets collectés pour {single_date}")
                 else:
@@ -65,19 +72,18 @@ def main():
                     except:
                         pass
 
-    # Sauvegarde générale
+    # Sauvegarde du dernier mois
+    if monthly_buffer:
+        monthly_df = pd.concat(monthly_buffer, ignore_index=True)
+        filename = f"C:\\Users\\selim\\Desktop\\Market_sentiment_analysis\\Data_preperation\\{current_month}.csv"
+        monthly_df.to_csv(filename, index=False, encoding="utf-8-sig")
+        print(f"💾 Dernier mois {current_month} sauvegardé avec {len(monthly_df)} tweets.")
+
+    # Sauvegarde globale
     if all_tweets:
         final_df = pd.concat(all_tweets, ignore_index=True)
         final_df.to_csv("C:\\Users\\selim\\Desktop\\Market_sentiment_analysis\\Data_preperation\\All_tweets.csv", index=False, encoding="utf-8-sig")
-        print(f"\n💾 Fichier global : {len(final_df)} tweets enregistrés.")
-
-    # Sauvegarde par mois
-    for month_key, dfs in monthly_dfs.items():
-        monthly_df = pd.concat(dfs, ignore_index=True)
-        filename = f"tweets_{month_key}.csv"
-        monthly_df.to_csv("C:\\Users\\selim\\Desktop\\Market_sentiment_analysis\\Data_preperation\\"+filename, index=False, encoding="utf-8-sig")
-        print(f"📁 Sauvegardé : {filename} ({len(monthly_df)} tweets)")
+        print(f"\n📦 Fichier global : {len(final_df)} tweets enregistrés.")
 
 if __name__ == "__main__":
     main()
-
