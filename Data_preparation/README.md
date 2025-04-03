@@ -62,7 +62,7 @@ Format des colonnes :
 
 ## Conseils & Limites
 
-- **Erreurs 429 / Captchas** : Nitter peut bloquer les requêtes si trop nombreuses. C'est pour cela que le script utilise :
+- **Erreurs 429** : Nitter peut bloquer les requêtes si trop nombreuses. C'est pour cela que le script utilise :
   - des pauses aléatoires entre les jours (`time.sleep`)
   - des **proxies HTTPS** automatiquement récupérés depuis `sslproxies.org`
 - **Retry automatique** : jusqu’à 10 tentatives par jour si le scraping échoue.

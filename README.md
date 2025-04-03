@@ -1,14 +1,15 @@
 # Market Sentiment Analysis
 
-This project investigates the relationship between Twitter sentiment and Tesla's stock performance. By analyzing public sentiment, we aim to determine whether trends in online discourse can be leveraged to inform trading strategies.
+This project investigates how Twitter sentiment related to Tesla can be transformed into **adaptive trading signals**. Rather than relying on correlation analysis, we explore how tuning and optimizing model parameters can reveal predictive insights from online discourse.
 
 ---
 
 ## Project Overview
 
 ### **Objective**
-- **Analyze** the correlation between Twitter sentiment and Tesla’s stock movements.
-- **Evaluate** the potential of sentiment data as a predictive signal for trading decisions.
+- **Develop** an adaptive model that transforms Twitter sentiment into trading signals.
+- **Optimize** model parameters to maximize return using historical data.
+- **Assess** whether public sentiment can be used to construct actionable strategies.
 
 ### **Data Sources**
 - **Twitter Data:** Collected via Selenium using the Nitter interface.  
@@ -21,48 +22,59 @@ This project investigates the relationship between Twitter sentiment and Tesla's
 ### **1. Data Preparation**
 
 #### **Data Collection**
-- **Twitter Sentiment:** Scraped from Nitter using Selenium.  
-- **Financial Data:** Extracted from Yahoo Finance.  
+- **Twitter Sentiment:** Scraped daily from Nitter using Selenium and rotating proxies.  
+- **Financial Data:** Extracted from Yahoo Finance (TSLA).
 
 #### **Data Cleaning**
 - Remove duplicate tweets to ensure uniqueness.  
-- Filter out URLs, special characters, and irrelevant content.  
-- Normalize text (e.g., lowercase conversion, punctuation removal) to optimize sentiment analysis.  
+- Clean text (remove URLs, mentions, numbers, punctuation).  
+- Filter only English tweets.  
 
 #### **Sentiment Analysis**
-- **VADER (Valence Aware Dictionary and sEntiment Reasoner):** Computes sentiment scores ranging from -1 (negative) to +1 (positive).  
-- **BERT-based Model:** Classifies sentiment into discrete categories (-1 for negative, +1 for positive).  
-- **Additional Models:** Test alternative sentiment analysis approaches to enhance accuracy.  
+- **VADER:** Scores sentiment from -1 to 1.  
+- **BERT-based Models:** Classify tweets as positive, negative, or neutral.  
+- **Multiple Models Compared:** FinancialBERT, DistilRoBERTa, DeBERTa.  
+- Tweets with neutral scores are excluded from trading simulations.
 
 ---
 
 ### **2. Data Analysis**
 
 #### **Exploratory Data Analysis (EDA)**
-- Visualize the distribution of sentiment scores.  
-- Identify sentiment trends over time.  
-- Compare sentiment variations across different timeframes.  
+- Visualize distribution of sentiment scores across models.  
+- Highlight dominance of neutral sentiment and its implications.  
+- Filter and retain only impactful sentiment signals (above a threshold).
 
-#### **Correlation with Market Data**
-- Examine relationships between sentiment scores and key stock market indicators.  
-- Investigate whether social media sentiment can anticipate market fluctuations.  
-- Develop predictive models to assess the influence of sentiment on Tesla's stock price.  
+#### **Daily Aggregation**
+- Sentiment scores averaged by day.  
+- Split between verified and non-verified user tweets.  
+- Weighted aggregation allows flexible contribution control from each group.  
 
-#### **Refining Sentiment Analysis**
-- Implement a **sentiment calibration method** to better align sentiment scores with stock market movements.  
+#### **Sentiment Calibration**
+- Sentiment time series are normalized and smoothed.  
+- Rolling averages applied to capture trends and reduce noise.  
 
 ---
 
 ### **3. Trading Strategy Development**
 
 #### **Signal Generation**
-- Convert refined sentiment scores and financial indicators (e.g., MACD, moving averages) into actionable buy/sell signals.  
-- Assess the effectiveness of these signals through backtesting.  
+- Buy/sell decisions based on thresholds applied to smoothed sentiment signals.  
+- Trades executed at daily open, exits on sentiment reversal.  
+- Portfolio return is tracked over time.
+
+#### **Parameter Optimization**
+- Grid search over multiple configurations:
+  - Sentiment model choice
+  - Rolling window size
+  - Buy/sell thresholds  
+- Best-performing combination is selected based on return.
 
 ---
 
-## Referances
+## References
 
-> Hutto, C.J. & Gilbert, E.E. (2014). VADER: A Parsimonious Rule-based Model for Sentiment Analysis of Social Media Text. Eighth International Conference on Weblogs and Social Media (ICWSM-14). Ann Arbor, MI, June 2014.
+> Hutto, C.J. & Gilbert, E.E. (2014). VADER: A Parsimonious Rule-based Model for Sentiment Analysis of Social Media Text. Eighth International Conference on Weblogs and Social Media (ICWSM-14).  
+> HuggingFace Transformers — Financial Sentiment Models
 
 ---
