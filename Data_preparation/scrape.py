@@ -35,7 +35,7 @@ def extract_tweets(driver, date_):
 
 #----------------------------------------------------------------------------------------------------------------------------
 
-def scrape_nitter_date_range(driver, date_list, number_tweets_per_day):
+def scrape_nitter_date_range(driver, date_list, number_tweets_per_day,company_name="tesla"):
     """Goes through a list of dates and collects tweets from each day."""
     all_data = []
     
@@ -44,7 +44,7 @@ def scrape_nitter_date_range(driver, date_list, number_tweets_per_day):
         total_tweets_day = 0
 
         try:
-            url = f"https://nitter.net/search?f=tweets&q=tesla&f-verified=on&until={date_}"
+            url = f"https://nitter.net/search?f=tweets&q={company_name}&f-verified=on&until={date_}"
             driver.get(url)
             
             # Wait for tweets to appear on the page

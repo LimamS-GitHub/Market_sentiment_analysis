@@ -9,7 +9,7 @@ def save_month(monthly_buffer, month_key):
     """Save monthly tweets to CSV."""
     if monthly_buffer:
         df = pd.concat(monthly_buffer, ignore_index=True)
-        path = f"C:\\Users\\selim\\Desktop\\Market_sentiment_analysis\\Data_preperation\\{month_key}.csv"
+        path = f"C:\\Users\\selim\\Desktop\\Market_sentiment_analysis\\Data_preparation\\Data_for_{month_key}.csv"
         df.to_csv(path, index=False, encoding="utf-8-sig")
         print(f"💾 Month {month_key} saved with {len(df)} tweets.")
 
@@ -22,14 +22,17 @@ def process_tweet_data(df_tweet, models):
         df_tweet[f'SENTIMENT_{name}'] = df_tweet['CLEANED_TWEET'].apply(lambda x: sentiment(x, model))
     return df_tweet
 
-def main(start_date, end_date, minimum_number_tweets_per_day):
+def main(start_date, end_date, minimum_number_tweets_per_day, company_name):
+    """Main function to scrape tweets and save them to CSV files."""
     date_list = generate_date_list(start_date, end_date)
     models = models_sentiment()
     all_tweets, monthly_buffer = [], []
     ip_list = list_proxies()
     proxy, _ = valid_proxy(ip_list)
     current_month = None
-
+    print ("#" * 20)
+    print (start_date.year, end_date.year)
+    print ("#" * 20)
     for date_str in date_list:
         date_obj = datetime.strptime(date_str, "%Y-%m-%d").date()
         month_key = date_obj.strftime("%Y-%m")
@@ -54,7 +57,11 @@ def main(start_date, end_date, minimum_number_tweets_per_day):
 
             try:
                 driver = initialize_driver(proxy)
-                tweet_data = scrape_nitter_date_range(driver, [date_str], minimum_number_tweets_per_day)
+                try:
+                    tweet_data = scrape_nitter_date_range(driver, [date_str], minimum_number_tweets_per_day, company_name)
+                except Exception as e:
+                    print(f"Error scraping date {date_str}: {e}")
+                    tweet_data = []
                 driver.quit()
 
                 df = pd.DataFrame(tweet_data)
@@ -77,11 +84,12 @@ def main(start_date, end_date, minimum_number_tweets_per_day):
     # Save all data
     if all_tweets:
         final_df = pd.concat(all_tweets, ignore_index=True)
-        final_df.to_csv("C:\\Users\\selim\\Desktop\\Market_sentiment_analysis\\Data_preperation\\All_tweets.csv", index=False, encoding="utf-8-sig")
+        final_df.to_csv("C:\\Users\\selim\\Desktop\\Market_sentiment_analysis\\Data_preparation\\Data_"+company_name+".csv", index=False, encoding="utf-8-sig")
         print(f"\n📦 Global file saved with {len(final_df)} tweets.")
 
 if __name__ == "__main__":
     start_date = date(2022, 1, 2)
-    end_date = date(2025, 1, 2)
-    minimum_number_tweets_per_day = 5
-    main(start_date, end_date, minimum_number_tweets_per_day)
+    end_date = date.today()
+    minimum_number_tweets_per_day = 50
+    company_name = "Tesla"
+    main(start_date, end_date, minimum_number_tweets_per_day,company_name)

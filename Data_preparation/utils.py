@@ -53,9 +53,8 @@ def list_proxies():
         columns = row.find_all("td")
         ip = columns[0].text.strip()
         port = columns[1].text.strip()
-        if columns[4].text.strip() == "elite proxy":
-            ip_port = f"{ip}:{port}"
-            ip_list.append(ip_port)
+        ip_port = f"{ip}:{port}"
+        ip_list.append(ip_port)
 
     print(f"🔍 {len(ip_list)} proxies récupérés")
     return ip_list
