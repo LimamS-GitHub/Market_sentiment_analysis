@@ -44,7 +44,8 @@ def scrape_nitter_date_range(driver, date_list, number_tweets_per_day,company_na
         total_tweets_day = 0
 
         try:
-            url = f"https://nitter.net/search?f=tweets&q={company_name}&f-verified=on&until={date_}"
+            #url = f"https://lightbrd.com/search?f=tweets&q={company_name}&f-verified=on&since=&until={date_}&near="
+            url = f"https://nitter.net/search?f=tweets&q={company_name}&f-verified=on&since={(pd.to_datetime(date_) - pd.DateOffset(days=1)).strftime("%Y-%m-%d")}&until={date_}"
             driver.get(url)
             
             # Wait for tweets to appear on the page

@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 from langdetect import detect
 import requests
 import pandas as pd
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 #------------------------------------------------------------------------------------------------------------------
 
@@ -61,19 +62,36 @@ def list_proxies():
 
 #------------------------------------------------------------------------------------------------------------------
 
-def valid_proxy (ip_list):
-    """Teste la liste de proxies pour trouver un proxy HTTPS valide"""
-    while ip_list:
-        proxy = random.choice(ip_list)
-        if test_https_proxy(proxy):
-            print(f"✅ Proxy valide : {proxy}")
-            return proxy,ip_list
-        else:
-            print(f"❌ Proxy refusé : {proxy}")
-            ip_list.remove(proxy)
+def valid_proxies(ip_list, max_workers=10):
+    """Teste en parallèle une liste de proxies et retourne tous les proxies HTTPS valides."""
 
-    print("❌ Aucun proxy HTTPS valide trouvé.")
-    return None,ip_list
+    def wrapper(proxy):
+        return proxy if test_https_proxy(proxy) else None
+
+    valid_proxies = []
+    rejected_proxies = set()
+
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+        futures = {executor.submit(wrapper, proxy): proxy for proxy in ip_list}
+
+        for future in as_completed(futures):
+            proxy = futures[future]
+            try:
+                result = future.result()
+                if result:
+                    print(f"✅ Proxy valide : {result}")
+                    valid_proxies.append(result)
+                else:
+                    print(f"❌ Proxy refusé : {proxy}")
+                    rejected_proxies.add(proxy)
+            except Exception as e:
+                print(f"❌ Erreur lors du test du proxy {proxy} : {e}")
+                rejected_proxies.add(proxy)
+
+    if not valid_proxies:
+        print("❌ Aucun proxy HTTPS valide trouvé.")
+
+    return valid_proxies
 
 #------------------------------------------------------------------------------------------------------------------
 

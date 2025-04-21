@@ -3,7 +3,6 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
-from selenium_stealth import stealth
 
 #------------------------------------------------------------------------------------------------------------------
 
@@ -34,7 +33,6 @@ def scroll_page(driver, scroll_attempts=3):
     prev_height = driver.execute_script("return document.body.scrollHeight")
     for _ in range(scroll_attempts):
         driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-        time.sleep(2)
         new_height = driver.execute_script("return document.body.scrollHeight")
         if new_height == prev_height:
             break
@@ -45,11 +43,11 @@ def scroll_page(driver, scroll_attempts=3):
 def click_load_more(driver):
     """Clicks only on the 'Load more' button and ignores 'Load newest'."""
     try:
+
         load_more_buttons = driver.find_elements(By.CSS_SELECTOR, "div.show-more a")
         for button in load_more_buttons:
             if "Load more" in button.text:
                 button.click()
-                time.sleep(2)
                 return True
         return False
     except Exception as e:
