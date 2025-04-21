@@ -2,23 +2,25 @@
 
 Ce projet permet de **scraper des tweets publics** depuis [Nitter](https://nitter.net), une alternative sans JavaScript à Twitter, et d'appliquer plusieurs **modèles d'analyse de sentiment**. Il est conçu pour contourner les limitations d'accès via un système de **rotation de proxies HTTPS**.
 
-## 🎯 Objectif
+## Objectif
 
 - Récupérer quotidiennement des tweets liés à une entreprise donnée (ex : `Tesla`).
-- Appliquer 5 modèles de sentiment (VADER + 4 Transformers financiers).
+- Appliquer 4 modèles de sentiment (VADER + 3 Transformers financiers).
 - Sauvegarder les résultats par mois et dans un fichier global, pour analyse de tendance ou backtest boursier.
 
 ---
 
-## ⚙️ Dépendances
+## Dépendances
+
 ```bash
 pip install selenium webdriver-manager pandas langdetect beautifulsoup4 requests vaderSentiment transformers
 ```
+
 Python 3.8+ recommandé.
 
 ---
 
-## 🚀 Lancer le scraping
+## Lancer le scraping
 
 ```bash
 python main.py
@@ -28,20 +30,22 @@ Cela lance le scraping pour la plage de dates définie dans `main.py`, par défa
 
 ---
 
-## 🔧 Paramètres configurables (`main.py`)
+## Paramètres configurables (`main.py`)
+
 - `start_date` / `end_date` : plage de dates à scraper
 - `company_name` : mot-clé recherché dans les tweets (par défaut : "Tesla")
 - `minimum_number_tweets_per_day` : nombre minimum de tweets à collecter par jour
 
 ---
 
-## 🧩 Fonctionnement (étapes principales)
+## Fonctionnement (étapes principales)
+
 1. **Initialisation des dates, modèles de sentiment et proxies**
 2. **Pour chaque jour :**
    - Ouverture d'un navigateur avec proxy
    - Scraping sur Nitter
    - Nettoyage et filtrage des tweets en anglais
-   - Analyse de sentiment avec VADER et 4 modèles Transformers
+   - Analyse de sentiment avec VADER et 3 modèles Transformers
    - Enregistrement dans un buffer mensuel et global
 3. **À chaque changement de mois :**
    - Écriture dans un fichier `Data_for_YYYY-MM.csv`
@@ -50,13 +54,13 @@ Cela lance le scraping pour la plage de dates définie dans `main.py`, par défa
 
 ---
 
-## 📊 Schéma du processus de scraping
+## Schéma du processus de scraping
 
 ```mermaid
 graph TD
     Start[Start script] --> LoadParams[Load parameters]
     LoadParams --> LoopDates[Loop through dates]
-    LoopDates --> GetProxy[Select valid proxy]
+    LoopDates --> GetProxy[Select random valid proxy]
     GetProxy --> LaunchDriver[Init WebDriver with proxy]
     LaunchDriver --> AccessNitter[Access Nitter & search tweets]
     AccessNitter --> Extract[Extract & filter English tweets]
@@ -67,14 +71,16 @@ graph TD
     MonthCheck -- No --> ContinueDate[Next date]
     SaveMonth --> ContinueDate
     ContinueDate --> FinalCheck{Last date?}
-    FinalCheck -- No --> LoopDates
+    FinalCheck -- No --> Retry{Retry needed?}
+    Retry -- Yes --> GetProxy
+    Retry -- No --> LoopDates
     FinalCheck -- Yes --> SaveAll[Save final CSV]
     SaveAll --> End[Done]
 ```
 
 ---
 
-## 📁 Structure des fichiers
+## Structure des fichiers
 
 - `main.py` : script principal de scraping et orchestration
 - `scrape.py` : logique de navigation sur Nitter, extraction des tweets
@@ -84,27 +90,32 @@ graph TD
 
 ---
 
-## 📄 Format de sortie
+## Format de sortie
 
 Les tweets sont sauvegardés dans :
+
 - des fichiers mensuels : `Data_for_2025-04.csv`
 - un fichier global : `Data_Tesla.csv`
 
 Colonnes principales :
-| id         | query_date | text               | verified | CLEANED_TWEET | SENTIMENT_VADER | SENTIMENT_ModelName |
-|------------|------------|--------------------|----------|----------------|------------------|----------------------|
-| tweet_id   | yyyy-mm-dd | contenu du tweet   | True/False | tweet nettoyé  | score [-1 à 1]   | score du modèle NLP  |
+
+| id        | query\_date | text             | verified   | CLEANED\_TWEET | SENTIMENT\_VADER | SENTIMENT\_ModelName |
+| --------- | ----------- | ---------------- | ---------- | -------------- | ---------------- | -------------------- |
+| tweet\_id | yyyy-mm-dd  | contenu du tweet | True/False | tweet nettoyé  | score [-1 à 1]   | score du modèle NLP  |
 
 ---
 
-## 🛡️ Gestion des erreurs & contournement
-- **Proxies HTTPS** : Récupérés depuis `sslproxies.org`, testés automatiquement.
-- **Rotation automatique** : En cas d'échec, on change de proxy.
-- **Retry** : Jusqu'à 3 tentatives par jour si le scraping échoue.
-- **Filtrage linguistique** : Seuls les tweets détectés comme anglais sont conservés (`langdetect`).
+## Gestion des erreurs & contournement
+
+- **Proxies HTTPS dynamiques** : Récupérés depuis `sslproxies.org` puis filtrés grâce à `valid_proxies()` pour ne garder que ceux qui fonctionnent.
+- **Test unitaire de validité** : Chaque proxy est testé individuellement via une requête HTTPS vers Nitter (`test_https_proxy`).
+- **Rotation intelligente** : Pour chaque tentative, un proxy est sélectionné au hasard parmi la liste des valides. Une fois utilisé, il est retiré temporairement pour éviter les blocages.
+- \*\*Retries\*\*: Jusqu'à **10 tentatives par jour**, avec changement de proxy après chaque tentative échouée.
+- **Filtrage linguistique** : Seuls les tweets détectés comme étant en anglais sont conservés (`langdetect`).Seuls les tweets détectés comme étant en anglais sont conservés (`langdetect`).
 
 ---
 
 ## 📬 Contact
+
 Pour toute amélioration ou suggestion, n'hésite pas à ouvrir une *issue* ou à me contacter directement.
 
