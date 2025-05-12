@@ -1,111 +1,101 @@
-# 🐦 Tweet Scraper via Nitter + Sentiment Analysis
+# 🐦 Tweet Scraper & Sentiment Pipeline (Nitter Edition)
 
-Ce projet permet de **scraper des tweets publics** depuis [Nitter](https://nitter.net), une alternative sans JavaScript à Twitter, et d'appliquer plusieurs **modèles d'analyse de sentiment**. Il est conçu pour contourner les limitations d'accès via un système de **rotation de proxies HTTPS**.
-
-## Objectif
-
-- Récupérer quotidiennement des tweets liés à une entreprise donnée (ex : `Tesla`).
-- Appliquer 5 modèles de sentiment (VADER + 4 Transformers financiers).
-- Sauvegarder les résultats par mois et dans un fichier global, pour analyse de tendance ou backtest boursier.
+Scrape **public tweets** through [Nitter](https://github.com/zedeus/nitter) (no Twitter API required) and attach **multi-model sentiment scores** in one go.  
+Designed for daily, proxy-rotated harvesting of any ticker or keyword (e.g. `Tesla`).
 
 ---
 
-## Dépendances
+## Key Features
+* **Headless Selenium** + automatic **HTTPS-proxy rotation** to dodge rate limits.  
+* **Five sentiment models out-of-the-box**  
+  * VADER (*compound* score –1…1)  
+  * `ahmedrachid/FinancialBERT-Sentiment-Analysis`  
+  * `mrm8488/distilroberta-finetuned-financial-news-sentiment-analysis` ×2  
+  * `mrm8488/deberta-v3-ft-financial-news-sentiment-analysis`  
+* **Language filter** – keeps English tweets only.  
+* **Rolling month buffer** – writes one CSV per month plus a final global file.
+
+---
+
+## Quick Start
+
 ```bash
+# activate your project venv first
+python main.py \
+  --company "Tesla" \
+  --start "2025-04-15" \
+  --end   "2025-04-19" \
+  --min_daily 300
+```
+
+The command above scrapes 15-19 Apr 2025 and produces:
+
+```
+data/Tesla/raw/   Data_for_2025-04.csv
+data/Tesla/global Data_Tesla.csv
+```
+
+### CLI Flags (`python main.py --help`)
+| Flag               | Default      | Description                          |
+|--------------------|--------------|--------------------------------------|
+| `--company`        | Tesla        | Keyword searched on Nitter           |
+| `--start / --end`  | last 5 days  | Date range (YYYY-MM-DD)              |
+| `--min_daily`      | 300          | Minimum tweets to keep per day       |
+| `--proxy_retries`  | 20           | Max proxy swaps per day              |
+
+---
+
+## Installation
+
+```bash
+pip install -r requirements.txt
+# or, standalone:
 pip install selenium webdriver-manager pandas langdetect beautifulsoup4 requests vaderSentiment transformers
 ```
-Python 3.8+ recommandé.
+*Python 3.9+ recommended.*
 
 ---
 
-## Lancer le scraping
+## Environment Variables (optional)
 
-```bash
-python main.py
+| Variable            | Example                 | Purpose                                |
+|---------------------|-------------------------|----------------------------------------|
+| `NITTER_BASE_URL`   | `https://nitter.net`    | Choose a different Nitter instance     |
+| `HTTP_PROXY` / `HTTPS_PROXY` | `http://user:pass@proxy:8080` | Force a specific proxy                |
+
+---
+
+## Output Schema
+
+| Column               | Example                         | Notes                              |
+|----------------------|---------------------------------|------------------------------------|
+| `id`                 | `1658327123456789`              | Tweet ID                           |
+| `query_date`         | `2025-04-15`                    | Day the tweet was scraped          |
+| `text`               | raw tweet text                  |                                    |
+| `verified`           | `True`                          | Blue-check status                  |
+| `cleaned_tweet`      | text without URLs, mentions…    |                                    |
+| `sentiment_vader`    | `0.63`                          | VADER compound                     |
+| `sentiment_{hf_model}`  | `1` (`-1,0,1`)                  | One column **per** HF model:<br>  • `financialbert`<br>  • `distilroberta_fin` (×2)<br>  • `deberta_v3_fin`|
+
+* HF : Hugging Face
+
+---
+
+## File Layout
+
 ```
-
-Cela lance le scraping pour la plage de dates définie dans `main.py`, par défaut entre le 15 et 19 avril 2025.
-
----
-
-## Paramètres configurables (`main.py`)
-- `start_date` / `end_date` : plage de dates à scraper
-- `company_name` : mot-clé recherché dans les tweets (par défaut : "Tesla")
-- `minimum_number_tweets_per_day` : nombre minimum de tweets à collecter par jour
-
----
-
-## 🧩 Fonctionnement (étapes principales)
-1. **Initialisation des dates, modèles de sentiment et proxies**
-2. **Pour chaque jour :**
-   - Ouverture d'un navigateur avec proxy
-   - Scraping sur Nitter
-   - Nettoyage et filtrage des tweets en anglais
-   - Analyse de sentiment avec VADER et 4 modèles Transformers
-   - Enregistrement dans un buffer mensuel et global
-3. **À chaque changement de mois :**
-   - Écriture dans un fichier `Data_for_YYYY-MM.csv`
-4. **À la fin du script :**
-   - Fusion et sauvegarde finale dans `Data_<company>.csv`
-
----
-
-## Schéma du processus de scraping (Mermaid)
-
-```mermaid
-graph TD
-    Start[Start script] --> LoadParams[Load parameters]
-    LoadParams --> LoopDates[Loop through dates]
-    LoopDates --> GetProxy[Select valid proxy]
-    GetProxy --> LaunchDriver[Init WebDriver with proxy]
-    LaunchDriver --> AccessNitter[Access Nitter & search tweets]
-    AccessNitter --> Extract[Extract & filter English tweets]
-    Extract --> Clean[Clean tweet text]
-    Clean --> Analyze[Sentiment analysis: VADER + models]
-    Analyze --> MonthCheck{Month changed?}
-    MonthCheck -- Yes --> SaveMonth[Save monthly CSV]
-    MonthCheck -- No --> ContinueDate[Next date]
-    SaveMonth --> ContinueDate
-    ContinueDate --> FinalCheck{Last date?}
-    FinalCheck -- No --> LoopDates
-    FinalCheck -- Yes --> SaveAll[Save final CSV]
-    SaveAll --> End[Done]
+Data_preparation/
+├── main.py               # CLI orchestrator
+├── scrape.py             # Nitter navigation & extraction
+├── driver.py             # Chrome initialisation with proxy
+├── sentiment.py          # VADER + HF pipelines
+└── utils.py              # dates, proxy pool, text cleaning
 ```
 
 ---
 
-## Structure des fichiers
+## Error Handling
 
-- `main.py` : script principal de scraping et orchestration
-- `scrape.py` : logique de navigation sur Nitter, extraction des tweets
-- `driver.py` : initialisation du navigateur Chrome avec proxy
-- `utils.py` : génération de dates, gestion des proxies, nettoyage texte
-- `sentiment.py` : analyse de sentiment avec VADER + Transformers
-
----
-
-## Format de sortie
-
-Les tweets sont sauvegardés dans :
-- des fichiers mensuels : `Data_for_2025-04.csv`
-- un fichier global : `Data_Tesla.csv`
-
-Colonnes principales :
-| id         | query_date | text               | verified | CLEANED_TWEET | SENTIMENT_VADER | SENTIMENT_ModelName |
-|------------|------------|--------------------|----------|----------------|------------------|----------------------|
-| tweet_id   | yyyy-mm-dd | contenu du tweet   | True/False | tweet nettoyé  | score [-1 à 1]   | score du modèle NLP  |
-
----
-
-## Gestion des erreurs & contournement
-- **Proxies HTTPS dynamiques** : Récupérés depuis `sslproxies.org` et filtrés en parallèle pour ne garder que les proxies fonctionnels (`valid_proxies`).
-- **Test parallèle de validité** : Chaque proxy est testé en parallèle via une requête HTTPS vers Nitter (`test_https_proxy`).
-- **Rotation intelligente** : Un proxy est choisi aléatoirement parmi les valides à chaque tentative de scraping.
-- **Retry quotidien** : Jusqu'à 3 tentatives par jour avec changement de proxy entre chaque tentative.
-- **Filtrage linguistique** : Seuls les tweets détectés comme étant en anglais sont conservés (`langdetect`).
-
----
-
-## Contact
-Pour toute amélioration ou suggestion, n'hésite pas à ouvrir une *issue* ou à me contacter directement.
-
+* **Proxy pool** downloaded from *sslproxies.org* and validated in parallel.  
+* Automatic proxy swap on HTTP errors / empty pages (up to `proxy_retries`).  
+* Daily scrape retried three times before the date is skipped.

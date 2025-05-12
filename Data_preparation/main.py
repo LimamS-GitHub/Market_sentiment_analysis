@@ -51,7 +51,7 @@ def main(start_date, end_date, minimum_number_tweets_per_day, company_name):
         success, attempt = False, 0
 
         while not success:
-            if attempt >10:
+            if attempt >20:
                 print(f"❌ Too many attempts for {date_str}. Moving to next date.")
                 break
             print(f'📅 {date_str} | Attempt {attempt}')
@@ -83,6 +83,7 @@ def main(start_date, end_date, minimum_number_tweets_per_day, company_name):
                     attempt += 1
                     if proxy!=None:
                         ip_list.remove(proxy) 
+                        print("proxy",proxy,"remouved")
 
             except Exception as e:
                 print(f"❌ Error on {date_str}: {e}")
@@ -100,8 +101,9 @@ def main(start_date, end_date, minimum_number_tweets_per_day, company_name):
 #------------------------------------------------------------------------------------------------------------------
 
 if __name__ == "__main__":
-    start_date = date(2022, 4, 15)
-    end_date = date(2022, 4, 19)
+    start_date = date(2025, 4, 1)
+    end_date = datetime.today().date()
+    
     minimum_number_tweets_per_day = 50
-    company_name = "Tesla"
+    company_name = "Meta OR Facebook Zuckerberg OR MetaQuest OR Threads OR Instagram OR WhatsApp"
     main(start_date, end_date, minimum_number_tweets_per_day,company_name)

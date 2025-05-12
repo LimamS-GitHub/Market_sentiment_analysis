@@ -16,8 +16,7 @@ def models_sentiment():
         pipeline("text-classification", model="ahmedrachid/FinancialBERT-Sentiment-Analysis", truncation=True),
         pipeline("text-classification", model="mrm8488/distilroberta-finetuned-financial-news-sentiment-analysis", truncation=True),
         pipeline("text-classification", model="mrm8488/deberta-v3-ft-financial-news-sentiment-analysis", truncation=True),
-        pipeline("text-classification", model="mrm8488/distilroberta-finetuned-financial-news-sentiment-analysis", truncation=True)
-    ]
+        ]
     return models
 
 # --------------------------------------------------------------------------------------------------------------------
