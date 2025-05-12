@@ -66,7 +66,7 @@ pip install selenium webdriver-manager pandas langdetect beautifulsoup4 requests
 | `verified`           | `True`                          | Blue-check status                  |
 | `cleaned_tweet`      | text without URLs, mentions…    |                                    |
 | `sentiment_vader`    | `0.63`                          | VADER compound                     |
-| `sentiment_{hf_model}`  | `1` (`-1,0,1`)                  | One column **per** HF model:<br>  • `financialbert`<br>  • `distilroberta_fin` (×2)<br>  • `deberta_v3_fin`|
+| `sentiment_{hf_model}`  | `1` (`-1,0,1`)                  | One column **per** HF model:<br>  • `financialbert`<br>  • `distilroberta_fin` <br>  • `deberta_v3_fin`|
 
 * HF : Hugging Face
 
