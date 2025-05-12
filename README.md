@@ -1,80 +1,69 @@
-# Market Sentiment Analysis
+# Market Sentiment Analysis – *Tesla Case Study*
 
-This project investigates how Twitter sentiment related to Tesla can be transformed into **adaptive trading signals**. Rather than relying on correlation analysis, we explore how tuning and optimizing model parameters can reveal predictive insights from online discourse.
+This project shows how **Twitter sentiment** can be turned into **adaptive trading signals** for $TSLA.  
+Instead of static correlation checks, we **re-train and re-optimize** the model as new data arrives, mimicking what would happen in real-time trading.
 
 ---
 
 ## Project Overview
 
 ### **Objective**
-- **Develop** an adaptive model that transforms Twitter sentiment into trading signals.
-- **Optimize** model parameters to maximize return using historical data.
-- **Assess** whether public sentiment can be used to construct actionable strategies.
+- **Build** a fully-adaptive pipeline that converts tweet sentiment into daily buy/sell signals.  
+- **Optimize** model hyper-parameters on a rolling window to maximise risk-adjusted return.  
+- **Evaluate** whether public mood provides actionable alpha beyond buy-and-hold.
 
 ### **Data Sources**
-- **Twitter Data:** Collected via Selenium using the Nitter interface.  
-- **Stock Market Data:** Retrieved from Yahoo Finance.
+| Source | Details |
+|--------|---------|
+| **Twitter** | Scraped with headless Selenium via the *Nitter* front-end (no Twitter API needed). |
+| **Market**  | Downloaded from https://fr.investing.com/equities/tesla-motors-historical-data |
 
 ---
 
-## Workflow
+## Workflow 🛠️
 
-### **1. Data Preparation**
+```mermaid
+flowchart LR
+    subgraph Prep["1 · Data Preparation"]
+        A[Scrape Nitter<br/>+ proxy rotation] --> B[Clean text<br/>+ deduplicate]
+        B --> C[Sentiment scoring<br/>VADER & HF models]
+        C --> D[Daily aggregation<br/>verified vs non-verified]
+    end
+    subgraph EDA["2 · Feature Engineering & EDA"]
+        D --> E[Visualise & filter]
+        E --> F[Normalise & smooth<br/>rolling windows]
+    end
+    subgraph Trade["3 · Adaptive Strategy"]
+        F --> G[Random search<br/>best weights & thresholds]
+        G --> H[Rolling simulation<br/>adaptive portfolio]
+        H --> I[Performance report<br/>(Total Return, Ann. Volatility,<br/>Max Drawdown, Ann. Outperformance,<br/>Avg Gap vs stock / initial capital)]
+    end
+```
 
-#### **Data Collection**
-- **Twitter Sentiment:** Scraped daily from Nitter using Selenium and rotating proxies.  
-- **Financial Data:** Extracted from Yahoo Finance (TSLA).
+### 1. Data Preparation
+* Scrape tweets (headless Selenium + rotating proxies).  
+* Clean text, keep English only, score with **VADER** + 3 HF models (FinancialBERT, DistilRoBERTa-FinNews, DeBERTa v3-FinNews).  
+* Aggregate daily sentiment for verified vs non-verified users.
 
-#### **Data Cleaning**
-- Remove duplicate tweets to ensure uniqueness.  
-- Clean text (remove URLs, mentions, numbers, punctuation).  
-- Filter only English tweets.  
+### 2. Feature Engineering & EDA
+* Filter low-signal tweets, visualise distributions.  
+* Normalise series and apply 1–7 day rolling averages.
 
-#### **Sentiment Analysis**
-- **VADER:** Scores sentiment from -1 to 1.  
-- **BERT-based Models:** Classify tweets as positive, negative, or neutral.  
-- **Multiple Models Compared:** FinancialBERT, DistilRoBERTa, DeBERTa.  
-- Tweets with neutral scores are excluded from trading simulations.
+### 3. Adaptive Strategy
+* Daily **random search** on the last *N* months to find optimal weights & thresholds.  
+* Roll-forward simulation: trade next-day open based on sentiment signal.  
+* Log KPIs (total return, annual volatility, max drawdown, etc.) to `/results/`.
 
----
-
-### **2. Data Analysis**
-
-#### **Exploratory Data Analysis (EDA)**
-- Visualize distribution of sentiment scores across models.  
-- Highlight dominance of neutral sentiment and its implications.  
-- Filter and retain only impactful sentiment signals (above a threshold).
-
-#### **Daily Aggregation**
-- Sentiment scores averaged by day.  
-- Split between verified and non-verified user tweets.  
-- Weighted aggregation allows flexible contribution control from each group.  
-
-#### **Sentiment Calibration**
-- Sentiment time series are normalized and smoothed.  
-- Rolling averages applied to capture trends and reduce noise.  
-
----
-
-### **3. Trading Strategy Development**
-
-#### **Signal Generation**
-- Buy/sell decisions based on thresholds applied to smoothed sentiment signals.  
-- Trades executed at daily open, exits on sentiment reversal.  
-- Portfolio return is tracked over time.
-
-#### **Parameter Optimization**
-- Grid search over multiple configurations:
-  - Sentiment model choice
-  - Rolling window size
-  - Buy/sell thresholds  
-- Best-performing combination is selected based on return.
 
 ---
 
 ## References
 
-> Hutto, C.J. & Gilbert, E.E. (2014). VADER: A Parsimonious Rule-based Model for Sentiment Analysis of Social Media Text. Eighth International Conference on Weblogs and Social Media (ICWSM-14).  
-> HuggingFace Transformers — Financial Sentiment Models
+* **Nitter** – <https://github.com/zedeus/nitter>  
+* **Selenium** – browser automation for scraping  
+* **VADER** – Hutto & Gilbert (2014) “VADER: A Parsimonious Rule-based Model for Sentiment Analysis of Social Media Text”  
+* **FinancialBERT-SA** – <https://huggingface.co/ahmedrachid/FinancialBERT-Sentiment-Analysis>  
+* **DistilRoBERTa-FinNews** – <https://huggingface.co/mrm8488/distilroberta-finetuned-financial-news-sentiment-analysis>  
+* **DeBERTa v3-FinNews** – <https://huggingface.co/mrm8488/deberta-v3-ft-financial-news-sentiment-analysis>  
 
----
+> **Disclaimer:** Educational use only. Nothing here is financial advice.
