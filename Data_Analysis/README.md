@@ -48,7 +48,7 @@ This notebook explores whether daily Twitter mood can help forecast — and trad
 
 8. **Grid search**  
    Sweep:  
-   * sentiment model (5 variants)  
+   * sentiment model (4 variants)  
    * rolling window (1 → 7 d)  
    * buy/sell thresholds ∈ {0.1 … 0.5}  
    **Best 2022 run:** **+75.9 %** with *FinancialBERT*, 1-day window, buy = 0.3, sell = –0.5.
