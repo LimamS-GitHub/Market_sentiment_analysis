@@ -126,4 +126,8 @@ Aim for high Total Return & CAGR with low Max DD and acceptable volatility.
 * Scale to **multi-asset** portfolios.  
 * Expose the loop as a **FastAPI** service for live paper trading.
 
-Questions or suggestions? Open an issue or PR — contributions welcome!
+> **Abbreviations used above**
+> * **KPIs** – Key Performance Indicators  
+> * **CAGR** – Compound Annual Growth Rate  
+> * **Vol** – Annualised volatility (σ × √252)  
+> * **DD** – Max Drawdown (worst peak-to-trough drop)
