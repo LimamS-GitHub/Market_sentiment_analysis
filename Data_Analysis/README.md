@@ -1,77 +1,69 @@
-# EDA & Trading Strategy based on Twitter Sentiment (2022)
+# EDA & Sentiment-Driven Trading — *Tesla 2022*
 
-Ce notebook analyse les performances boursières de l'action Tesla (“TSLA”) en 2022 en les mettant en relation avec les sentiments extraits des tweets.
-
----
-
-## 🔍 Objectifs
-
-- Explorer la distribution des sentiments à partir de plusieurs modèles (VADER, BERT, RoBERTa, DeBERTa).
-- Évaluer la valeur explicative des sentiments sur les variations de prix boursiers.
-- Simuler une stratégie d'achat/vente simple basée sur le sentiment.
-- Optimiser les paramètres de cette stratégie.
+This notebook explores whether daily Twitter mood can help forecast — and trade — Tesla’s price moves.
 
 ---
 
-## 📁 Données utilisées
-
-- `Data_Tesla_2022_2025.csv` : Tweets scorés par modèles de sentiment, avec dates, id, texte, vérification.
-- `yfinance` : Données boursières de Tesla pour 2022 (prix d'ouverture/fermeture, volume, variation).
-
----
-
-## 🧼 Etapes principales du notebook
-
-### 1. Chargement et préparation des données
-- Suppression des doublons de tweets.
-- Conversion des dates, tri, filtrage sur l'année 2022.
-
-### 2. Visualisation des distributions de sentiment
-- Histograms pour chaque modèle.
-- Observation : très forte proportion de scores neutres (=0).
-- Hypothèse : tweets effectivement neutres, donc ignorés dans la suite de l'analyse.
-
-### 3. Filtrage et agrégation
-- Suppression des tweets avec sentiment trop proche de 0 (entre -0.1 et 0.1).
-- Agrégation journalière des sentiments par groupe : comptes vérifiés / non-vérifiés.
-- Moyenne pondérée des sentiments : ici, 25% vérifiés et 75% non-vérifiés.
-
-### 4. Fusion avec données de marché
-- Données TSLA via Yahoo Finance.
-- Calcul des variations journalières en pourcentage.
-- Fusion avec les sentiments journaliers sur la clé "date".
-
-### 5. Normalisation
-- Scores de sentiment, prix d'ouverture et variation % sont normalisés pour les comparer visuellement.
-
-### 6. Visualisation temporelle
-- Courbes colorées selon les variations de sentiment (vert/jaune/rouge).
-- Superposition avec le cours normalisé de l'action TSLA.
-
-### 7. Simulation de stratégie d'investissement
-- Achat si sentiment > 0.2
-- Vente si sentiment < -0.2
-- Suivi du capital initial en fonction de ces décisions.
-- Premier test : stratégie profitable mais modeste.
-
-### 8. Optimisation automatique
-- Grid search sur : modèle, fenêtre de lissage, seuils d'achat/vente.
-- Meilleur résultat : +75.86% avec FinancialBERT, rolling=1, seuil achat=0.3, seuil vente=-0.5.
+## Goals
+* Inspect the sentiment distribution produced by five models (VADER + FinancialBERT + DistilRoBERTa + DeBERTa).  
+* Test the relationship between sentiment and TSLA returns.  
+* Prototype a simple long/flat strategy based on sentiment thresholds.  
+* Tune the strategy’s hyper-parameters.
 
 ---
 
-## ✅ Conclusion
-
-Ce notebook montre qu'on peut tirer parti de signaux de sentiment sur Twitter pour construire une stratégie d'investissement simple et profitable, en les combinant avec une bonne agrégation temporelle et une pondération par type de compte.
-
-Ceci constitue une première brique pour développer un modèle de trading adaptatif basé sur le sentiment social.
+## Data
+| Source / File | Content |
+|---------------|---------|
+| `Data_Tesla_2022_2025.csv` | Tweets with cleaned text, verified flag, five sentiment columns |
+|  `META_market.csv`  | **Daily OHLCV for TSLA (2022 → 2025)** |
 
 ---
 
-## 📌 Prochaines étapes
+## Notebook Flow
 
-- Tester la robustesse sur 2023 et 2024.
-- Intégrer des indicateurs techniques pour hybridation sentiment + technique.
-- Raffiner le système de pondération vérifié / non-vérifié.
-- Passer à une stratégie multi-actifs (Tesla + autres).
+1. **Load & tidy**  
+   Import the tweet CSV and TSLA price series, drop duplicates, convert `query_date` to `datetime`, then keep only the **1 Jan → 31 Dec 2022** slice.
 
+2. **Histogram sentiment**  
+   Plot a histogram for each model (VADER, FinancialBERT, DistilRoBERTa-Fin, DeBERTa-v3-Fin) and highlight a huge spike at **0** ⇒ most tweets are neutral.
+
+3. **Filter & aggregate**  
+   Discard tweets with |score| < 0.1 (weak signal).  
+   Split **verified** vs **non-verified** accounts and compute a daily weighted mean: **25 % verified / 75 % non-verified**.
+
+4. **Merge market data**  
+   Pull TSLA data via `yfinance`, compute daily returns (`Close.pct_change()`), and merge with the sentiment table on `date`.
+
+5. **Normalise & smooth**  
+   Z-score the closing price and scale each sentiment series to its max absolute value.  
+   Add a rolling mean (window **1 → 7 days**) to reduce noise.
+
+6. **Visualise**  
+   Plot the normalised price curve plus a colour band (green / amber / red) keyed to the smoothed sentiment level—quickly shows price-mood divergences.
+
+7. **Baseline strategy**  
+   Fixed rules: **long** if sentiment > 0.2, **flat** if sentiment < –0.2.  
+   Simulate a \$10 000 account and chart the equity curve vs buy-and-hold.
+
+8. **Grid search**  
+   Sweep:  
+   * sentiment model (5 variants)  
+   * rolling window (1 → 7 d)  
+   * buy/sell thresholds ∈ {0.1 … 0.5}  
+   **Best 2022 run:** **+75.9 %** with *FinancialBERT*, 1-day window, buy = 0.3, sell = –0.5.
+
+---
+
+## Takeaways
+Even a naïve threshold rule on daily sentiment outperformed buy-and-hold in 2022, suggesting real predictive value when signals are properly filtered and weighted.
+
+---
+
+## Next step  
+Feed these sentiment features into the **adaptive trading engine** in `Trading_Strategy_Development`, which retrains each day on the last *N* months and rolls forward while logging full KPIs.
+
+---
+
+> **Note — OHLCV:**  
+> *Open* (first price of the day), *High* (intraday maximum), *Low* (intraday minimum), *Close* (last price of the day), and *Volume* (shares traded). These five fields summarise each trading session and are standard in market data files.
