@@ -56,15 +56,6 @@ pip install selenium webdriver-manager pandas langdetect beautifulsoup4 requests
 
 ---
 
-## Environment Variables (optional)
-
-| Variable            | Example                 | Purpose                                |
-|---------------------|-------------------------|----------------------------------------|
-| `NITTER_BASE_URL`   | `https://nitter.net`    | Choose a different Nitter instance     |
-| `HTTP_PROXY` / `HTTPS_PROXY` | `http://user:pass@proxy:8080` | Force a specific proxy                |
-
----
-
 ## Output Schema
 
 | Column               | Example                         | Notes                              |
