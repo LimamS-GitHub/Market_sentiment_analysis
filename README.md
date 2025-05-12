@@ -27,7 +27,7 @@ flowchart TD
   %% 1 · DATA PREP
   subgraph STEP1["1 • Data Prep"]
     direction TB
-    A1["Scrape Nitter \\ proxy rotation"] --> A2["Clean text\\ndeduplicate"]
+    A1["Scrape Nitter \\ proxy rotation"] --> A2["Clean text \\ deduplicate"]
     A2 --> A3["Sentiment score \\ VADER + 3 HF"]
     A3 --> A4["Daily agg. \\ verified vs non-verified"]
   end
