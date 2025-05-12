@@ -18,17 +18,17 @@ for each trading date it re-trains on the *N* previous months of data, picks the
 
 ```mermaid
 flowchart TD
-    subgraph DAY["Repeat for each trading day _t_"]
-        A1[Select training window<br/>(last _N_ months up to t-1)]
-        A2[Random search<br/>(weights, thresholds,<br/>verified factor)]
-        A3[Keep best params<br/>(max P&L on window)]
-        A4[Generate sentiment<br/>signal for day _t_]
-        A5[Execute trade<br/>(open of day _t+1_)]
-        A6[Update cash & position]
-        A7[Log KPIs<br/>(Total Ret, CAGR, Vol,<br/>Max DD, etc.)]
+    subgraph DAILY_LOOP["Repeat for each trading day t"]
+        A1[Select training window\\n(last N months)]
+        A2[Random search\\nweights & thresholds]
+        A3[Keep best parameters]
+        A4[Generate sentiment\\nsignal for day t]
+        A5[Execute trade\\n(open of day t+1)]
+        A6[Update cash and position]
+        A7[Log KPIs\\nReturn, CAGR, Vol, DD]
     end
     A1 --> A2 --> A3 --> A4 --> A5 --> A6 --> A7
-    A7 -->|next day| DAY
+    A7 -->|next day| DAILY_LOOP
 ```
 
 ---
