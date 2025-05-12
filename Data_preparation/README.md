@@ -25,7 +25,7 @@ python main.py \
   --company "Tesla" \
   --start "2025-04-15" \
   --end   "2025-04-19" \
-  --min_daily 300
+  --min_daily 50
 ```
 
 The command above scrapes 15-19 Apr 2025 and produces:
@@ -40,8 +40,8 @@ data/Tesla/global Data_Tesla.csv
 |--------------------|--------------|--------------------------------------|
 | `--company`        | Tesla        | Keyword searched on Nitter           |
 | `--start / --end`  | last 5 days  | Date range (YYYY-MM-DD)              |
-| `--min_daily`      | 300          | Minimum tweets to keep per day       |
-| `--proxy_retries`  | 20           | Max proxy swaps per day              |
+| `--min_daily`      | 50          | Minimum tweets to keep per day       |
+| `--proxy_retries`  | 20           | Max proxy swaps              |
 
 ---
 
