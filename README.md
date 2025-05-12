@@ -26,7 +26,7 @@ Instead of static correlation checks, we **re-train and re-optimize** the model 
 flowchart LR
   subgraph Prep["1 · Data Preparation"]
     A[Scrape Nitter<br/>+ proxy rotation] --> B[Clean text<br/>+ deduplicate]
-    B --> C[Sentiment scoring<br/>VADER + 4 HF]
+    B --> C[Sentiment scoring<br/>VADER + 3 HF]
     C --> D[Daily aggregation<br/>verified vs non-verified]
   end
 
