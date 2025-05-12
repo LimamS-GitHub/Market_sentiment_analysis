@@ -27,25 +27,25 @@ flowchart TD
   %% 1 · DATA PREP
   subgraph STEP1["1 • Data Prep"]
     direction TB
-    A1["Scrape Nitter\\nproxy rotation"] --> A2["Clean text\\ndeduplicate"]
-    A2 --> A3["Sentiment score\\nVADER + 3 HF"]
-    A3 --> A4["Daily agg.\\nverified vs non-verified"]
+    A1["Scrape Nitter \\ proxy rotation"] --> A2["Clean text\\ndeduplicate"]
+    A2 --> A3["Sentiment score \\ VADER + 3 HF"]
+    A3 --> A4["Daily agg. \\ verified vs non-verified"]
   end
 
   %% 2 · FEATURE ENG
   subgraph STEP2["2 • Feature Eng"]
     direction TB
-    A4 --> B1["Filter\\nstrong scores"]
-    B1 --> B2["Normalise\\nZ-score & scale"]
-    B2 --> B3["Smooth\\nrolling mean 1–7 d"]
+    A4 --> B1["Filter \\ strong scores"]
+    B1 --> B2["Normalise \\ Z-score & scale"]
+    B2 --> B3["Smooth \\ rolling mean 1–7 d"]
   end
 
   %% 3 · ADAPTIVE STRATEGY
   subgraph STEP3["3 • Adaptive Strategy"]
     direction TB
-    B3 --> C1["Random search\\nweights & thresholds"]
-    C1 --> C2["Walk-forward sim\\nupdate portfolio"]
-    C2 --> C3["Log KPIs\\nReturn  Vol  DD  Alpha"]
+    B3 --> C1["Random search \\ weights & thresholds"]
+    C1 --> C2["Walk-forward sim \\ update portfolio"]
+    C2 --> C3["Log KPIs \\ Return  Vol  DD  Alpha"]
   end
 ```
 
