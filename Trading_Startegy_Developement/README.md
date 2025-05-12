@@ -69,29 +69,16 @@ python src/Utils_study_results.py \
   --out_root results/batch
 ```
 
-### Key outputs
+### Key outputs (examples)
 
-| Path | Purpose |
-|------|---------|
-| `history.csv` | Daily equity, cash, position, signal, price |
-| `kpi.json` | Summary KPIs (Total Return, CAGR, Vol, Max DD, etc.) |
-| `parameters.json` | Weights, thresholds and verified factors chosen each day |
-| `Notebooks/df_global/results_global.csv` | One line per batch run (overall leaderboard) |
-| `Notebooks/df_global/results_global_mois_1.csv` | KPIs aggregated month-by-month (example) |
+| Path (under `Notebooks/`)                | Purpose |
+|----------------------------------------------------|---------|
+| `df_historique_saves/df_50_iter_1_mois.csv`        | Full daily equity curve and trade log for one run |
+| `df_historique_param/df_params_50_iter_1_mois.csv` | Hyper-parameters chosen each day for the same run |
+| `df_global/results_global.csv`                               | Leader-board — one line per completed run |
+| `df_global/results_global_mois_1.csv`                        | KPIs aggregated month-by-month 1 |
 
-> **Where exactly are they stored?**  
-> All artifacts live under **`Notebooks/df_global/`** so you can explore them directly in Jupyter:
->
-> ```
-> Notebooks/df_global/
-> ├── results_global.csv            # leaderboard of every run
-> ├── results_global_mois_1.csv     # monthly slice KPIs
-> ├── df_historique_param/          # ⤷ daily hyper-parameter trajectories
-> └── df_historique_saves/          # ⤷ full equity curves & trade logs
-> ```
->
-> Open **`Study_results.ipynb`** to load these CSVs, rank strategies, and visualise the parameter evolution.
-
+> Open **`Notebooks/Study_results.ipynb`** to load these CSVs, rank the runs, and visualise how parameters evolve over time.
 ---
 
 ## Main pieces
