@@ -23,24 +23,32 @@ Instead of static correlation checks, we **re-train and re-optimize** the model 
 ## Workflow 🛠️
 
 ```mermaid
-flowchart LR
-  subgraph Prep["1 · Data Preparation"]
-    A[Scrape Nitter<br/>+ proxy rotation] --> B[Clean text<br/>+ deduplicate]
-    B --> C[Sentiment scoring<br/>VADER + 3 HF]
-    C --> D[Daily aggregation<br/>verified vs non-verified]
+flowchart TD
+  %% 1 · DATA PREP
+  subgraph STEP1["1 • Data Prep"]
+    direction TB
+    A1["Scrape Nitter\\nproxy rotation"] --> A2["Clean text\\ndeduplicate"]
+    A2 --> A3["Sentiment score\\nVADER + 3 HF"]
+    A3 --> A4["Daily agg.\\nverified vs non-verified"]
   end
 
-  subgraph EDA["2 · Feature Engineering"]
-    D --> E[Filter & visualise]
-    E --> F[Normalise & smooth<br/>rolling windows]
+  %% 2 · FEATURE ENG
+  subgraph STEP2["2 • Feature Eng"]
+    direction TB
+    A4 --> B1["Filter\\nstrong scores"]
+    B1 --> B2["Normalise\\nZ-score & scale"]
+    B2 --> B3["Smooth\\nrolling mean 1–7 d"]
   end
 
-  subgraph Trade["3 · Adaptive Strategy"]
-    F --> G[Random search<br/>weights & thresholds]
-    G --> H[Rolling simulation]
-    H --> I[Report KPIs\\nTotal Return\\nAnnual Volatility\\nMax Drawdown\\nOut-performance]
+  %% 3 · ADAPTIVE STRATEGY
+  subgraph STEP3["3 • Adaptive Strategy"]
+    direction TB
+    B3 --> C1["Random search\\nweights & thresholds"]
+    C1 --> C2["Walk-forward sim\\nupdate portfolio"]
+    C2 --> C3["Log KPIs\\nReturn  Vol  DD  Alpha"]
   end
 ```
+
 
 
 ### 1. Data Preparation
