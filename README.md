@@ -24,21 +24,24 @@ Instead of static correlation checks, we **re-train and re-optimize** the model 
 
 ```mermaid
 flowchart LR
-    subgraph Prep["1 · Data Preparation"]
-        A[Scrape Nitter<br/>+ proxy rotation] --> B[Clean text<br/>+ deduplicate]
-        B --> C[Sentiment scoring<br/>VADER & HF models]
-        C --> D[Daily aggregation<br/>verified vs non-verified]
-    end
-    subgraph EDA["2 · Feature Engineering & EDA"]
-        D --> E[Visualise & filter]
-        E --> F[Normalise & smooth<br/>rolling windows]
-    end
-    subgraph Trade["3 · Adaptive Strategy"]
-        F --> G[Random search<br/>best weights & thresholds]
-        G --> H[Rolling simulation<br/>adaptive portfolio]
-        H --> I[Performance report<br/>(Total Return, Ann. Volatility,<br/>Max Drawdown, Ann. Outperformance,<br/>Avg Gap vs stock / initial capital)]
-    end
+  subgraph Prep["1 · Data Preparation"]
+    A[Scrape Nitter<br/>+ proxy rotation] --> B[Clean text<br/>+ deduplicate]
+    B --> C[Sentiment scoring<br/>VADER + 4 HF]
+    C --> D[Daily aggregation<br/>verified vs non-verified]
+  end
+
+  subgraph EDA["2 · Feature Engineering"]
+    D --> E[Filter & visualise]
+    E --> F[Normalise & smooth<br/>rolling windows]
+  end
+
+  subgraph Trade["3 · Adaptive Strategy"]
+    F --> G[Random search<br/>weights & thresholds]
+    G --> H[Rolling simulation]
+    H --> I[Report KPIs\\nTotal Return\\nAnnual Volatility\\nMax Drawdown\\nOut-performance]
+  end
 ```
+
 
 ### 1. Data Preparation
 * Scrape tweets (headless Selenium + rotating proxies).  
