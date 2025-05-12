@@ -17,18 +17,17 @@ for each trading date it re-trains on the *N* previous months of data, picks the
 ## Daily Adaptive Loop
 
 ```mermaid
-flowchart TD
-    subgraph DAILY_LOOP["Repeat for each trading day t"]
-        A1[Select training window\\n(last N months)]
-        A2[Random search\\nweights & thresholds]
-        A3[Keep best parameters]
-        A4[Generate sentiment\\nsignal for day t]
-        A5[Execute trade\\n(open of day t+1)]
-        A6[Update cash and position]
-        A7[Log KPIs\\nReturn, CAGR, Vol, DD]
-    end
-    A1 --> A2 --> A3 --> A4 --> A5 --> A6 --> A7
-    A7 -->|next day| DAILY_LOOP
+gitGraph
+   commit id:"t-1  •  Train on last N months"
+   branch search
+   checkout search
+   commit id:"Random-search \\n weights + thresholds"
+   checkout main
+   merge     search tag:"Best params"
+   commit id:"Generate signal • day t"
+   commit id:"Execute trade • close t"
+   commit id:"Log KPIs"
+   commit id:"→ advance to next day"
 ```
 
 ---
