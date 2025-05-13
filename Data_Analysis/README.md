@@ -5,7 +5,7 @@ This notebook explores whether daily Twitter mood can help forecast — and trad
 ---
 
 ## Goals
-* Inspect the sentiment distribution produced by five models (VADER + FinancialBERT + DistilRoBERTa + DeBERTa).  
+* Inspect the sentiment distribution produced by four models (VADER + FinancialBERT + DistilRoBERTa + DeBERTa).  
 * Test the relationship between sentiment and TSLA returns.  
 * Prototype a simple long/flat strategy based on sentiment thresholds.  
 * Tune the strategy’s hyper-parameters.
