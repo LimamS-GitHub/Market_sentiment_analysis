@@ -7,13 +7,13 @@ Designed for daily, proxy-rotated harvesting of any ticker or keyword (e.g. `Tes
 
 ## Key Features
 * **Headless Selenium** + automatic **HTTPS-proxy rotation** to dodge rate limits.  
-* **Five sentiment models out-of-the-box**  
+* **Four sentiment models out-of-the-box**  
   * VADER (*compound* score –1…1)  
   * `ahmedrachid/FinancialBERT-Sentiment-Analysis`  
-  * `mrm8488/distilroberta-finetuned-financial-news-sentiment-analysis` ×2  
+  * `mrm8488/distilroberta-finetuned-financial-news-sentiment-analysis`
   * `mrm8488/deberta-v3-ft-financial-news-sentiment-analysis`  
 * **Language filter** – keeps English tweets only.  
-* **Rolling month buffer** – writes one CSV per month plus a final global file.
+* **Rolling month buffer** – writes one CSV per month plus a final global file in the event of a crash.
 
 ---
 
