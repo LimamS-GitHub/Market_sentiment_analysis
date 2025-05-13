@@ -1,6 +1,6 @@
 # Market Sentiment Analysis – *Tesla Case Study*
 
-This project shows how **Twitter sentiment** can be turned into **adaptive trading signals** for $TSLA.  
+This project shows how **Twitter sentiment** can be turned into **adaptive trading signals** for the company tesla.  
 Instead of static correlation checks, we **re-train and re-optimize** the model as new data arrives, mimicking what would happen in real-time trading.
 
 ---
