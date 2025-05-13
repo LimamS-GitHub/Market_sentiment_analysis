@@ -1,7 +1,12 @@
-# Market Sentiment Analysis – *Tesla Case Study*
+# Market-Sentiment Trading — *Tesla Case Study*
 
-This project shows how **Twitter sentiment** can be turned into **adaptive trading signals** for the company tesla.  
-Instead of static correlation checks, we **re-train and re-optimize** the model as new data arrives, mimicking what would happen in real-time trading.
+Track Twitter’s mood on $TSLA, quantify it with multi-model NLP, and turn it into live trading signals.  
+Rather than running a one-off correlation between sentiment and price, this project builds an **adaptive pipeline** that:
+
+* scrapes tweets daily via Nitter (no Twitter API needed),
+* scores them with VADER plus three finance-tuned Transformer models,
+* recalibrates weights and thresholds every trading day, and
+* benchmarks the resulting strategy against buy-and-hold.
 
 ---
 
