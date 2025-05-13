@@ -21,7 +21,7 @@ gitGraph
    commit id:"t-1  •  Train on last N months"
    branch search
    checkout search
-   commit id:"Random-search \\n weights + thresholds"
+   commit id:"Random-search \\ weights + thresholds"
    checkout main
    merge     search tag:"Best params"
    commit id:"Generate signal • day t"
@@ -34,40 +34,26 @@ gitGraph
 
 ## Folder layout
 ```
-Trading_Strategy_Development/
+Trading_Startegy_Developement/
 ├── src/
-│   ├── model.py               # SentimentTradingModel class
-│   ├── Utils_simulations.py   # simuler_marche_journalier()
-│   └── Utils_study_results.py # KPI calc + batch runner
+│   ├── model.py
+│   ├── Utils_simulations.py
+│   └── Utils_study_results.py
 ├── Notebooks/
-│   ├── TSD.ipynb              # step-by-step example
-│   └── Study_results.ipynb    # aggregate & plot batch runs
+│   ├── TSD.ipynb
+│   ├── Study_results.ipynb
+│   └── df_global/  
+│       ├── results_global.csv
+│       ├── results_global_mois_1.csv
+│       ├── df_historique_param/
+│       │   └── df_params_50_iter_1_mois.csv
+│       └── df_historique_saves/
+│           └── df_50_iter_1_mois.csv
 └── README.md
 ```
 
 ---
 
-## Quick start
-
-```bash
-# Single adaptive run on Tesla
-python src/Utils_simulations.py \
-  --sentiment_csv ../../data/processed/tsla_sentiment.csv \
-  --price_csv     ../../data/market/TSLA.csv \
-  --lookback_months 6 \
-  --n_iter 200 \
-  --capital 10000 \
-  --out_dir results/tsla_run
-
-# Batch scan: 3 look-back lengths × 2 search sizes
-python src/Utils_study_results.py \
-  --sentiment_csv ../../data/processed/tsla_sentiment.csv \
-  --price_csv     ../../data/market/TSLA.csv \
-  --train_lengths 3 6 12 \
-  --n_iter_list   100 250 \
-  --capital 10000 \
-  --out_root results/batch
-```
 
 ### Key outputs (examples)
 
@@ -96,8 +82,8 @@ python src/Utils_study_results.py \
 
 | Arg / Attr | Controls | Typical values |
 |------------|----------|----------------|
-| `lookback_months` | Training window length | 3 / 6 / 12 |
-| `n_iter` | Random-search iterations per day | 100 – 500 |
+| `lookback_months` | Training window length | 1 / 3 / 6 / 12 |
+| `n_iter` | Random-search iterations per day | 100 – 1300 |
 | `buy_threshold / sell_threshold` | Entry / exit cut-offs | sampled in [0, 1] / [-1, 0] |
 | `weights` | 4-tuple (VADER + 3 HF) — Σ = 1 | auto-sampled |
 | `weight_verified` | Extra weight for verified accounts | 0 – 1 |
@@ -122,7 +108,6 @@ Aim for high Total Return & CAGR with low Max DD and acceptable volatility.
 ## Roadmap
 
 * Replace random search with **Optuna Bayesian optimisation**.  
-* Add stop-loss / take-profit logic.  
 * Scale to **multi-asset** portfolios.  
 * Expose the loop as a **FastAPI** service for live paper trading.
 
