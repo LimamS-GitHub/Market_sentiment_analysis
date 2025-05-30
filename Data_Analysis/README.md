@@ -1,6 +1,6 @@
 # EDA & Sentiment-Driven Trading — *Tesla 2022*
 
-This notebook explores whether daily Twitter mood can help forecast — and trade — Tesla’s price moves.
+This notebook begins by exploring sentiment data and investigates whether daily Twitter mood can help anticipate — and trade — Tesla's price movements.
 
 ---
 
@@ -16,7 +16,7 @@ This notebook explores whether daily Twitter mood can help forecast — and trad
 | Source / File | Content |
 |---------------|---------|
 | `Data_Tesla_2022_2025.csv` | Tweets with cleaned text, verified flag, five sentiment columns |
-|  `META_market.csv`  | **Daily OHLCV for TSLA (2022 → 2025)** |
+|  `TSLA_market.csv`  | **Daily OHLCV for TSLA (2022 → 2025)** |
 
 ---
 
@@ -29,11 +29,11 @@ This notebook explores whether daily Twitter mood can help forecast — and trad
    Plot a histogram for each model (VADER, FinancialBERT, DistilRoBERTa-Fin, DeBERTa-v3-Fin) and highlight a huge spike at **0** ⇒ most tweets are neutral.
 
 3. **Filter & aggregate**  
-   Discard tweets with |score| < 0.1 (weak signal).  
+   Discard tweets with |score| <= 0.1 — these are considered too neutral to drive reliable buy/sell decisions.
    Split **verified** vs **non-verified** accounts and compute a daily weighted mean: **25 % verified / 75 % non-verified**.
 
 4. **Merge market data**  
-   Pull TSLA data via `yfinance`, compute daily returns (`Close.pct_change()`), and merge with the sentiment table on `date`.
+   Pull TSLA data via `TSLA_market.csv` and merge with the sentiment table on `date`.
 
 5. **Normalise & smooth**  
    Z-score the closing price and scale each sentiment series to its max absolute value.  
@@ -50,7 +50,7 @@ This notebook explores whether daily Twitter mood can help forecast — and trad
    Sweep:  
    * sentiment model (4 variants)  
    * rolling window (1 → 7 d)  
-   * buy/sell thresholds ∈ {0.1 … 0.5}  
+   * Buy/sell thresholds are selected from the range [0, 1] × [–1, 0]
    **Best 2022 run:** **+75.9 %** with *FinancialBERT*, 1-day window, buy = 0.3, sell = –0.5.
 
 ---

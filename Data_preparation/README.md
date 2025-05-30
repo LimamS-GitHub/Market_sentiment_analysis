@@ -40,7 +40,7 @@ data/Tesla/global Data_Tesla.csv
 |--------------------|--------------|--------------------------------------|
 | `--company`        | Tesla        | Keyword searched on Nitter           |
 | `--start / --end`  | last 5 days  | Date range (YYYY-MM-DD)              |
-| `--min_daily`      | 50          | Minimum tweets to keep per day       |
+| `--min_daily`      | 50          | Minimum tweets per day; if fewer than 50 exist, the scraper collects whatever is available      |
 | `--proxy_retries`  | 20           | Max proxy swaps              |
 
 ---

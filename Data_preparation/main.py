@@ -101,9 +101,9 @@ def main(start_date, end_date, minimum_number_tweets_per_day, company_name):
 #------------------------------------------------------------------------------------------------------------------
 
 if __name__ == "__main__":
-    start_date = date(2025, 4, 1)
-    end_date = datetime.today().date()
+    start_date = date(2025, 4, 15)
+    end_date = date(2025,4,19)
     
     minimum_number_tweets_per_day = 50
-    company_name = "Meta OR Facebook Zuckerberg OR MetaQuest OR Threads OR Instagram OR WhatsApp"
+    company_name = "Tesla"
     main(start_date, end_date, minimum_number_tweets_per_day,company_name)

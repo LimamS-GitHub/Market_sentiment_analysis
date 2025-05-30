@@ -5,7 +5,7 @@ Rather than running a one-off correlation between sentiment and price, this proj
 
 * scrapes tweets daily via Nitter (no Twitter API needed),
 * scores them with VADER plus three finance-tuned Transformer models,
-* recalibrates weights and thresholds every trading day, and
+* recalibrates weights and thresholds every trading day, **executes the trade at the next market open**
 * benchmarks the resulting strategy against buy-and-hold.
 
 ---
@@ -32,16 +32,16 @@ flowchart TD
   %% 1 · DATA PREP
   subgraph STEP1["1 • Data Prep"]
     direction TB
-    A1["Scrape Nitter \\ proxy rotation"] --> A2["Clean text \\ deduplicate"]
-    A2 --> A3["Sentiment score \\ VADER + 3 HF"]
-    A3 --> A4["Daily agg. \\ verified vs non-verified"]
+    A1["Scrape Nitter with proxy rotation"] --> A2["Clean text"]
+    A2 --> A3["Sentiment score : VADER + 3 HF"]
+    A3 --> A4["Daily agg. : verified vs non-verified"]
   end
 
   %% 2 · FEATURE ENG
   subgraph STEP2["2 • Feature Eng"]
     direction TB
-    A4 --> B1["Filter \\ strong scores"]
-    B1 --> B2["Normalise \\ Z-score & scale"]
+    A4 --> B1["Filter strong scores"]
+    B1 --> B2["Normalise with Z-score & scale"]
     B2 --> B3["Smooth \\ rolling mean 1–7 d"]
   end
 
