@@ -6,7 +6,6 @@ This notebook begins by exploring sentiment data and investigates whether daily 
 
 ## Goals
 * Inspect the sentiment distribution produced by four models (VADER + FinancialBERT + DistilRoBERTa + DeBERTa).  
-* Test the relationship between sentiment and TSLA returns.  
 * Prototype a simple long/flat strategy based on sentiment thresholds.  
 * Tune the strategy’s hyper-parameters.
 
