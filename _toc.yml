@@ -1,0 +1,14 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+
+chapters:
+  - file: tweet_collection          # 1. Collecte & préparation des tweets
+#  - file: sentiment_models          # 2. Explication des modèles utilisés
+  - file: sentiment_analysis        # 3. Analyse exploratoire du sentiment
+  - file: trading_strategy          # 4. Développement de la stratégie de trading
+  - file: results_and_outlook       # 5. Résultats, visualisations & perspectives
+
+
