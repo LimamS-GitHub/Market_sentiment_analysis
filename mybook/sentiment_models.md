@@ -15,6 +15,25 @@ Dans notre projet, les modèles Transformers ont été utilisés pour analyser l
 Chaque tweet a été passé dans un ou plusieurs modèles pré-entraînés afin d'évaluer s’il exprimait une opinion positive, neutre ou négative.
 
 ---
+## Schéma de l’analyse de sentiment avec Transformers
+
+```mermaid
+flowchart TD
+  A[🗂 Tweet brut] --> B[🔍 Nettoyage du texte]
+  B --> C[🌍 Détection de la langue]
+  C --> D{Langue = Anglais ?}
+  D -- Oui --> E[📤 Envoi au modèle Transformer]
+  E --> F[🔎 Prédiction : POS / NEU / NEG]
+  F --> G[📊 Conversion : +1 / 0 / -1]
+  G --> H[📄 Enregistrement dans CSV]
+  D -- Non --> X[⛔ Tweet ignoré]
+  subgraph Modèles utilisés
+    M1[FinBERT]
+    M2[DeBERTa-v3-fin]
+    M3[DistilRoBERTa-fin]
+  end
+  E --> M1 & M2 & M3
+
 
 ## Étapes d'utilisation
 
