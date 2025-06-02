@@ -9,79 +9,81 @@ Contrairement aux RNNs ou LSTMs, ils traitent l’ensemble d’un texte en paral
 
 Dans notre projet, nous utilisons des versions spécialisées du Transformer, préentraînées sur des textes financiers (ex. : FinancialBERT, DeBERTa-v3-fin) pour analyser les tweets liés à Tesla.
 
-# 🤖 Comment avons-nous utilisé les Transformers ?
+# Explication de l'utilisation des modèles Transformers
 
-Les Transformers ont été utilisés pour **analyser le sentiment des tweets** que nous avons collectés au sujet de Tesla ($TSLA).  
-Chaque tweet nettoyé est passé dans un ou plusieurs **modèles pré-entraînés** pour déterminer s’il exprime un avis positif, neutre ou négatif.
-
----
-
-## 🔄 Étapes concrètes d'utilisation
-
-### 1. ✅ Prétraitement des tweets
-
-Avant d’utiliser les modèles, chaque tweet est :
-
-- **nettoyé** : suppression des liens, mentions, hashtags, emojis, ponctuation ;
-- **filtré** : seuls les tweets **en anglais** sont conservés (détection automatique de langue).
-
-Cela garantit une compatibilité optimale avec les modèles, tous entraînés sur des textes en anglais.
+Dans notre projet, les modèles Transformers ont été utilisés pour analyser le sentiment des tweets collectés au sujet de Tesla (TSLA).  
+Chaque tweet a été passé dans un ou plusieurs modèles pré-entraînés afin d'évaluer s’il exprimait une opinion positive, neutre ou négative.
 
 ---
 
-### 2. ✅ Analyse de sentiment par modèle Transformer
+## Étapes d'utilisation
 
-Chaque tweet propre est ensuite analysé avec un modèle Transformer via `transformers.pipeline` (librairie Hugging Face).  
-Le modèle retourne un **label** parmi :
+### 1. Prétraitement des tweets
 
-- `POSITIVE` → **+1**
-- `NEUTRAL` → **0**
-- `NEGATIVE` → **−1**
-
-Ces scores sont utilisés pour évaluer la tonalité du tweet et construire des indicateurs de marché.
+Avant de procéder à l’analyse de sentiment, nous avons appliqué un nettoyage des tweets afin de supprimer les éléments non informatifs : liens, mentions, hashtags, ponctuation, etc.  
+Nous avons également filtré les tweets par langue, en ne conservant que ceux rédigés en anglais.  
+Ce choix s’explique par le fait que tous les modèles utilisés ont été entraînés sur des textes anglophones.
 
 ---
 
-### 3. ✅ Modèles utilisés
+### 2. Application des modèles de sentiment
 
-| Modèle HuggingFace                             | Architecture     | Domaine entraîné                          | Utilisation principale                            |
-|------------------------------------------------|------------------|--------------------------------------------|---------------------------------------------------|
-| `ProsusAI/finbert`                             | BERT             | Documents financiers (10-K, actualités)   | Référence pour le sentiment boursier              |
-| `Yiyang/deberta-v3-financial-news-sentiment`   | DeBERTa-v3       | News économiques et financières           | Meilleure compréhension contextuelle              |
-| `NbAiLab/distilroberta-financial-news-sentiment` | DistilRoBERTa | Articles de presse spécialisés finance    | Léger, rapide à l’inférence                       |
+Une fois les tweets nettoyés, ils sont analysés à l’aide de modèles de type Transformer.  
+Ces modèles sont accessibles via l’API `pipeline` de la bibliothèque Hugging Face.  
+Pour chaque tweet, le modèle renvoie un label de sentiment : `POSITIVE`, `NEUTRAL` ou `NEGATIVE`.
 
-Chaque modèle attribue un score stocké dans une colonne distincte (`sentiment_finbert`, `sentiment_deberta`, `sentiment_roberta`).
+Nous avons ensuite converti ces labels en valeurs numériques pour faciliter leur traitement statistique :
 
----
-
-### 4. ✅ Structuration des résultats
-
-Ces scores sont ajoutés directement dans notre base de données finale (`tweets_with_sentiment.csv`) :
-
-- Chaque ligne = 1 tweet + 3 scores de sentiment
-- Permet ensuite une **agrégation journalière** et des calculs statistiques
-- Sert de base à la construction des signaux dans la stratégie de trading
+- `POSITIVE` → +1  
+- `NEUTRAL` → 0  
+- `NEGATIVE` → −1
 
 ---
 
-## 🎯 Pourquoi utiliser plusieurs modèles ?
+### 3. Modèles utilisés
 
-Cela nous permet de :
+Nous avons utilisé plusieurs modèles, tous spécialisés dans le domaine financier. Cela permet d’obtenir des scores mieux adaptés au langage économique souvent employé dans les tweets.
 
-- **Comparer les interprétations** de tweets parfois ambigus ;
-- **Combiner plusieurs sources** pour lisser le bruit et améliorer la robustesse ;
-- **Tester les performances de chaque modèle** dans notre pipeline de trading.
+| Modèle | Architecture | Données d’entraînement | Particularité |
+|--------|--------------|------------------------|---------------|
+| `ProsusAI/finbert` | BERT | Documents financiers et rapports annuels | Référence en sentiment financier |
+| `deberta-v3-financial-news-sentiment` | DeBERTa-v3 | Articles de presse boursiers | Bonne compréhension du contexte |
+| `distilroberta-financial-news-sentiment` | DistilRoBERTa | Actualités économiques | Modèle léger et rapide à exécuter |
 
----
-
-## 🔗 Pour mieux comprendre l’architecture Transformer
-
-Nous recommandons cette visualisation interactive :
-
-👉 [Transformer Visualizer – Polo Club](https://poloclub.github.io/transformer-explainer/)
-
-Elle montre comment les modèles attribuent de l’importance à chaque mot dans une phrase grâce au mécanisme d’**attention**, cœur du fonctionnement des Transformers.
+Chaque modèle a été appliqué individuellement à tous les tweets, et les résultats sont enregistrés dans des colonnes distinctes (`sentiment_finbert`, `sentiment_deberta`, `sentiment_roberta`, etc.).
 
 ---
 
-➡️ Partie suivante : [Analyse exploratoire du sentiment](analyse_sentiment.html)
+### 4. Intégration dans notre base de données
+
+Les scores obtenus sont ajoutés directement dans notre base structurée.  
+Chaque tweet est donc enrichi de plusieurs indicateurs de sentiment.  
+Ce jeu de données est ensuite utilisé pour :
+
+- construire des moyennes de sentiment par jour,
+- explorer les corrélations avec les variations du cours de l'action Tesla,
+- alimenter notre stratégie de trading.
+
+---
+
+## Pourquoi utiliser plusieurs modèles ?
+
+Le choix d’utiliser plusieurs modèles repose sur plusieurs motivations :
+
+- Les tweets sont souvent ambigus ou implicites. En comparant plusieurs scores, on peut repérer les divergences ou convergences d’interprétation.
+- En combinant les résultats, on peut lisser les erreurs individuelles de chaque modèle.
+- Cela permet également de tester l’impact de chaque modèle sur la performance globale de notre approche.
+
+---
+
+## Ressource pour mieux comprendre les Transformers
+
+Pour mieux comprendre le fonctionnement des modèles Transformers et le principe de l'attention, nous recommandons la ressource suivante, particulièrement claire et interactive :
+
+[Transformer Visualizer – Polo Club](https://poloclub.github.io/transformer-explainer/)
+
+Ce site illustre de manière visuelle la façon dont les mots d’une phrase sont analysés et mis en relation les uns avec les autres dans un modèle Transformer.
+
+---
+
+Dans la section suivante, nous utiliserons ces scores pour explorer les liens entre sentiment agrégé et performance boursière.
