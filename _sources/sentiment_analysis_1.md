@@ -1,4 +1,4 @@
-# Vers une stratégie de trading simple
+# 🚶‍♂️ Vers une stratégie de trading simple
 
 À partir des signaux calibrés à l'étape précédente, nous allons :
 
