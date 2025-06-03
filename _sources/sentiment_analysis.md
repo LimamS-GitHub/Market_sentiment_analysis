@@ -28,9 +28,7 @@ Le graphique ci-dessous montre la répartition des scores de sentiment produits 
 
 Cette distribution justifie notre décision de **filtrer les tweets jugés trop neutres**, c’est-à-dire dont le score absolu est inférieur à 0.1.
 
-<p align="center">
-  <img src="assets/images/Distrib_sentiment.png" width="90%">
-</p>
+![Distribution sentiment](Distrib_sentiment.png)
 
 
 2. **Filtrage des tweets peu expressifs**  
@@ -60,9 +58,8 @@ Nous comparons ici l’évolution standardisée des scores de sentiment à celle
 
 Les courbes en **gris** représentent le **prix de clôture standardisé**, tandis que les traits colorés représentent le sentiment journalier, lissé par moyenne mobile.
 
-<p align="center">
-  <img src="assets/images/Evol_cour_sentiment.png" width="95%">
-</p>
+![Evol cour sentiment](Evol_cour_sentiment.png)
+
 
 On observe que certains signaux haussiers (vert) ou baissiers (rouge) **précèdent ou accompagnent des mouvements de prix**, ce qui constitue une première indication de potentiel informatif à exploiter dans la stratégie.
 

@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -60,7 +60,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'tweet_collection';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Analyse exploratoire du sentiment" href="sentiment_analysis.html" />
+    <link rel="next" title="🤖 Comprendre les Transformers" href="sentiment_models.html" />
     <link rel="prev" title="Bienvenue sur notre projet : Market Sentiment &amp; Trading" href="intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -181,6 +181,8 @@
         </ul>
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">🐦 Collecte &amp; Préparation des Tweets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sentiment_models.html">🤖 Comprendre les Transformers</a></li>
+
 <li class="toctree-l1"><a class="reference internal" href="sentiment_analysis.html">Analyse exploratoire du sentiment</a></li>
 </ul>
 
@@ -377,11 +379,21 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sommaire">🗂️ Sommaire</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pourquoi-twitter">Pourquoi Twitter ?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objectif-de-cette-section">Objectif de cette section</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apercu-technique">Aperçu technique</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#schema-des-donnees-exportees">Schéma des données exportées</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#schema-de-recuperation-des-donnees">🔄 Schéma de récupération des données</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#schema-de-recuperation-des-donnees">Schéma de récupération des données</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#detail-conceptuel-des-etapes">🧠 Détail conceptuel des étapes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scraping-sans-api">🔍 1. Scraping sans API</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nettoyage-et-filtrage-linguistique">🧼 2. Nettoyage et filtrage linguistique</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analyse-de-sentiment-multi-modele">🧪 3. Analyse de sentiment multi-modèle</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stockage-mensuel-et-structuration">📦 4. Stockage mensuel et structuration</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limites-rencontrees">⚠️ Limites rencontrées</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pour-aller-plus-loin">🔗 Pour aller plus loin</a></li>
 </ul>
             </nav>
         </div>
@@ -395,6 +407,19 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="collecte-preparation-des-tweets">
 <h1>🐦 Collecte &amp; Préparation des Tweets<a class="headerlink" href="#collecte-preparation-des-tweets" title="Link to this heading">#</a></h1>
+<hr class="docutils" />
+<section id="sommaire">
+<h2>🗂️ Sommaire<a class="headerlink" href="#sommaire" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="#pourquoi-twitter-"><span class="xref myst">Pourquoi Twitter ?</span></a></p></li>
+<li><p><a class="reference internal" href="#objectif-de-cette-section"><span class="xref myst">Objectif de cette section</span></a></p></li>
+<li><p><a class="reference internal" href="#aper%C3%A7u-technique"><span class="xref myst">Aperçu technique</span></a></p></li>
+<li><p><a class="reference internal" href="#sch%C3%A9ma-des-donn%C3%A9es-export%C3%A9es"><span class="xref myst">Schéma des données exportées</span></a></p></li>
+<li><p><a class="reference internal" href="#-d%C3%A9tail-conceptuel-des-%C3%A9tapes"><span class="xref myst">🧠 Détail conceptuel des étapes</span></a></p></li>
+<li><p><a class="reference internal" href="#%EF%B8%8F-limites-rencontr%C3%A9es"><span class="xref myst">⚠️ Limites rencontrées</span></a></p></li>
+<li><p><a class="reference internal" href="#-pour-aller-plus-loin"><span class="xref myst">🔗 Pour aller plus loin</span></a></p></li>
+</ul>
+</section>
 <section id="pourquoi-twitter">
 <h2>Pourquoi Twitter ?<a class="headerlink" href="#pourquoi-twitter" title="Link to this heading">#</a></h2>
 <p>Twitter est une plateforme où l’information circule vite, brute et en grande quantité.<br />
@@ -471,11 +496,86 @@ Dans ce chapitre, nous allons donc :</p>
 </section>
 <hr class="docutils" />
 <section id="schema-de-recuperation-des-donnees">
-<h2>🔄 Schéma de récupération des données<a class="headerlink" href="#schema-de-recuperation-des-donnees" title="Link to this heading">#</a></h2>
+<h2>Schéma de récupération des données<a class="headerlink" href="#schema-de-recuperation-des-donnees" title="Link to this heading">#</a></h2>
 <p>Le diagramme ci-dessous illustre le processus complet de collecte et de traitement des tweets, depuis le lancement du script jusqu’à la sauvegarde des fichiers CSV :</p>
-<p align="center">
-  <img src="C:\Users\selim\Desktop\mybook\schema_scraping.svg" width="80%">
-</p>
+<p><img alt="Distribution sentiment" src="_images/schema_scraping.svg" /></p>
+</section>
+<hr class="docutils" />
+<section id="detail-conceptuel-des-etapes">
+<h2>🧠 Détail conceptuel des étapes<a class="headerlink" href="#detail-conceptuel-des-etapes" title="Link to this heading">#</a></h2>
+<section id="scraping-sans-api">
+<h3>🔍 1. Scraping sans API<a class="headerlink" href="#scraping-sans-api" title="Link to this heading">#</a></h3>
+<p>Nous avons choisi <strong>Nitter</strong>, une interface alternative à Twitter, pour contourner les restrictions de l’API officielle (limites, coût, authentification).<br />
+Le scraping consiste à :</p>
+<ul class="simple">
+<li><p>Formuler une requête par mot-clé (<code class="docutils literal notranslate"><span class="pre">Tesla</span></code>, <code class="docutils literal notranslate"><span class="pre">TSLA</span></code>, etc.) et par jour ;</p></li>
+<li><p>Naviguer automatiquement dans les pages pour extraire le contenu des tweets visibles ;</p></li>
+<li><p>Stocker les résultats dans un format brut, avec des métadonnées (date, utilisateur, texte, etc.).</p></li>
+</ul>
+<p>Pour automatiser cela, nous utilisons un outil de navigation sans interface visuelle (<strong>navigateur headless</strong>) avec gestion de délais et rotation de connexions (<strong>proxies</strong>) pour éviter d’être bloqués.</p>
+</section>
+<hr class="docutils" />
+<section id="nettoyage-et-filtrage-linguistique">
+<h3>🧼 2. Nettoyage et filtrage linguistique<a class="headerlink" href="#nettoyage-et-filtrage-linguistique" title="Link to this heading">#</a></h3>
+<p>Les tweets récupérés sont très bruts : liens, mentions, hashtags, emojis, etc.<br />
+Avant toute analyse, chaque texte est <strong>nettoyé</strong> pour retirer ces éléments parasites.</p>
+<p>Ensuite, un filtre de langue est appliqué pour ne garder que les tweets <strong>en anglais</strong>, car les modèles NLP utilisés sont spécifiquement entraînés sur ce langage.</p>
+</section>
+<hr class="docutils" />
+<section id="analyse-de-sentiment-multi-modele">
+<h3>🧪 3. Analyse de sentiment multi-modèle<a class="headerlink" href="#analyse-de-sentiment-multi-modele" title="Link to this heading">#</a></h3>
+<p>Chaque tweet nettoyé est passé à travers plusieurs modèles de <strong>sentiment analysis</strong> :</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Type de modèle</p></th>
+<th class="head"><p>Exemple utilisé</p></th>
+<th class="head"><p>Caractéristiques</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Lexical</strong></p></td>
+<td><p>VADER</p></td>
+<td><p>Basé sur des règles, rapide, mais limité face au langage complexe</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Transformers généralistes</strong></p></td>
+<td><p>DistilRoBERTa</p></td>
+<td><p>Plus fins, mais parfois surentraînés sur du texte non-financier</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Transformers spécialisés</strong></p></td>
+<td><p>FinancialBERT, DeBERTa-v3-fin</p></td>
+<td><p>Entraînés sur des actualités boursières, mieux adaptés à notre contexte</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Chaque modèle attribue un <strong>score de polarité</strong> : positif, neutre ou négatif (souvent transformé en valeurs −1, 0 ou +1).</p>
+</section>
+<hr class="docutils" />
+<section id="stockage-mensuel-et-structuration">
+<h3>📦 4. Stockage mensuel et structuration<a class="headerlink" href="#stockage-mensuel-et-structuration" title="Link to this heading">#</a></h3>
+<p>Les résultats sont organisés :</p>
+<ul class="simple">
+<li><p>Par <strong>mois civil</strong> (ex. : <code class="docutils literal notranslate"><span class="pre">tweets_2022_01.csv</span></code>) pour faciliter l’analyse temporelle ;</p></li>
+<li><p>Avec un <strong>fichier global fusionné</strong> (<code class="docutils literal notranslate"><span class="pre">tweets_with_sentiment.csv</span></code>) utilisé dans les notebooks suivants.</p></li>
+</ul>
+<p>Chaque ligne de ce fichier correspond à un tweet unique enrichi de métadonnées et de scores.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="limites-rencontrees">
+<h2>⚠️ Limites rencontrées<a class="headerlink" href="#limites-rencontrees" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Qualité des tweets</strong> : bruit, ironie, contenu peu informatif, spam…</p></li>
+<li><p><strong>Langue détectée automatiquement</strong> → erreurs possibles.</p></li>
+<li><p><strong>Modèles de sentiment divergents</strong> : certaines phrases ambigües sont classées différemment selon le modèle.</p></li>
+<li><p><strong>Instabilité de Nitter</strong> : indisponibilités ponctuelles → recours à des solutions de contournement techniques.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="pour-aller-plus-loin">
+<h2>🔗 Pour aller plus loin<a class="headerlink" href="#pour-aller-plus-loin" title="Link to this heading">#</a></h2>
+<p>👉 Dans la prochaine section, nous croiserons ces tweets enrichis avec les <strong>cours boursiers de Tesla</strong> pour étudier les corrélations et construire des indicateurs de sentiment agrégé.</p>
+<p>➡️ Accéder à la suite : <a class="reference internal" href="#EDA.html"><span class="xref myst">Analyse exploratoire des données</span></a></p>
 </section>
 </section>
 
@@ -519,11 +619,11 @@ Dans ce chapitre, nous allons donc :</p>
       </div>
     </a>
     <a class="right-next"
-       href="sentiment_analysis.html"
+       href="sentiment_models.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Analyse exploratoire du sentiment</p>
+        <p class="prev-next-title">🤖 Comprendre les Transformers</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -543,11 +643,21 @@ Dans ce chapitre, nous allons donc :</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sommaire">🗂️ Sommaire</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pourquoi-twitter">Pourquoi Twitter ?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objectif-de-cette-section">Objectif de cette section</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apercu-technique">Aperçu technique</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#schema-des-donnees-exportees">Schéma des données exportées</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#schema-de-recuperation-des-donnees">🔄 Schéma de récupération des données</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#schema-de-recuperation-des-donnees">Schéma de récupération des données</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#detail-conceptuel-des-etapes">🧠 Détail conceptuel des étapes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scraping-sans-api">🔍 1. Scraping sans API</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nettoyage-et-filtrage-linguistique">🧼 2. Nettoyage et filtrage linguistique</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analyse-de-sentiment-multi-modele">🧪 3. Analyse de sentiment multi-modèle</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stockage-mensuel-et-structuration">📦 4. Stockage mensuel et structuration</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limites-rencontrees">⚠️ Limites rencontrées</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pour-aller-plus-loin">🔗 Pour aller plus loin</a></li>
 </ul>
   </nav></div>
 

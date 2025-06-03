@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -60,7 +60,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'sentiment_analysis';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="🐦 Collecte &amp; Préparation des Tweets" href="tweet_collection.html" />
+    <link rel="prev" title="🤖 Comprendre les Transformers" href="sentiment_models.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -180,6 +180,8 @@
         </ul>
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="tweet_collection.html">🐦 Collecte &amp; Préparation des Tweets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sentiment_models.html">🤖 Comprendre les Transformers</a></li>
+
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Analyse exploratoire du sentiment</a></li>
 </ul>
 
@@ -413,9 +415,7 @@ choix du modèle, fenêtre de lissage, seuils d’achat et de vente.</p></li>
 <li><p><strong>FinancialBERT</strong>, <strong>DistilRoBERTa</strong>, <strong>DeBERTa</strong> : scores discrets {-1, 0, +1}, avec un pic très marqué pour la classe neutre (0).</p></li>
 </ul>
 <p>Cette distribution justifie notre décision de <strong>filtrer les tweets jugés trop neutres</strong>, c’est-à-dire dont le score absolu est inférieur à 0.1.</p>
-<p align="center">
-  <img src="assets/images/Distrib_sentiment.png" width="90%">
-</p>
+<p><img alt="Distribution sentiment" src="_images/Distrib_sentiment.png" /></p>
 <ol class="arabic" start="2">
 <li><p><strong>Filtrage des tweets peu expressifs</strong><br />
 Nous éliminons les tweets dont le score absolu est <strong>inférieur à 0.1</strong> sur plusieurs modèles, car ils n’ont pas de valeur exploitable dans une logique d’achat/vente.</p></li>
@@ -443,9 +443,7 @@ Les scores sont ensuite moyennés <strong>par jour</strong>, séparément pour :
 </ol>
 <p>Nous comparons ici l’évolution standardisée des scores de sentiment à celle du cours de clôture de l’action Tesla.</p>
 <p>Les courbes en <strong>gris</strong> représentent le <strong>prix de clôture standardisé</strong>, tandis que les traits colorés représentent le sentiment journalier, lissé par moyenne mobile.</p>
-<p align="center">
-  <img src="assets/images/Evol_cour_sentiment.png" width="95%">
-</p>
+<p><img alt="Evol cour sentiment" src="_images/Evol_cour_sentiment.png" /></p>
 <p>On observe que certains signaux haussiers (vert) ou baissiers (rouge) <strong>précèdent ou accompagnent des mouvements de prix</strong>, ce qui constitue une première indication de potentiel informatif à exploiter dans la stratégie.</p>
 <hr class="docutils" />
 <p>➡️ Étudions maintenant si ces signaux peuvent alimenter une stratégie de trading concrète.</p>
@@ -483,12 +481,12 @@ Les scores sont ensuite moyennés <strong>par jour</strong>, séparément pour :
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="tweet_collection.html"
+       href="sentiment_models.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">🐦 Collecte &amp; Préparation des Tweets</p>
+        <p class="prev-next-title">🤖 Comprendre les Transformers</p>
       </div>
     </a>
 </div>

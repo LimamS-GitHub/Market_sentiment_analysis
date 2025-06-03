@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Bienvenue sur notre projet : Market Sentiment &amp; Trading &#8212; My sample book</title>
+    <title>🤖 Comprendre les Transformers &#8212; My sample book</title>
   
   
   
@@ -57,10 +57,11 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'intro';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'sentiment_models';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="🐦 Collecte &amp; Préparation des Tweets" href="tweet_collection.html" />
+    <link rel="next" title="Analyse exploratoire du sentiment" href="sentiment_analysis.html" />
+    <link rel="prev" title="🐦 Collecte &amp; Préparation des Tweets" href="tweet_collection.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -123,8 +124,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -143,7 +142,7 @@
     
   
 
-<a class="navbar-brand logo" href="#">
+<a class="navbar-brand logo" href="intro.html">
   
   
   
@@ -174,18 +173,17 @@
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1 current active">
-                <a class="reference internal" href="#">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
                     Bienvenue sur notre projet : Market Sentiment & Trading
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="tweet_collection.html">🐦 Collecte &amp; Préparation des Tweets</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sentiment_models.html">🤖 Comprendre les Transformers</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">🤖 Comprendre les Transformers</a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="sentiment_analysis.html">Analyse exploratoire du sentiment</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sentiment_analysis_1.html">Vers une stratégie de trading simple</a></li>
 </ul>
 
     </div>
@@ -257,7 +255,7 @@
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fintro.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fsentiment_models.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -287,7 +285,7 @@
       
       
       
-      <li><a href="_sources/intro.md" target="_blank"
+      <li><a href="_sources/sentiment_models.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -371,7 +369,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Bienvenue sur notre projet : Market Sentiment & Trading</h1>
+    <h1>🤖 Comprendre les Transformers</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -381,9 +379,21 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contexte">Contexte</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contenu-du-livre">Contenu du livre</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">🤖 Comprendre les Transformers</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#explication-de-l-utilisation-des-modeles-transformers">Explication de l’utilisation des modèles Transformers</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#etapes-d-utilisation">Étapes d’utilisation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pretraitement-des-tweets">1. Prétraitement des tweets</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#application-des-modeles-de-sentiment">2. Application des modèles de sentiment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modeles-utilises">3. Modèles utilisés</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#integration-dans-notre-base-de-donnees">4. Intégration dans notre base de données</a></li>
 </ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pourquoi-utiliser-plusieurs-modeles">Pourquoi utiliser plusieurs modèles ?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ressource-pour-mieux-comprendre-les-transformers">Ressource pour mieux comprendre les Transformers</a></li>
+</ul>
+</li>
+</ul>
+
             </nav>
         </div>
     </div>
@@ -394,34 +404,106 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="bienvenue-sur-notre-projet-market-sentiment-trading">
-<h1>Bienvenue sur notre projet : <em>Market Sentiment &amp; Trading</em><a class="headerlink" href="#bienvenue-sur-notre-projet-market-sentiment-trading" title="Link to this heading">#</a></h1>
-<section id="contexte">
-<h2>Contexte<a class="headerlink" href="#contexte" title="Link to this heading">#</a></h2>
-<p>Aujourd’hui, investir en bourse est devenu un véritable casse-tête.<br />
-Les marchés sont volatils, souvent influencés par bien plus que les seuls résultats économiques.<br />
-L’actualité, les réseaux sociaux, et les émotions collectives jouent un rôle grandissant dans les mouvements de prix.</p>
-<p>Parmi ces canaux, <strong>Twitter</strong> s’impose comme un thermomètre de l’opinion publique : chaque jour, des milliers de tweets commentent les entreprises, leurs dirigeants et leurs produits.</p>
-<p>Alors, une question se pose :</p>
-<p><strong>Et si on transformait l’humeur collective en indicateur de trading ?</strong></p>
+  <section id="comprendre-les-transformers">
+<h1>🤖 Comprendre les Transformers<a class="headerlink" href="#comprendre-les-transformers" title="Link to this heading">#</a></h1>
+<p>Les modèles utilisés dans notre analyse sont basés sur l’architecture Transformer, une technologie révolutionnaire introduite en 2017 (Vaswani et al.).<br />
+Contrairement aux RNNs ou LSTMs, ils traitent l’ensemble d’un texte en parallèle grâce à un mécanisme d’<strong>attention</strong>.</p>
+<p>👉 Pour une visualisation interactive de leur fonctionnement, nous vous recommandons cette ressource :</p>
+<p>🔗 <a class="reference external" href="https://poloclub.github.io/transformer-explainer/">Transformer Visualizer (Polo Club)</a></p>
+<p>Dans notre projet, nous utilisons des versions spécialisées du Transformer, préentraînées sur des textes financiers (ex. : FinancialBERT, DeBERTa-v3-fin) pour analyser les tweets liés à Tesla.</p>
 </section>
-<section id="contenu-du-livre">
-<h2>Contenu du livre<a class="headerlink" href="#contenu-du-livre" title="Link to this heading">#</a></h2>
-<p>Ce Jupyter Book est structuré en 5 grandes parties :</p>
-<ol class="arabic simple">
-<li><p><strong>Collecte &amp; préparation des tweets</strong></p></li>
-<li><p><strong>Explication des modèles utilisés</strong></p></li>
-<li><p><strong>Analyse exploratoire du sentiment</strong></p></li>
-<li><p><strong>Développement de la stratégie de trading</strong></p></li>
-<li><p><strong>Résultats, visualisations &amp; perspectives</strong></p></li>
-</ol>
+<section class="tex2jax_ignore mathjax_ignore" id="explication-de-l-utilisation-des-modeles-transformers">
+<h1>Explication de l’utilisation des modèles Transformers<a class="headerlink" href="#explication-de-l-utilisation-des-modeles-transformers" title="Link to this heading">#</a></h1>
+<p>Dans notre projet, les modèles Transformers ont été utilisés pour analyser le sentiment des tweets collectés au sujet de Tesla (TSLA).<br />
+Chaque tweet a été passé dans un ou plusieurs modèles pré-entraînés afin d’évaluer s’il exprimait une opinion positive, neutre ou négative.</p>
 <hr class="docutils" />
-<blockquote>
-<div><p>Bonne lecture, et bienvenue dans l’univers du trading piloté par le sentiment social !</p>
-</div></blockquote>
+<p><img alt="Analyse de sentiment via Transformers" src="_images/diagramme_transformers.png" /></p>
+<section id="etapes-d-utilisation">
+<h2>Étapes d’utilisation<a class="headerlink" href="#etapes-d-utilisation" title="Link to this heading">#</a></h2>
+<section id="pretraitement-des-tweets">
+<h3>1. Prétraitement des tweets<a class="headerlink" href="#pretraitement-des-tweets" title="Link to this heading">#</a></h3>
+<p>Avant de procéder à l’analyse de sentiment, nous avons appliqué un nettoyage des tweets afin de supprimer les éléments non informatifs : liens, mentions, hashtags, ponctuation, etc.<br />
+Nous avons également filtré les tweets par langue, en ne conservant que ceux rédigés en anglais.<br />
+Ce choix s’explique par le fait que tous les modèles utilisés ont été entraînés sur des textes anglophones.</p>
 </section>
-<div class="toctree-wrapper compound">
+<hr class="docutils" />
+<section id="application-des-modeles-de-sentiment">
+<h3>2. Application des modèles de sentiment<a class="headerlink" href="#application-des-modeles-de-sentiment" title="Link to this heading">#</a></h3>
+<p>Une fois les tweets nettoyés, ils sont analysés à l’aide de modèles de type Transformer.<br />
+Ces modèles sont accessibles via l’API <code class="docutils literal notranslate"><span class="pre">pipeline</span></code> de la bibliothèque Hugging Face.<br />
+Pour chaque tweet, le modèle renvoie un label de sentiment : <code class="docutils literal notranslate"><span class="pre">POSITIVE</span></code>, <code class="docutils literal notranslate"><span class="pre">NEUTRAL</span></code> ou <code class="docutils literal notranslate"><span class="pre">NEGATIVE</span></code>.</p>
+<p>Nous avons ensuite converti ces labels en valeurs numériques pour faciliter leur traitement statistique :</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">POSITIVE</span></code> → +1</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">NEUTRAL</span></code> → 0</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">NEGATIVE</span></code> → −1</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="modeles-utilises">
+<h3>3. Modèles utilisés<a class="headerlink" href="#modeles-utilises" title="Link to this heading">#</a></h3>
+<p>Nous avons utilisé plusieurs modèles, tous spécialisés dans le domaine financier. Cela permet d’obtenir des scores mieux adaptés au langage économique souvent employé dans les tweets.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Modèle</p></th>
+<th class="head"><p>Architecture</p></th>
+<th class="head"><p>Données d’entraînement</p></th>
+<th class="head"><p>Particularité</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ProsusAI/finbert</span></code></p></td>
+<td><p>BERT</p></td>
+<td><p>Documents financiers et rapports annuels</p></td>
+<td><p>Référence en sentiment financier</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">deberta-v3-financial-news-sentiment</span></code></p></td>
+<td><p>DeBERTa-v3</p></td>
+<td><p>Articles de presse boursiers</p></td>
+<td><p>Bonne compréhension du contexte</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">distilroberta-financial-news-sentiment</span></code></p></td>
+<td><p>DistilRoBERTa</p></td>
+<td><p>Actualités économiques</p></td>
+<td><p>Modèle léger et rapide à exécuter</p></td>
+</tr>
+</tbody>
+</table>
 </div>
+<p>Chaque modèle a été appliqué individuellement à tous les tweets, et les résultats sont enregistrés dans des colonnes distinctes (<code class="docutils literal notranslate"><span class="pre">sentiment_finbert</span></code>, <code class="docutils literal notranslate"><span class="pre">sentiment_deberta</span></code>, <code class="docutils literal notranslate"><span class="pre">sentiment_roberta</span></code>, etc.).</p>
+</section>
+<hr class="docutils" />
+<section id="integration-dans-notre-base-de-donnees">
+<h3>4. Intégration dans notre base de données<a class="headerlink" href="#integration-dans-notre-base-de-donnees" title="Link to this heading">#</a></h3>
+<p>Les scores obtenus sont ajoutés directement dans notre base structurée.<br />
+Chaque tweet est donc enrichi de plusieurs indicateurs de sentiment.<br />
+Ce jeu de données est ensuite utilisé pour :</p>
+<ul class="simple">
+<li><p>construire des moyennes de sentiment par jour,</p></li>
+<li><p>explorer les corrélations avec les variations du cours de l’action Tesla,</p></li>
+<li><p>alimenter notre stratégie de trading.</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="pourquoi-utiliser-plusieurs-modeles">
+<h2>Pourquoi utiliser plusieurs modèles ?<a class="headerlink" href="#pourquoi-utiliser-plusieurs-modeles" title="Link to this heading">#</a></h2>
+<p>Le choix d’utiliser plusieurs modèles repose sur plusieurs motivations :</p>
+<ul class="simple">
+<li><p>Les tweets sont souvent ambigus ou implicites. En comparant plusieurs scores, on peut repérer les divergences ou convergences d’interprétation.</p></li>
+<li><p>En combinant les résultats, on peut lisser les erreurs individuelles de chaque modèle.</p></li>
+<li><p>Cela permet également de tester l’impact de chaque modèle sur la performance globale de notre approche.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="ressource-pour-mieux-comprendre-les-transformers">
+<h2>Ressource pour mieux comprendre les Transformers<a class="headerlink" href="#ressource-pour-mieux-comprendre-les-transformers" title="Link to this heading">#</a></h2>
+<p>Pour mieux comprendre le fonctionnement des modèles Transformers et le principe de l’attention, nous recommandons la ressource suivante, particulièrement claire et interactive :</p>
+<p><a class="reference external" href="https://poloclub.github.io/transformer-explainer/">Transformer Visualizer – Polo Club</a></p>
+<p>Ce site illustre de manière visuelle la façon dont les mots d’une phrase sont analysés et mis en relation les uns avec les autres dans un modèle Transformer.</p>
+<hr class="docutils" />
+<p>Dans la section suivante, nous utiliserons ces scores pour explorer les liens entre sentiment agrégé et performance boursière.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -454,12 +536,21 @@ L’actualité, les réseaux sociaux, et les émotions collectives jouent un rô
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
-    <a class="right-next"
+    <a class="left-prev"
        href="tweet_collection.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">🐦 Collecte &amp; Préparation des Tweets</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="sentiment_analysis.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">🐦 Collecte &amp; Préparation des Tweets</p>
+        <p class="prev-next-title">Analyse exploratoire du sentiment</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -479,9 +570,21 @@ L’actualité, les réseaux sociaux, et les émotions collectives jouent un rô
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contexte">Contexte</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contenu-du-livre">Contenu du livre</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">🤖 Comprendre les Transformers</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#explication-de-l-utilisation-des-modeles-transformers">Explication de l’utilisation des modèles Transformers</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#etapes-d-utilisation">Étapes d’utilisation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pretraitement-des-tweets">1. Prétraitement des tweets</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#application-des-modeles-de-sentiment">2. Application des modèles de sentiment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modeles-utilises">3. Modèles utilisés</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#integration-dans-notre-base-de-donnees">4. Intégration dans notre base de données</a></li>
 </ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pourquoi-utiliser-plusieurs-modeles">Pourquoi utiliser plusieurs modèles ?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ressource-pour-mieux-comprendre-les-transformers">Ressource pour mieux comprendre les Transformers</a></li>
+</ul>
+</li>
+</ul>
+
   </nav></div>
 
 </div></div>
