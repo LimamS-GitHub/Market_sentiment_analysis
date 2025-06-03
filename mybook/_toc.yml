@@ -5,10 +5,11 @@ format: jb-book
 root: intro
 
 chapters:
-  - file: tweet_collection          # 1. Collecte & préparation des tweets
-  - file: sentiment_models          # 2. Explication des modèles utilisés
-  - file: sentiment_analysis        # 3. Analyse exploratoire du sentiment
-  - file: trading_strategy          # 4. Développement de la stratégie de trading
-  - file: results_and_outlook       # 5. Résultats, visualisations & perspectives
+  - file: tweet_collection
+  - file: sentiment_models
+  - file: sentiment_analysis
+  - file: sentiment_analysis_1
+  - file: trading_strategy
+  - file: results_and_outlook
 
 

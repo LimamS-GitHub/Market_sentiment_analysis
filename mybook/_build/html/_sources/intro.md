@@ -14,7 +14,7 @@ Alors, une question se pose :
 
 ## Contenu du livre
 
-Ce Jupyter Book est structuré en 4 grandes parties :
+Ce Jupyter Book est structuré en 5 grandes parties :
 
 1. **Collecte & préparation des tweets**
 2. **Explication des modèles utilisés**
