@@ -24,7 +24,7 @@ L’histogramme ci-dessous montre l'**écart moyen de performance** entre la str
 
 Le graphique suivant illustre l’impact du **nombre de mois utilisés pour entraîner le modèle** sur la qualité du résultat.
 
-![Écart moyen par tranche d’itérations](../_static/ecart_moyen_evolution.png)
+![Écart moyen par tranche d’itérations](ecart_moyen_evolution.png)
 
 > Les performances s’améliorent clairement jusqu’à **1500 itérations** environ.  
 > Au-delà, les gains se stabilisent, avec une variabilité qui reste notable.  
