@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>&lt;no title&gt; &#8212; My sample book</title>
+    <title>📈 Présentation du modèle de trading adaptatif &#8212; My sample book</title>
   
   
   
@@ -60,6 +60,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'trading_strategy';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="📊 Analyse des performances" href="trading_strategy_1.html" />
     <link rel="prev" title="Vers une stratégie de trading simple" href="sentiment_analysis_1.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -178,12 +179,14 @@
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="tweet_collection.html">🐦 Collecte &amp; Préparation des Tweets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sentiment_models.html">🤖 Comprendre les Transformers</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="sentiment_analysis.html">Analyse exploratoire du sentiment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sentiment_analysis.html">📊 Analyse exploratoire du sentiment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sentiment_analysis_1.html">Vers une stratégie de trading simple</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">📈 Présentation du modèle de trading adaptatif</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trading_strategy_1.html">📊 Analyse des performances</a></li>
 </ul>
 
     </div>
@@ -369,7 +372,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1><no title></h1>
+    <h1>📈 Présentation du modèle de trading adaptatif</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -378,9 +381,15 @@ document.write(`
                 <h2> Contents </h2>
             </div>
             <nav aria-label="Page">
-                <ul class="simple visible nav section-nav flex-column">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-a-letude">Introduction à l’étude</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fonctionnement-general-du-modele">⚙️ Fonctionnement général du modèle</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boucle-adaptative-quotidienne">🔁 Boucle adaptative quotidienne</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parametres-optimises-chaque-jour">Paramètres optimisés chaque jour</a></li>
 </ul>
-
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#schema-du-processus">Schéma du processus</a></li>
+</ul>
             </nav>
         </div>
     </div>
@@ -391,7 +400,83 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  
+  <section class="tex2jax_ignore mathjax_ignore" id="presentation-du-modele-de-trading-adaptatif">
+<h1>📈 Présentation du modèle de trading adaptatif<a class="headerlink" href="#presentation-du-modele-de-trading-adaptatif" title="Link to this heading">#</a></h1>
+<section id="introduction-a-letude">
+<h2>Introduction à l’étude<a class="headerlink" href="#introduction-a-letude" title="Link to this heading">#</a></h2>
+<p>Cette section présente le <strong>fonctionnement interne du modèle de trading adaptatif</strong> développé dans le projet.<br />
+L’objectif est de comprendre <strong>comment les signaux de sentiment sont transformés en décisions d’achat ou de vente</strong>, puis traduits en actions concrètes sur un portefeuille virtuel.</p>
+<p>Nous allons décomposer :</p>
+<ul class="simple">
+<li><p>la manière dont les signaux sont construits,</p></li>
+<li><p>le processus d’optimisation des paramètres,</p></li>
+<li><p>la boucle journalière d’entraînement et d’exécution.</p></li>
+</ul>
+<p>Un schéma explicatif illustre ce fonctionnement.</p>
+</section>
+<hr class="docutils" />
+<section id="fonctionnement-general-du-modele">
+<h2>⚙️ Fonctionnement général du modèle<a class="headerlink" href="#fonctionnement-general-du-modele" title="Link to this heading">#</a></h2>
+<p>Le modèle repose sur l’analyse quotidienne du <strong>sentiment extrait de Twitter</strong> via 4 modèles différents :</p>
+<ul class="simple">
+<li><p><strong>VADER</strong> : modèle classique de sentiment</p></li>
+<li><p><strong>FinBERT</strong>, <strong>DistilRoBERTa</strong>, <strong>DeBERTa</strong> : modèles de langage spécialisés ou pré-entraînés sur du contenu financier ou généraliste.</p></li>
+</ul>
+<p>Chaque jour, on cherche la <strong>meilleure combinaison de poids</strong> entre ces modèles pour prédire l’évolution du cours de l’action TSLA.</p>
+<hr class="docutils" />
+<section id="boucle-adaptative-quotidienne">
+<h3>🔁 Boucle adaptative quotidienne<a class="headerlink" href="#boucle-adaptative-quotidienne" title="Link to this heading">#</a></h3>
+<p>Chaque jour de trading suit les étapes suivantes :</p>
+<ol class="arabic simple">
+<li><p><strong>Sélection des données d’entraînement</strong> sur les <em>N derniers mois</em></p></li>
+<li><p><strong>Recherche aléatoire des meilleurs paramètres</strong> :</p>
+<ul class="simple">
+<li><p>poids des modèles de sentiment</p></li>
+<li><p>seuil d’achat (<code class="docutils literal notranslate"><span class="pre">buy_threshold</span></code>)</p></li>
+<li><p>seuil de vente (<code class="docutils literal notranslate"><span class="pre">sell_threshold</span></code>)</p></li>
+<li><p>facteur d’importance des comptes vérifiés (<code class="docutils literal notranslate"><span class="pre">weight_verified</span></code>)</p></li>
+</ul>
+</li>
+<li><p><strong>Sélection de la combinaison qui maximise le gain</strong></p></li>
+<li><p><strong>Exécution du signal</strong> (achat, vente ou attente)</p></li>
+<li><p><strong>Mise à jour du portefeuille</strong></p></li>
+<li><p><strong>Journalisation des décisions et performances</strong></p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="parametres-optimises-chaque-jour">
+<h3>Paramètres optimisés chaque jour<a class="headerlink" href="#parametres-optimises-chaque-jour" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Paramètre</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">weights</span></code></p></td>
+<td><p>Poids attribués à chaque modèle de sentiment</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">buy_threshold</span></code></p></td>
+<td><p>Seuil au-dessus duquel un achat est déclenché</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">sell_threshold</span></code></p></td>
+<td><p>Seuil en dessous duquel une vente est déclenchée</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">weight_verified</span></code></p></td>
+<td><p>Importance accordée aux tweets vérifiés</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="schema-du-processus">
+<h2>Schéma du processus<a class="headerlink" href="#schema-du-processus" title="Link to this heading">#</a></h2>
+<p><img alt="Process adaptatif" src="_images/Process_adaptatif.svg" /></p>
+</section>
+</section>
+
     <script type="text/x-thebe-config">
     {
         requestKernel: true,
@@ -431,6 +516,15 @@ document.write(`
         <p class="prev-next-title">Vers une stratégie de trading simple</p>
       </div>
     </a>
+    <a class="right-next"
+       href="trading_strategy_1.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">📊 Analyse des performances</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -446,9 +540,15 @@ document.write(`
     <i class="fa-solid fa-list"></i> Contents
   </div>
   <nav class="bd-toc-nav page-toc">
-    <ul class="simple visible nav section-nav flex-column">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-a-letude">Introduction à l’étude</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fonctionnement-general-du-modele">⚙️ Fonctionnement général du modèle</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boucle-adaptative-quotidienne">🔁 Boucle adaptative quotidienne</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parametres-optimises-chaque-jour">Paramètres optimisés chaque jour</a></li>
 </ul>
-
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#schema-du-processus">Schéma du processus</a></li>
+</ul>
   </nav></div>
 
 </div></div>

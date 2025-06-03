@@ -1,4 +1,4 @@
-# Analyse exploratoire du sentiment
+# 📊 Analyse exploratoire du sentiment
 
 Cette section a pour but de poser les premières bases d'une stratégie de trading fondée sur le sentiment.  
 Elle repose sur trois axes principaux :
