@@ -415,7 +415,7 @@ choix du modèle, fenêtre de lissage, seuils d’achat et de vente.</p></li>
 <li><p><strong>FinancialBERT</strong>, <strong>DistilRoBERTa</strong>, <strong>DeBERTa</strong> : scores discrets {-1, 0, +1}, avec un pic très marqué pour la classe neutre (0).</p></li>
 </ul>
 <p>Cette distribution justifie notre décision de <strong>filtrer les tweets jugés trop neutres</strong>, c’est-à-dire dont le score absolu est inférieur à 0.1.</p>
-<p><img alt="Distribution sentiment" src="assets/images/Distrib_sentiment.png" /></p>
+<p><img alt="Distribution sentiment" src="_images/Distrib_sentiment.png" /></p>
 <ol class="arabic" start="2">
 <li><p><strong>Filtrage des tweets peu expressifs</strong><br />
 Nous éliminons les tweets dont le score absolu est <strong>inférieur à 0.1</strong> sur plusieurs modèles, car ils n’ont pas de valeur exploitable dans une logique d’achat/vente.</p></li>

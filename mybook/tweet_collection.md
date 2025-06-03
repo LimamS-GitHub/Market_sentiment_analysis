@@ -60,13 +60,12 @@ Les résultats sont sauvegardés dans des fichiers CSV organisés **par mois**, 
 
 ---
 
-## 🔄 Schéma de récupération des données
+## Schéma de récupération des données
 
 Le diagramme ci-dessous illustre le processus complet de collecte et de traitement des tweets, depuis le lancement du script jusqu’à la sauvegarde des fichiers CSV :
 
-<p align="center">
-  <img src="C:\Users\selim\Desktop\mybook\schema_scraping.svg" width="80%">
-</p>
+![Distribution sentiment](schema_scraping.svg)
+
 ---
 
 ## 🧠 Détail conceptuel des étapes

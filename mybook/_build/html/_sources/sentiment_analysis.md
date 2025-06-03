@@ -28,7 +28,7 @@ Le graphique ci-dessous montre la répartition des scores de sentiment produits 
 
 Cette distribution justifie notre décision de **filtrer les tweets jugés trop neutres**, c’est-à-dire dont le score absolu est inférieur à 0.1.
 
-![Distribution sentiment](assets/images/Distrib_sentiment.png)
+![Distribution sentiment](Distrib_sentiment.png)
 
 
 2. **Filtrage des tweets peu expressifs**  
