@@ -6,7 +6,10 @@ Afin d’évaluer la qualité de la stratégie, plusieurs simulations ont été 
 - le **nombre d'itérations** de la recherche aléatoire chaque jour,
 - la **taille de la fenêtre d'entraînement** (en mois).
 
-Chaque simulation a produit un ensemble de KPIs (Key performance indices) : rendement total, volatilité, drawdown, surperformance par rapport à TSLA, etc.
+Chaque simulation a produit un ensemble de KPIs (Key Performance Indicators) : rendement total, volatilité, drawdown, surperformance par rapport à TSLA, etc.
+
+> Pour comparer les différentes configurations de manière simple et directe, nous utilisons comme indicateur principal **l’écart moyen par jour entre la stratégie et la stratégie passive (buy & hold)**, exprimé en pourcentage du capital initial.
+
 
 ---
 
