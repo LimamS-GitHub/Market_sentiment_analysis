@@ -15,7 +15,7 @@ Dans notre projet, les modèles Transformers ont été utilisés pour analyser l
 Chaque tweet a été passé dans un ou plusieurs modèles pré-entraînés afin d'évaluer s’il exprimait une opinion positive, neutre ou négative.
 
 ---
-![Analyse de sentiment via Transformers](diagramme_transformers.png)
+![Analyse de sentiment via Transformers](diagramme_transformers1.png)
 
 
 
