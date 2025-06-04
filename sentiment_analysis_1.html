@@ -181,8 +181,7 @@
         </ul>
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="tweet_collection.html">🐦 Collecte &amp; Préparation des Tweets</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sentiment_models.html">🤖 Comprendre les Transformers</a></li>
-
+<li class="toctree-l1"><a class="reference internal" href="sentiment_models.html">Analyse des modèles de sentiment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sentiment_analysis.html">📊 Analyse exploratoire du sentiment</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">🚶‍♂️ Vers une stratégie de trading simple</a></li>
 <li class="toctree-l1"><a class="reference internal" href="trading_strategy.html">📈 Présentation du modèle de trading adaptatif</a></li>
@@ -383,7 +382,6 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prototype-dune-strategie-simple">Prototype d’une stratégie simple</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#avec-cette-strategie-rudimentaire-on-obtient-une-performance-annuelle-de-0-67-sans-frais-de-transaction-ni-levier">-&gt; Avec cette stratégie rudimentaire, on obtient une performance annuelle de +0.67 %, sans frais de transaction ni levier.</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recherche-dhyperparametres">Recherche d’hyperparamètres</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#meilleur-resultat-obtenu-2022">Meilleur résultat obtenu (2022)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#courbe-de-capital">Courbe de capital</a></li>
@@ -413,10 +411,11 @@ Puis ajuster automatiquement les paramètres pour maximiser la performance de la
 </ul>
 <p>Chaque décision est prise à la clôture du jour, en fonction du score de sentiment observé dans la même journée.
 On suppose que les données de sentiment ont été collectées et traitées suffisamment tôt pour pouvoir être utilisées avant la fin de séance.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Avec cette stratégie rudimentaire, on obtient une performance annuelle de +0.67 % sans frais de transaction.
+</pre></div>
+</div>
 </section>
-<section id="avec-cette-strategie-rudimentaire-on-obtient-une-performance-annuelle-de-0-67-sans-frais-de-transaction-ni-levier">
-<h2>-&gt; Avec cette stratégie rudimentaire, on obtient une performance annuelle de +0.67 %, sans frais de transaction ni levier.<a class="headerlink" href="#avec-cette-strategie-rudimentaire-on-obtient-une-performance-annuelle-de-0-67-sans-frais-de-transaction-ni-levier" title="Link to this heading">#</a></h2>
-</section>
+<hr class="docutils" />
 <section id="recherche-dhyperparametres">
 <h2>Recherche d’hyperparamètres<a class="headerlink" href="#recherche-dhyperparametres" title="Link to this heading">#</a></h2>
 <p>Pour améliorer les performances de la stratégie, nous effectuons une <strong>recherche exhaustive (grid search)</strong> sur les éléments suivants :</p>
@@ -531,7 +530,6 @@ Malgré sa simplicité, cette approche démontre que le signal issu de Twitter c
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prototype-dune-strategie-simple">Prototype d’une stratégie simple</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#avec-cette-strategie-rudimentaire-on-obtient-une-performance-annuelle-de-0-67-sans-frais-de-transaction-ni-levier">-&gt; Avec cette stratégie rudimentaire, on obtient une performance annuelle de +0.67 %, sans frais de transaction ni levier.</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recherche-dhyperparametres">Recherche d’hyperparamètres</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#meilleur-resultat-obtenu-2022">Meilleur résultat obtenu (2022)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#courbe-de-capital">Courbe de capital</a></li>
