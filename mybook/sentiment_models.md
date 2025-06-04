@@ -40,7 +40,7 @@ Une présentation générale des modèles (VADER, Transformers financiers, etc.)
 Ici, nous approfondissons deux aspects essentiels :
 
 1. Le fonctionnement lexical et mathématique de **VADER**  
-2. Le principe général des **Transformers**, avec un schéma de leur usage dans notre pipeline
+2. Le principe général des **Transformers**, en lien avec leur usage pour l’analyse de sentiment
 
 ---
 
@@ -94,30 +94,30 @@ Ces modèles attribuent à chaque tweet une prédiction (`POSITIVE`, `NEUTRAL`, 
 
 ---
 
-## 3. Schéma de traitement avec Transformers
+## 3. Comparaison VADER vs Transformers
 
-Le schéma ci-dessous illustre l'enchaînement des étapes appliquées à chaque tweet lors de l’analyse de sentiment avec les modèles Transformers.
+| Critère | VADER | Transformers financiers |
+|--------|-------|--------------------------|
+| Approche | Lexicale (basée règles) | Apprentissage profond |
+| Données requises | Aucune | Modèles pré-entraînés |
+| Vitesse | Très rapide | Plus lente à l’inférence |
+| Capacité contextuelle | Limitée | Élevée |
+| Adaptation au langage boursier | Faible | Excellente |
+| Interprétabilité | Très bonne | Moyenne |
 
-```mermaid
-flowchart TD
-  A[Etape 1 : Tweet brut] --> B[Nettoyage du texte]
-  B --> C[Détection de la langue]
-  C --> D{Langue = anglais ?}
-  D -- Oui --> E[Envoi au modèle Transformer]
-  E --> F[Prédiction : POS / NEU / NEG]
-  F --> G[Conversion : +1 / 0 / -1]
-  G --> H[Enregistrement dans CSV]
-  D -- Non --> X[Rejet du tweet]
+Nous avons utilisé VADER comme point de référence simple, et les Transformers pour une analyse plus fine et spécialisée.
 
-  subgraph Modèles utilisés
-    M1[FinBERT]
-    M2[DeBERTa-v3-fin]
-    M3[DistilRoBERTa-fin]
-  end
+---
 
-  E --> M1
-  E --> M2
-  E --> M3
+## 4. Pour aller plus loin
+
+Pour mieux comprendre le fonctionnement des Transformers, nous recommandons cette ressource interactive :
+
+[Visualisation interactive des Transformers (Polo Club)](https://poloclub.github.io/transformer-explainer/)
+
+---
+
+Dans la section suivante, nous explorerons les scores produits et leur évolution dans le temps, en lien avec le marché boursier.
 
 
 ---
