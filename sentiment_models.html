@@ -386,7 +386,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#formule-utilisee">Formule utilisée</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#les-transformers-modeles-contextuels-par-attention">2. Les Transformers : modèles contextuels par attention</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comprendre-les-transformers-modeles-contextuels-par-attention">2. comprendre Les Transformers : modèles contextuels par attention</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fonctionnement-general">Fonctionnement général</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modeles-utilises-dans-notre-projet">Modèles utilisés dans notre projet</a></li>
 </ul>
@@ -428,18 +428,18 @@ Ce score peut être modulé par :</p>
 <section id="formule-utilisee">
 <h3>Formule utilisée<a class="headerlink" href="#formule-utilisee" title="Link to this heading">#</a></h3>
 <p>Le score final (appelé <em>compound</em>) est normalisé dans l’intervalle [−1, +1] à l’aide de la formule :</p>
-<p><img alt="Formule compound de VADER" src="_images/formule_vader.png" /></p>
+<p>compound = ( Σ sᵢ ) / √( Σ sᵢ² + α )</p>
 <p>Où :</p>
 <ul class="simple">
-<li><p>( s_i ) est le score de chaque mot ou expression ;</p></li>
-<li><p>( \alpha ) est une constante (par défaut : 15).</p></li>
+<li><p>sᵢ est le score de chaque mot ou modificateur</p></li>
+<li><p>α est une constante (valeur par défaut : 15)</p></li>
 </ul>
 <p>Le résultat donne un score unique reflétant la tonalité globale du tweet.</p>
 </section>
 </section>
 <hr class="docutils" />
-<section id="les-transformers-modeles-contextuels-par-attention">
-<h2>2. Les Transformers : modèles contextuels par attention<a class="headerlink" href="#les-transformers-modeles-contextuels-par-attention" title="Link to this heading">#</a></h2>
+<section id="comprendre-les-transformers-modeles-contextuels-par-attention">
+<h2>2. comprendre Les Transformers : modèles contextuels par attention<a class="headerlink" href="#comprendre-les-transformers-modeles-contextuels-par-attention" title="Link to this heading">#</a></h2>
 <p>Les <strong>Transformers</strong> sont des modèles de langage introduits par Vaswani et al. (2017), fondés sur le mécanisme d’<strong>attention</strong>.<br />
 Contrairement aux approches séquentielles (RNN, LSTM), ils traitent l’ensemble du texte en parallèle et captent les dépendances entre mots, même distants.</p>
 <section id="fonctionnement-general">
@@ -590,7 +590,7 @@ Cela permet de modéliser le contexte d’un mot selon sa relation avec les autr
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#formule-utilisee">Formule utilisée</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#les-transformers-modeles-contextuels-par-attention">2. Les Transformers : modèles contextuels par attention</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comprendre-les-transformers-modeles-contextuels-par-attention">2. comprendre Les Transformers : modèles contextuels par attention</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fonctionnement-general">Fonctionnement général</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modeles-utilises-dans-notre-projet">Modèles utilisés dans notre projet</a></li>
 </ul>

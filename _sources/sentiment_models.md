@@ -24,17 +24,17 @@ Ce score peut être modulé par :
 
 Le score final (appelé *compound*) est normalisé dans l’intervalle [−1, +1] à l’aide de la formule :
 
-![Formule compound de VADER](formule_vader.png)
+compound = ( Σ sᵢ ) / √( Σ sᵢ² + α )
 
 Où :
-- \( s_i \) est le score de chaque mot ou expression ;
-- \( \alpha \) est une constante (par défaut : 15).
+- sᵢ est le score de chaque mot ou modificateur
+- α est une constante (valeur par défaut : 15)
 
 Le résultat donne un score unique reflétant la tonalité globale du tweet.
 
 ---
 
-## 2. Les Transformers : modèles contextuels par attention
+## 2. comprendre Les Transformers : modèles contextuels par attention
 
 Les **Transformers** sont des modèles de langage introduits par Vaswani et al. (2017), fondés sur le mécanisme d’**attention**.  
 Contrairement aux approches séquentielles (RNN, LSTM), ils traitent l’ensemble du texte en parallèle et captent les dépendances entre mots, même distants.
