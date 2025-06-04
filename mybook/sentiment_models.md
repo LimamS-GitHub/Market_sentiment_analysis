@@ -1,133 +1,98 @@
-# 🐦 Collecte & Préparation des Tweets
----
+# Analyse des modèles de sentiment
 
-## 🗂️ Sommaire
-
-- [Pourquoi Twitter ?](#pourquoi-twitter-)
-- [Objectif de cette section](#objectif-de-cette-section)
-- [Aperçu technique](#aperçu-technique)
-- [Schéma des données exportées](#schéma-des-données-exportées)
-- [🧠 Détail conceptuel des étapes](#-détail-conceptuel-des-étapes)
-- [⚠️ Limites rencontrées](#️-limites-rencontrées)
-- [🔗 Pour aller plus loin](#-pour-aller-plus-loin)
-
-## Pourquoi Twitter ?
-
-Twitter est une plateforme où l'information circule vite, brute et en grande quantité.  
-C’est un véritable flux continu d’opinions, de réactions et de spéculations, souvent en lien direct avec l’actualité économique ou les entreprises cotées en bourse.
-
-Dans notre cas, nous nous intéressons à **Tesla ($TSLA)**.  
-Notre hypothèse : les messages postés quotidiennement au sujet de Tesla pourraient refléter, voire anticiper, les mouvements de son cours boursier.
+Dans ce chapitre, nous détaillons les modèles d’analyse de sentiment utilisés pour enrichir les tweets relatifs à Tesla.  
+Nous présentons d’abord **VADER**, une approche lexicale basée sur des règles, puis les **modèles Transformers** pré-entraînés adaptés au langage financier.
 
 ---
 
-## Objectif de cette section
+## 1. VADER : une approche lexicale basée sur des règles
 
-Avant d’analyser ou de modéliser quoi que ce soit, il faut construire une **base de données propre, fiable et exploitable**.  
-Dans ce chapitre, nous allons donc :
+**VADER** (Valence Aware Dictionary and sEntiment Reasoner) est un outil conçu pour l’analyse de sentiment dans des textes courts tels que les tweets.  
+Il repose sur un **lexique de mots scorés** et un ensemble de **règles linguistiques** sans apprentissage automatique.
 
-- **Scraper automatiquement** des tweets à l’aide de [Nitter](https://nitter.net), une alternative à Twitter sans JavaScript ni authentification API.
-- **Nettoyer les textes** : suppression des liens, mentions, ponctuations, etc.
-- **Filtrer les langues** pour ne garder que les tweets en anglais.
-- **Analyser le sentiment** de chaque tweet avec plusieurs modèles NLP.
-- **Sauvegarder** les données propres pour les futures étapes.
+### Fonctionnement
 
----
+Chaque mot est associé à un score de valence compris entre −4 et +4.  
+Ce score peut être modulé par :
 
-## Aperçu technique
+- des majuscules (`GREAT` est plus fort que `great`) ;
+- des ponctuations (`!!!`) ;
+- des modificateurs d’intensité (`very`, `slightly`, etc.) ;
+- des négations (`not good`, `isn't bad`).
 
-Le scraping est réalisé en Python avec **Selenium**, et utilise une **rotation automatique de proxies HTTPS** afin de contourner les restrictions d’accès aux contenus Twitter.
+### Formule utilisée
 
-Chaque tweet est ensuite enrichi par **5 scores de sentiment** :  
-- 1 issu de **VADER** (modèle lexical basé sur des règles),
-- 3 provenant de **modèles Transformers spécialisés dans le domaine financier**.
+Le score final (appelé *compound*) est normalisé dans l’intervalle [−1, +1] à l’aide de la formule :
 
-Les résultats sont sauvegardés dans des fichiers CSV organisés **par mois**, ainsi qu’un **fichier global** regroupant toutes les données.
+![Formule compound de VADER](formule_vader.png)
 
----
+Où :
+- \( s_i \) est le score de chaque mot ou expression ;
+- \( \alpha \) est une constante (par défaut : 15).
 
-## Schéma des données exportées
-
-| Colonne                | Exemple                         | Description                                 |
-|------------------------|----------------------------------|---------------------------------------------|
-| `id`                   | `1658327123456789`              | Identifiant unique du tweet                 |
-| `query_date`           | `2025-04-15`                    | Date de récupération du tweet               |
-| `text`                 | Texte brut                      | Contenu original du tweet                   |
-| `verified`             | `True`                          | Statut vérifié (compte certifié ou non)     |
-| `cleaned_tweet`        | Texte nettoyé                   | Sans liens, mentions, ponctuation, etc.     |
-| `sentiment_vader`      | `0.63`                          | Score de sentiment (composé VADER)          |
-| `sentiment_{hf_model}` | `1` (`-1`, `0`, `1`)            | Une colonne **par modèle HF** :<br> • `financialbert`<br> • `distilroberta_fin`<br> • `deberta_v3_fin` |
+Le résultat donne un score unique reflétant la tonalité globale du tweet.
 
 ---
 
-## Schéma de récupération des données
+## 2. Les Transformers : modèles contextuels par attention
 
-Le diagramme ci-dessous illustre le processus complet de collecte et de traitement des tweets, depuis le lancement du script jusqu’à la sauvegarde des fichiers CSV :
+Les **Transformers** sont des modèles de langage introduits par Vaswani et al. (2017), fondés sur le mécanisme d’**attention**.  
+Contrairement aux approches séquentielles (RNN, LSTM), ils traitent l’ensemble du texte en parallèle et captent les dépendances entre mots, même distants.
 
-![Distribution sentiment](schema_scraping.svg)
+### Fonctionnement général
 
----
+Chaque mot est converti en un vecteur, puis comparé aux autres mots du texte via des **poids d’attention**.  
+Cela permet de modéliser le contexte d’un mot selon sa relation avec les autres termes.
 
-##  Détail conceptuel des étapes
+### Modèles utilisés dans notre projet
 
-###  1. Scraping sans API
+Nous avons appliqué plusieurs Transformers spécialisés dans le domaine financier :
 
-Nous avons choisi **Nitter**, une interface alternative à Twitter, pour contourner les restrictions de l’API officielle (limites, coût, authentification).  
-Le scraping consiste à :
+- `ProsusAI/finbert`
+- `deberta-v3-financial-news-sentiment`
+- `distilroberta-financial-news-sentiment`
 
-- Formuler une requête par mot-clé (`Tesla`, `TSLA`, etc.) et par jour ;
-- Naviguer automatiquement dans les pages pour extraire le contenu des tweets visibles ;
-- Stocker les résultats dans un format brut, avec des métadonnées (date, utilisateur, texte, etc.).
+Chaque tweet est analysé individuellement, et le modèle retourne une **classe de sentiment** :
 
-Pour automatiser cela, nous utilisons un outil de navigation sans interface visuelle (**navigateur headless**) avec gestion de délais et rotation de connexions (**proxies**) pour éviter d’être bloqués.
+- `POSITIVE` → **+1**  
+- `NEUTRAL` → **0**  
+- `NEGATIVE` → **−1**
 
----
-
-###  2. Nettoyage et filtrage linguistique
-
-Les tweets récupérés sont très bruts : liens, mentions, hashtags, emojis, etc.  
-Avant toute analyse, chaque texte est **nettoyé** pour retirer ces éléments parasites.
-
-Ensuite, un filtre de langue est appliqué pour ne garder que les tweets **en anglais**, car les modèles NLP utilisés sont spécifiquement entraînés sur ce langage.
+Ces scores sont ensuite intégrés dans notre base de données.
 
 ---
 
-###  3. Analyse de sentiment multi-modèle
+## 3. Schéma de traitement appliqué aux tweets
 
-Chaque tweet nettoyé est passé à travers plusieurs modèles de **sentiment analysis** :
+Le diagramme suivant illustre l’enchaînement des étapes dans notre pipeline de traitement du sentiment à partir des tweets collectés :
 
-| Type de modèle           | Exemple utilisé         | Caractéristiques                                               |
-|--------------------------|--------------------------|----------------------------------------------------------------|
-| **Lexical**              | VADER                    | Basé sur des règles, rapide, mais limité face au langage complexe |
-| **Transformers généralistes** | DistilRoBERTa         | Plus fins, mais parfois surentraînés sur du texte non-financier |
-| **Transformers spécialisés** | FinancialBERT, DeBERTa-v3-fin | Entraînés sur des actualités boursières, mieux adaptés à notre contexte |
-
-Chaque modèle attribue un **score de polarité** : positif, neutre ou négatif (souvent transformé en valeurs −1, 0 ou +1).
+![Analyse de sentiment via Transformers](diagramme_transformers1.png)
 
 ---
 
-###  4. Stockage mensuel et structuration
+## 4. Comparaison des deux approches
 
-Les résultats sont organisés :
+| Critère                        | VADER                     | Transformers financiers         |
+|-------------------------------|---------------------------|---------------------------------|
+| Approche                      | Lexicale (basée sur règles) | Apprentissage profond (NLP)    |
+| Données requises              | Aucune                    | Corpus pré-entraînés massifs    |
+| Vitesse                       | Très rapide               | Plus lente                      |
+| Capacité à comprendre le contexte | Limitée                 | Élevée                          |
+| Adaptation au domaine financier| Faible                    | Excellente                      |
+| Interprétabilité              | Très bonne                | Moyenne à faible                |
 
-- Par **mois civil** (ex. : `tweets_2022_01.csv`) pour faciliter l’analyse temporelle ;
-- Avec un **fichier global fusionné** (`tweets_with_sentiment.csv`) utilisé dans les notebooks suivants.
-
-Chaque ligne de ce fichier correspond à un tweet unique enrichi de métadonnées et de scores.
-
----
-
-##  Limites rencontrées
-
-- **Qualité des tweets** : bruit, ironie, contenu peu informatif, spam…
-- **Langue détectée automatiquement** → erreurs possibles.
-- **Modèles de sentiment divergents** : certaines phrases ambigües sont classées différemment selon le modèle.
-- **Instabilité de Nitter** : indisponibilités ponctuelles → recours à des solutions de contournement techniques.
+Nous avons utilisé VADER comme **point de référence rapide** et facilement interprétable, tandis que les Transformers ont été mobilisés pour fournir une **analyse fine**, tenant compte du langage spécifique à la finance.
 
 ---
 
-##  Pour aller plus loin
+## 5. Pour aller plus loin
 
-👉 Dans la prochaine section, nous croiserons ces tweets enrichis avec les **cours boursiers de Tesla** pour étudier les corrélations et construire des indicateurs de sentiment agrégé.
+Pour comprendre plus en détail le fonctionnement des Transformers et du mécanisme d’attention, nous recommandons cette visualisation interactive :
 
-➡️ Accéder à la suite : [Analyse exploratoire des données](EDA.html)
+🔗 [Transformer Visualizer – Polo Club](https://poloclub.github.io/transformer-explainer/)
+
+Ce site permet d’explorer les flux d’attention et la façon dont chaque mot est influencé par les autres dans une phrase.
+
+---
+
+Dans la section suivante, nous analyserons comment les scores de sentiment obtenus évoluent dans le temps et comment ils sont corrélés avec les cours boursiers de Tesla.
