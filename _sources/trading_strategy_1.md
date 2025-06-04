@@ -19,7 +19,9 @@ L’histogramme ci-dessous montre l'**écart moyen de performance** entre la str
 
 ![Écart moyen par tranche d’itérations](ecart_moyen_evolution.png)
 
-> **Observation** : plus le nombre d’itérations augmente, plus la stratégie génère un écart positif stable.  
+> Les performances s’améliorent clairement jusqu’à **1500 itérations** environ.  
+> Au-delà, les gains se stabilisent, avec une variabilité qui reste notable.  
+> Les faibles nombres d’itérations (< 300) donnent de moins bons résultats, suggérant un manque d’exploration des paramètres.
 
 ---
 
@@ -29,9 +31,8 @@ Le graphique suivant illustre l’impact du **nombre de mois utilisés pour entr
 
 ![Écart moyen par tranche d’itérations](Ecart_moyen_par_mois.png)
 
-> Les performances s’améliorent clairement jusqu’à **1500 itérations** environ.  
-> Au-delà, les gains se stabilisent, avec une variabilité qui reste notable.  
-> Les faibles nombres d’itérations (< 300) donnent de moins bons résultats, suggérant un manque d’exploration des paramètres.
+> Les fenêtres courtes (1 mois) donnent les meilleurs résultats.  
+Quand la fenêtre est trop longue, les signaux deviennent moins réactifs ou trop dilués.
 
 ---
 

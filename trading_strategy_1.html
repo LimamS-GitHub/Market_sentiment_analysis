@@ -421,7 +421,9 @@ document.write(`
 <p>L’histogramme ci-dessous montre l’<strong>écart moyen de performance</strong> entre la stratégie et un buy &amp; hold passif, en fonction du nombre d’itérations par jour.</p>
 <p><img alt="Écart moyen par tranche d’itérations" src="_images/ecart_moyen_evolution.png" /></p>
 <blockquote>
-<div><p><strong>Observation</strong> : plus le nombre d’itérations augmente, plus la stratégie génère un écart positif stable.</p>
+<div><p>Les performances s’améliorent clairement jusqu’à <strong>1500 itérations</strong> environ.<br />
+Au-delà, les gains se stabilisent, avec une variabilité qui reste notable.<br />
+Les faibles nombres d’itérations (&lt; 300) donnent de moins bons résultats, suggérant un manque d’exploration des paramètres.</p>
 </div></blockquote>
 </section>
 <hr class="docutils" />
@@ -430,9 +432,8 @@ document.write(`
 <p>Le graphique suivant illustre l’impact du <strong>nombre de mois utilisés pour entraîner le modèle</strong> sur la qualité du résultat.</p>
 <p><img alt="Écart moyen par tranche d’itérations" src="_images/Ecart_moyen_par_mois.png" /></p>
 <blockquote>
-<div><p>Les performances s’améliorent clairement jusqu’à <strong>1500 itérations</strong> environ.<br />
-Au-delà, les gains se stabilisent, avec une variabilité qui reste notable.<br />
-Les faibles nombres d’itérations (&lt; 300) donnent de moins bons résultats, suggérant un manque d’exploration des paramètres.</p>
+<div><p>Les fenêtres courtes (1 mois) donnent les meilleurs résultats.<br />
+Quand la fenêtre est trop longue, les signaux deviennent moins réactifs ou trop dilués.</p>
 </div></blockquote>
 </section>
 </section>
