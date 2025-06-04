@@ -109,11 +109,6 @@ Pour mieux comprendre le fonctionnement des Transformers, nous recommandons cett
 
 ---
 
-Dans la section suivante, nous explorerons les scores produits et leur évolution dans le temps, en lien avec le marché boursier.
-
-
----
-Dans notre projet, VADER est utilisé **en parallèle** des modèles Transformers.  
-Il fournit une **mesure de référence rapide**, que nous comparons aux scores plus complexes générés par FinBERT, DeBERTa, etc.
-
 Dans la section suivante, nous utiliserons ces scores pour explorer les liens entre sentiment agrégé et performance boursière.
+
+
