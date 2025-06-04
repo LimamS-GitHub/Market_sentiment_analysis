@@ -1,4 +1,4 @@
-# Analyse des modèles de sentiment
+# 🧠 Explication des modèles de sentiment utilisés
 
 Dans ce chapitre, nous détaillons les modèles d’analyse de sentiment utilisés pour enrichir les tweets relatifs à Tesla.  
 Nous présentons d’abord **VADER**, une approche lexicale basée sur des règles, puis les **modèles Transformers** pré-entraînés adaptés au langage financier.
