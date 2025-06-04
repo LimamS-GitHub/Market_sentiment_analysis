@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>📊 Analyse exploratoire du sentiment &#8212; My sample book</title>
+    <title>📊 Analyse des performances &#8212; My sample book</title>
   
   
   
@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -57,11 +57,10 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'sentiment_analysis';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'trading_strategy_1';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Vers une stratégie de trading simple" href="sentiment_analysis_1.html" />
-    <link rel="prev" title="🤖 Comprendre les Transformers" href="sentiment_models.html" />
+    <link rel="prev" title="📈 Présentation du modèle de trading adaptatif" href="trading_strategy.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -181,12 +180,11 @@
         </ul>
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="tweet_collection.html">🐦 Collecte &amp; Préparation des Tweets</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sentiment_models.html">🤖 Comprendre les Transformers</a></li>
-
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">📊 Analyse exploratoire du sentiment</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sentiment_analysis_1.html">Vers une stratégie de trading simple</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sentiment_models.html">Analyse des modèles de sentiment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sentiment_analysis.html">📊 Analyse exploratoire du sentiment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sentiment_analysis_1.html">🚶‍♂️ Vers une stratégie de trading simple</a></li>
 <li class="toctree-l1"><a class="reference internal" href="trading_strategy.html">📈 Présentation du modèle de trading adaptatif</a></li>
-<li class="toctree-l1"><a class="reference internal" href="trading_strategy_1.html">📊 Analyse des performances</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">📊 Analyse des performances</a></li>
 </ul>
 
     </div>
@@ -258,7 +256,7 @@
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fsentiment_analysis.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Ftrading_strategy_1.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -288,7 +286,7 @@
       
       
       
-      <li><a href="_sources/sentiment_analysis.md" target="_blank"
+      <li><a href="_sources/trading_strategy_1.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -372,7 +370,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>📊 Analyse exploratoire du sentiment</h1>
+    <h1>📊 Analyse des performances</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -382,7 +380,17 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contenu-de-cette-analyse">Contenu de cette analyse</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resultats-globaux">1. Résultats globaux</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ecart-moyen-vs-strategie-passive-selon-le-nombre-diterations">Écart moyen vs stratégie passive (selon le nombre d’itérations)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#impact-de-la-fenetre-d-entrainement">Impact de la fenêtre d’entraînement</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exemple-dun-run-gagnant">2. Exemple d’un run gagnant</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparaison-avec-buy-hold">3. Comparaison avec Buy &amp; Hold</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion-de-la-strategie">Conclusion de la stratégie</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perspectives">Perspectives</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -394,63 +402,79 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="analyse-exploratoire-du-sentiment">
-<h1>📊 Analyse exploratoire du sentiment<a class="headerlink" href="#analyse-exploratoire-du-sentiment" title="Link to this heading">#</a></h1>
-<p>Cette section a pour but de poser les premières bases d’une stratégie de trading fondée sur le sentiment.<br />
-Elle repose sur trois axes principaux :</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="analyse-des-performances">
+<h1>📊 Analyse des performances<a class="headerlink" href="#analyse-des-performances" title="Link to this heading">#</a></h1>
+<section id="resultats-globaux">
+<h2>1. Résultats globaux<a class="headerlink" href="#resultats-globaux" title="Link to this heading">#</a></h2>
+<p>Afin d’évaluer la qualité de la stratégie, plusieurs simulations ont été réalisées en faisant varier deux paramètres clés :</p>
 <ul class="simple">
-<li><p><strong>Explorer la distribution des scores de sentiment</strong>, générés par quatre modèles :<br />
-VADER, FinancialBERT, DistilRoBERTa et DeBERTa.</p></li>
-<li><p><strong>Prototyper une stratégie simple</strong> basée sur des seuils de sentiment :<br />
-lorsqu’un score dépasse un certain niveau, on entre en position ; sinon, on reste à l’écart (long / flat).</p></li>
-<li><p><strong>Ajuster les hyperparamètres clés</strong> de cette stratégie :<br />
-choix du modèle, fenêtre de lissage, seuils d’achat et de vente.</p></li>
+<li><p>le <strong>nombre d’itérations</strong> de la recherche aléatoire chaque jour,</p></li>
+<li><p>la <strong>taille de la fenêtre d’entraînement</strong> (en mois).</p></li>
 </ul>
-<p>Ce travail exploratoire nous permet d’évaluer si le signal issu de Twitter peut, même de façon rudimentaire, générer un comportement de marché exploitable.</p>
+<p>Chaque simulation a produit un ensemble de KPIs (Key Performance Indicators) : rendement total, volatilité, drawdown, surperformance par rapport à TSLA, etc.</p>
+<blockquote>
+<div><p>Pour comparer les différentes configurations de manière simple et directe, nous utilisons comme indicateur principal <strong>l’écart moyen par jour entre la stratégie et la stratégie passive (buy &amp; hold)</strong>, exprimé en pourcentage du capital initial.</p>
+</div></blockquote>
 <hr class="docutils" />
-<section id="contenu-de-cette-analyse">
-<h2>Contenu de cette analyse<a class="headerlink" href="#contenu-de-cette-analyse" title="Link to this heading">#</a></h2>
-<ol class="arabic simple">
-<li><p>Distribution des scores de sentiment</p></li>
-</ol>
-<p>Le graphique ci-dessous montre la répartition des scores de sentiment produits par les différents modèles utilisés :</p>
-<ul class="simple">
-<li><p><strong>VADER</strong> (en haut à gauche) : score continu entre -1 et +1.</p></li>
-<li><p><strong>FinancialBERT</strong>, <strong>DistilRoBERTa</strong>, <strong>DeBERTa</strong> : scores discrets {-1, 0, +1}, avec un pic très marqué pour la classe neutre (0).</p></li>
-</ul>
-<p>Cette distribution justifie notre décision de <strong>filtrer les tweets jugés trop neutres</strong>, c’est-à-dire dont le score absolu est inférieur à 0.1.</p>
-<p><img alt="Distribution sentiment" src="_images/Distrib_sentiment.png" /></p>
-<ol class="arabic" start="2">
-<li><p><strong>Filtrage des tweets peu expressifs</strong><br />
-Nous éliminons les tweets dont le score absolu est <strong>inférieur à 0.1</strong> sur plusieurs modèles, car ils n’ont pas de valeur exploitable dans une logique d’achat/vente.</p></li>
-<li><p><strong>Agrégation journalière</strong><br />
-Les scores sont ensuite moyennés <strong>par jour</strong>, séparément pour :</p>
-<ul class="simple">
-<li><p>les comptes <strong>vérifiés</strong></p></li>
-<li><p>les comptes <strong>non vérifiés</strong></p></li>
-</ul>
-<p>→ Ces deux groupes peuvent ensuite être combinés avec une pondération personnalisée (ex. : 25 % vérifiés / 75 % non vérifiés).</p>
-</li>
-<li><p><strong>Standardisation des données</strong></p>
-<p>Avant toute comparaison ou visualisation combinée, les données de sentiment et les prix boursiers sont <strong>standardisés</strong> :</p>
-<ul class="simple">
-<li><p>Chaque série (prix ou score de sentiment) est <strong>centrée autour de sa moyenne</strong> et <strong>réduite à un écart-type unitaire</strong> (formule : (x - μ) / σ).</p></li>
-<li><p>Cela permet de visualiser les tendances relatives sur des échelles cohérentes, sans être influencé par les ordres de grandeur.</p></li>
-</ul>
-<p>Cette standardisation s’applique à :</p>
-<ul class="simple">
-<li><p>la variable <code class="docutils literal notranslate"><span class="pre">Close</span></code> (prix journalier de Tesla),</p></li>
-<li><p>chaque score de sentiment combiné (par modèle).</p></li>
-</ul>
-</li>
-<li><p><strong>Corrélation visuelle : sentiment vs prix</strong></p></li>
-</ol>
-<p>Nous comparons ici l’évolution standardisée des scores de sentiment à celle du cours de clôture de l’action Tesla.</p>
-<p>Les courbes en <strong>gris</strong> représentent le <strong>prix de clôture standardisé</strong>, tandis que les traits colorés représentent le sentiment journalier, lissé par moyenne mobile.</p>
-<p><img alt="Evol cour sentiment" src="_images/Evol_cour_sentiment.png" /></p>
-<p>On observe que certains signaux haussiers (vert) ou baissiers (rouge) <strong>précèdent ou accompagnent des mouvements de prix</strong>, ce qui constitue une première indication de potentiel informatif à exploiter dans la stratégie.</p>
+<section id="ecart-moyen-vs-strategie-passive-selon-le-nombre-diterations">
+<h3>Écart moyen vs stratégie passive (selon le nombre d’itérations)<a class="headerlink" href="#ecart-moyen-vs-strategie-passive-selon-le-nombre-diterations" title="Link to this heading">#</a></h3>
+<p>L’histogramme ci-dessous montre l’<strong>écart moyen de performance</strong> entre la stratégie et un buy &amp; hold passif, en fonction du nombre d’itérations par jour.</p>
+<p><img alt="Écart moyen par tranche d’itérations" src="_images/ecart_moyen_evolution.png" /></p>
+<blockquote>
+<div><p><strong>Observation</strong> : plus le nombre d’itérations augmente, plus la stratégie génère un écart positif stable.</p>
+</div></blockquote>
+</section>
 <hr class="docutils" />
-<p>➡️ Étudions maintenant si ces signaux peuvent alimenter une stratégie de trading concrète.</p>
+<section id="impact-de-la-fenetre-d-entrainement">
+<h3>Impact de la fenêtre d’entraînement<a class="headerlink" href="#impact-de-la-fenetre-d-entrainement" title="Link to this heading">#</a></h3>
+<p>Le graphique suivant illustre l’impact du <strong>nombre de mois utilisés pour entraîner le modèle</strong> sur la qualité du résultat.</p>
+<p><img alt="Écart moyen par tranche d’itérations" src="_images/Ecart_moyen_par_mois.png" /></p>
+<blockquote>
+<div><p>Les performances s’améliorent clairement jusqu’à <strong>1500 itérations</strong> environ.<br />
+Au-delà, les gains se stabilisent, avec une variabilité qui reste notable.<br />
+Les faibles nombres d’itérations (&lt; 300) donnent de moins bons résultats, suggérant un manque d’exploration des paramètres.</p>
+</div></blockquote>
+</section>
+</section>
+<hr class="docutils" />
+<section id="exemple-dun-run-gagnant">
+<h2>2. Exemple d’un run gagnant<a class="headerlink" href="#exemple-dun-run-gagnant" title="Link to this heading">#</a></h2>
+<p>Le graphique ci-dessous montre un exemple de simulation réussie.<br />
+On y voit l’évolution du portefeuille par rapport à la stratégie buy &amp; hold, ainsi que les signaux d’achat et de vente déclenchés.</p>
+<p><img alt="Évolution du portefeuille vs buy &amp; hold" src="_images/Prix_fermeture_valeur_portefeuille.png" /></p>
+<blockquote>
+<div><p>La stratégie active évite les baisses prolongées et saisit plusieurs hausses.<br />
+Elle aboutit à un capital final nettement supérieur à la stratégie passive.</p>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="comparaison-avec-buy-hold">
+<h2>3. Comparaison avec Buy &amp; Hold<a class="headerlink" href="#comparaison-avec-buy-hold" title="Link to this heading">#</a></h2>
+<p>Un indicateur central est l’<strong>écart moyen journalier</strong> entre notre portefeuille et celui de la stratégie buy &amp; hold.</p>
+<ul class="simple">
+<li><p>En moyenne, la stratégie a généré un <strong>écart positif de plusieurs dizaines d’euros par jour</strong>.</p></li>
+<li><p>Ce gain est obtenu à partir d’un capital initial fixe (1000 €).</p></li>
+</ul>
+<p>Cela signifie que le modèle génère bien un <strong>alpha</strong> exploitable à partir du signal de sentiment social.</p>
+</section>
+<hr class="docutils" />
+<section id="conclusion-de-la-strategie">
+<h2>Conclusion de la stratégie<a class="headerlink" href="#conclusion-de-la-strategie" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>La stratégie adaptative surperforme <strong>clairement</strong> une approche passive, surtout lorsqu’elle est recalibrée fréquemment.</p></li>
+<li><p>Des <strong>fenêtres d’entraînement courtes (1 mois)</strong> permettent au modèle de mieux capter l’évolution rapide du sentiment social.</p></li>
+<li><p>L’impact du nombre d’itérations est réel mais <strong>non linéaire</strong> : un minimum est nécessaire pour que la recherche d’hyperparamètres soit efficace, mais au-delà d’un certain seuil, les gains se stabilisent.</p></li>
+</ul>
+<p>Le bruit collectif (def : l’ensemble des opinions, réactions, émotions ou rumeurs exprimées par la foule) devient ainsi un indicateur exploitable, à condition d’être combiné à un cadre adaptatif rigoureux.</p>
+<hr class="docutils" />
+<section id="perspectives">
+<h3>Perspectives<a class="headerlink" href="#perspectives" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Étendre la méthode à un <strong>portefeuille multi-actifs</strong></p></li>
+<li><p>Remplacer la random search par une <strong>optimisation bayésienne (Optuna)</strong></p></li>
+<li><p>Tester un modèle qui s’entraîne chaque jour sur les <strong>N dernières semaines</strong> au lieu des N derniers mois, pour voir si cela améliore la réactivité et la performance.</p></li>
+</ul>
+</section>
 </section>
 </section>
 
@@ -485,22 +509,13 @@ Les scores sont ensuite moyennés <strong>par jour</strong>, séparément pour :
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="sentiment_models.html"
+       href="trading_strategy.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">🤖 Comprendre les Transformers</p>
+        <p class="prev-next-title">📈 Présentation du modèle de trading adaptatif</p>
       </div>
-    </a>
-    <a class="right-next"
-       href="sentiment_analysis_1.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Vers une stratégie de trading simple</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
@@ -518,7 +533,17 @@ Les scores sont ensuite moyennés <strong>par jour</strong>, séparément pour :
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contenu-de-cette-analyse">Contenu de cette analyse</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resultats-globaux">1. Résultats globaux</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ecart-moyen-vs-strategie-passive-selon-le-nombre-diterations">Écart moyen vs stratégie passive (selon le nombre d’itérations)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#impact-de-la-fenetre-d-entrainement">Impact de la fenêtre d’entraînement</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exemple-dun-run-gagnant">2. Exemple d’un run gagnant</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparaison-avec-buy-hold">3. Comparaison avec Buy &amp; Hold</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion-de-la-strategie">Conclusion de la stratégie</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perspectives">Perspectives</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

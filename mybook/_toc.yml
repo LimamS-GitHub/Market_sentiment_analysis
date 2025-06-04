@@ -10,6 +10,7 @@ chapters:
   - file: sentiment_analysis
   - file: sentiment_analysis_1
   - file: trading_strategy
+  - file: trading_strategy_1
   - file: results_and_outlook
 
 

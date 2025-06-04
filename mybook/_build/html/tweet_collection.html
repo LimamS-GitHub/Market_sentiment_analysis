@@ -60,7 +60,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'tweet_collection';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="🤖 Comprendre les Transformers" href="sentiment_models.html" />
+    <link rel="next" title="Analyse des modèles de sentiment" href="sentiment_models.html" />
     <link rel="prev" title="Bienvenue sur notre projet : Market Sentiment &amp; Trading" href="intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -181,9 +181,11 @@
         </ul>
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">🐦 Collecte &amp; Préparation des Tweets</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sentiment_models.html">🤖 Comprendre les Transformers</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="sentiment_analysis.html">Analyse exploratoire du sentiment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sentiment_models.html">Analyse des modèles de sentiment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sentiment_analysis.html">📊 Analyse exploratoire du sentiment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sentiment_analysis_1.html">🚶‍♂️ Vers une stratégie de trading simple</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trading_strategy.html">📈 Présentation du modèle de trading adaptatif</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trading_strategy_1.html">📊 Analyse des performances</a></li>
 </ul>
 
     </div>
@@ -385,15 +387,15 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apercu-technique">Aperçu technique</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#schema-des-donnees-exportees">Schéma des données exportées</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#schema-de-recuperation-des-donnees">Schéma de récupération des données</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#detail-conceptuel-des-etapes">🧠 Détail conceptuel des étapes</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scraping-sans-api">🔍 1. Scraping sans API</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nettoyage-et-filtrage-linguistique">🧼 2. Nettoyage et filtrage linguistique</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analyse-de-sentiment-multi-modele">🧪 3. Analyse de sentiment multi-modèle</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stockage-mensuel-et-structuration">📦 4. Stockage mensuel et structuration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#detail-conceptuel-des-etapes">Détail conceptuel des étapes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scraping-sans-api">1. Scraping sans API</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nettoyage-et-filtrage-linguistique">2. Nettoyage et filtrage linguistique</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analyse-de-sentiment-multi-modele">3. Analyse de sentiment multi-modèle</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stockage-mensuel-et-structuration">4. Stockage mensuel et structuration</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limites-rencontrees">⚠️ Limites rencontrées</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pour-aller-plus-loin">🔗 Pour aller plus loin</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limites-rencontrees">Limites rencontrées</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pour-aller-plus-loin">Pour aller plus loin</a></li>
 </ul>
             </nav>
         </div>
@@ -502,9 +504,9 @@ Dans ce chapitre, nous allons donc :</p>
 </section>
 <hr class="docutils" />
 <section id="detail-conceptuel-des-etapes">
-<h2>🧠 Détail conceptuel des étapes<a class="headerlink" href="#detail-conceptuel-des-etapes" title="Link to this heading">#</a></h2>
+<h2>Détail conceptuel des étapes<a class="headerlink" href="#detail-conceptuel-des-etapes" title="Link to this heading">#</a></h2>
 <section id="scraping-sans-api">
-<h3>🔍 1. Scraping sans API<a class="headerlink" href="#scraping-sans-api" title="Link to this heading">#</a></h3>
+<h3>1. Scraping sans API<a class="headerlink" href="#scraping-sans-api" title="Link to this heading">#</a></h3>
 <p>Nous avons choisi <strong>Nitter</strong>, une interface alternative à Twitter, pour contourner les restrictions de l’API officielle (limites, coût, authentification).<br />
 Le scraping consiste à :</p>
 <ul class="simple">
@@ -516,14 +518,14 @@ Le scraping consiste à :</p>
 </section>
 <hr class="docutils" />
 <section id="nettoyage-et-filtrage-linguistique">
-<h3>🧼 2. Nettoyage et filtrage linguistique<a class="headerlink" href="#nettoyage-et-filtrage-linguistique" title="Link to this heading">#</a></h3>
+<h3>2. Nettoyage et filtrage linguistique<a class="headerlink" href="#nettoyage-et-filtrage-linguistique" title="Link to this heading">#</a></h3>
 <p>Les tweets récupérés sont très bruts : liens, mentions, hashtags, emojis, etc.<br />
 Avant toute analyse, chaque texte est <strong>nettoyé</strong> pour retirer ces éléments parasites.</p>
 <p>Ensuite, un filtre de langue est appliqué pour ne garder que les tweets <strong>en anglais</strong>, car les modèles NLP utilisés sont spécifiquement entraînés sur ce langage.</p>
 </section>
 <hr class="docutils" />
 <section id="analyse-de-sentiment-multi-modele">
-<h3>🧪 3. Analyse de sentiment multi-modèle<a class="headerlink" href="#analyse-de-sentiment-multi-modele" title="Link to this heading">#</a></h3>
+<h3>3. Analyse de sentiment multi-modèle<a class="headerlink" href="#analyse-de-sentiment-multi-modele" title="Link to this heading">#</a></h3>
 <p>Chaque tweet nettoyé est passé à travers plusieurs modèles de <strong>sentiment analysis</strong> :</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
@@ -552,7 +554,7 @@ Avant toute analyse, chaque texte est <strong>nettoyé</strong> pour retirer ces
 </section>
 <hr class="docutils" />
 <section id="stockage-mensuel-et-structuration">
-<h3>📦 4. Stockage mensuel et structuration<a class="headerlink" href="#stockage-mensuel-et-structuration" title="Link to this heading">#</a></h3>
+<h3>4. Stockage mensuel et structuration<a class="headerlink" href="#stockage-mensuel-et-structuration" title="Link to this heading">#</a></h3>
 <p>Les résultats sont organisés :</p>
 <ul class="simple">
 <li><p>Par <strong>mois civil</strong> (ex. : <code class="docutils literal notranslate"><span class="pre">tweets_2022_01.csv</span></code>) pour faciliter l’analyse temporelle ;</p></li>
@@ -563,7 +565,7 @@ Avant toute analyse, chaque texte est <strong>nettoyé</strong> pour retirer ces
 </section>
 <hr class="docutils" />
 <section id="limites-rencontrees">
-<h2>⚠️ Limites rencontrées<a class="headerlink" href="#limites-rencontrees" title="Link to this heading">#</a></h2>
+<h2>Limites rencontrées<a class="headerlink" href="#limites-rencontrees" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><strong>Qualité des tweets</strong> : bruit, ironie, contenu peu informatif, spam…</p></li>
 <li><p><strong>Langue détectée automatiquement</strong> → erreurs possibles.</p></li>
@@ -573,7 +575,7 @@ Avant toute analyse, chaque texte est <strong>nettoyé</strong> pour retirer ces
 </section>
 <hr class="docutils" />
 <section id="pour-aller-plus-loin">
-<h2>🔗 Pour aller plus loin<a class="headerlink" href="#pour-aller-plus-loin" title="Link to this heading">#</a></h2>
+<h2>Pour aller plus loin<a class="headerlink" href="#pour-aller-plus-loin" title="Link to this heading">#</a></h2>
 <p>👉 Dans la prochaine section, nous croiserons ces tweets enrichis avec les <strong>cours boursiers de Tesla</strong> pour étudier les corrélations et construire des indicateurs de sentiment agrégé.</p>
 <p>➡️ Accéder à la suite : <a class="reference internal" href="#EDA.html"><span class="xref myst">Analyse exploratoire des données</span></a></p>
 </section>
@@ -623,7 +625,7 @@ Avant toute analyse, chaque texte est <strong>nettoyé</strong> pour retirer ces
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">🤖 Comprendre les Transformers</p>
+        <p class="prev-next-title">Analyse des modèles de sentiment</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -649,15 +651,15 @@ Avant toute analyse, chaque texte est <strong>nettoyé</strong> pour retirer ces
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apercu-technique">Aperçu technique</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#schema-des-donnees-exportees">Schéma des données exportées</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#schema-de-recuperation-des-donnees">Schéma de récupération des données</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#detail-conceptuel-des-etapes">🧠 Détail conceptuel des étapes</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scraping-sans-api">🔍 1. Scraping sans API</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nettoyage-et-filtrage-linguistique">🧼 2. Nettoyage et filtrage linguistique</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analyse-de-sentiment-multi-modele">🧪 3. Analyse de sentiment multi-modèle</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stockage-mensuel-et-structuration">📦 4. Stockage mensuel et structuration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#detail-conceptuel-des-etapes">Détail conceptuel des étapes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scraping-sans-api">1. Scraping sans API</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nettoyage-et-filtrage-linguistique">2. Nettoyage et filtrage linguistique</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analyse-de-sentiment-multi-modele">3. Analyse de sentiment multi-modèle</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stockage-mensuel-et-structuration">4. Stockage mensuel et structuration</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limites-rencontrees">⚠️ Limites rencontrées</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pour-aller-plus-loin">🔗 Pour aller plus loin</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limites-rencontrees">Limites rencontrées</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pour-aller-plus-loin">Pour aller plus loin</a></li>
 </ul>
   </nav></div>
 

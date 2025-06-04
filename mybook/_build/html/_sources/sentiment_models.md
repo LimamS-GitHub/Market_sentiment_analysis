@@ -1,93 +1,98 @@
-## 🤖 Comprendre les Transformers
+# Analyse des modèles de sentiment
 
-Les modèles utilisés dans notre analyse sont basés sur l’architecture Transformer, une technologie révolutionnaire introduite en 2017 (Vaswani et al.).  
-Contrairement aux RNNs ou LSTMs, ils traitent l’ensemble d’un texte en parallèle grâce à un mécanisme d’**attention**.
-
-👉 Pour une visualisation interactive de leur fonctionnement, nous vous recommandons cette ressource :
-
-🔗 [Transformer Visualizer (Polo Club)](https://poloclub.github.io/transformer-explainer/)
-
-Dans notre projet, nous utilisons des versions spécialisées du Transformer, préentraînées sur des textes financiers (ex. : FinancialBERT, DeBERTa-v3-fin) pour analyser les tweets liés à Tesla.
-
-# Explication de l'utilisation des modèles Transformers
-
-Dans notre projet, les modèles Transformers ont été utilisés pour analyser le sentiment des tweets collectés au sujet de Tesla (TSLA).  
-Chaque tweet a été passé dans un ou plusieurs modèles pré-entraînés afin d'évaluer s’il exprimait une opinion positive, neutre ou négative.
-
----
-![Analyse de sentiment via Transformers](diagramme_transformers.png)
-
-
-
-
-## Étapes d'utilisation
-
-### 1. Prétraitement des tweets
-
-Avant de procéder à l’analyse de sentiment, nous avons appliqué un nettoyage des tweets afin de supprimer les éléments non informatifs : liens, mentions, hashtags, ponctuation, etc.  
-Nous avons également filtré les tweets par langue, en ne conservant que ceux rédigés en anglais.  
-Ce choix s’explique par le fait que tous les modèles utilisés ont été entraînés sur des textes anglophones.
+Dans ce chapitre, nous détaillons les modèles d’analyse de sentiment utilisés pour enrichir les tweets relatifs à Tesla.  
+Nous présentons d’abord **VADER**, une approche lexicale basée sur des règles, puis les **modèles Transformers** pré-entraînés adaptés au langage financier.
 
 ---
 
-### 2. Application des modèles de sentiment
+## 1. VADER : une approche lexicale basée sur des règles
 
-Une fois les tweets nettoyés, ils sont analysés à l’aide de modèles de type Transformer.  
-Ces modèles sont accessibles via l’API `pipeline` de la bibliothèque Hugging Face.  
-Pour chaque tweet, le modèle renvoie un label de sentiment : `POSITIVE`, `NEUTRAL` ou `NEGATIVE`.
+**VADER** (Valence Aware Dictionary and sEntiment Reasoner) est un outil conçu pour l’analyse de sentiment dans des textes courts tels que les tweets.  
+Il repose sur un **lexique de mots scorés** et un ensemble de **règles linguistiques** sans apprentissage automatique.
 
-Nous avons ensuite converti ces labels en valeurs numériques pour faciliter leur traitement statistique :
+### Fonctionnement
 
-- `POSITIVE` → +1  
-- `NEUTRAL` → 0  
-- `NEGATIVE` → −1
+Chaque mot est associé à un score de valence compris entre −4 et +4.  
+Ce score peut être modulé par :
 
----
+- des majuscules (`GREAT` est plus fort que `great`) ;
+- des ponctuations (`!!!`) ;
+- des modificateurs d’intensité (`very`, `slightly`, etc.) ;
+- des négations (`not good`, `isn't bad`).
 
-### 3. Modèles utilisés
+### Formule utilisée
 
-Nous avons utilisé plusieurs modèles, tous spécialisés dans le domaine financier. Cela permet d’obtenir des scores mieux adaptés au langage économique souvent employé dans les tweets.
+Le score final (appelé *compound*) est normalisé dans l’intervalle [−1, +1] à l’aide de la formule :
 
-| Modèle | Architecture | Données d’entraînement | Particularité |
-|--------|--------------|------------------------|---------------|
-| `ProsusAI/finbert` | BERT | Documents financiers et rapports annuels | Référence en sentiment financier |
-| `deberta-v3-financial-news-sentiment` | DeBERTa-v3 | Articles de presse boursiers | Bonne compréhension du contexte |
-| `distilroberta-financial-news-sentiment` | DistilRoBERTa | Actualités économiques | Modèle léger et rapide à exécuter |
+compound = ( Σ sᵢ ) / √( Σ sᵢ² + α )
 
-Chaque modèle a été appliqué individuellement à tous les tweets, et les résultats sont enregistrés dans des colonnes distinctes (`sentiment_finbert`, `sentiment_deberta`, `sentiment_roberta`, etc.).
+Où :
+- sᵢ est le score de chaque mot ou modificateur
+- α est une constante (valeur par défaut : 15)
 
----
-
-### 4. Intégration dans notre base de données
-
-Les scores obtenus sont ajoutés directement dans notre base structurée.  
-Chaque tweet est donc enrichi de plusieurs indicateurs de sentiment.  
-Ce jeu de données est ensuite utilisé pour :
-
-- construire des moyennes de sentiment par jour,
-- explorer les corrélations avec les variations du cours de l'action Tesla,
-- alimenter notre stratégie de trading.
+Le résultat donne un score unique reflétant la tonalité globale du tweet.
 
 ---
 
-## Pourquoi utiliser plusieurs modèles ?
+## 2. comprendre Les Transformers : modèles contextuels par attention
 
-Le choix d’utiliser plusieurs modèles repose sur plusieurs motivations :
+Les **Transformers** sont des modèles de langage introduits par Vaswani et al. (2017), fondés sur le mécanisme d’**attention**.  
+Contrairement aux approches séquentielles (RNN, LSTM), ils traitent l’ensemble du texte en parallèle et captent les dépendances entre mots, même distants.
 
-- Les tweets sont souvent ambigus ou implicites. En comparant plusieurs scores, on peut repérer les divergences ou convergences d’interprétation.
-- En combinant les résultats, on peut lisser les erreurs individuelles de chaque modèle.
-- Cela permet également de tester l’impact de chaque modèle sur la performance globale de notre approche.
+### Fonctionnement général
+
+Chaque mot est converti en un vecteur, puis comparé aux autres mots du texte via des **poids d’attention**.  
+Cela permet de modéliser le contexte d’un mot selon sa relation avec les autres termes.
+
+### Modèles utilisés dans notre projet
+
+Nous avons appliqué plusieurs Transformers spécialisés dans le domaine financier :
+
+- `ProsusAI/finbert`
+- `deberta-v3-financial-news-sentiment`
+- `distilroberta-financial-news-sentiment`
+
+Chaque tweet est analysé individuellement, et le modèle retourne une **classe de sentiment** :
+
+- `POSITIVE` → **+1**  
+- `NEUTRAL` → **0**  
+- `NEGATIVE` → **−1**
+
+Ces scores sont ensuite intégrés dans notre base de données.
 
 ---
 
-## Ressource pour mieux comprendre les Transformers
+## 3. Schéma de traitement appliqué aux tweets
 
-Pour mieux comprendre le fonctionnement des modèles Transformers et le principe de l'attention, nous recommandons la ressource suivante, particulièrement claire et interactive :
+Le diagramme suivant illustre l’enchaînement des étapes dans notre pipeline de traitement du sentiment à partir des tweets collectés :
 
-[Transformer Visualizer – Polo Club](https://poloclub.github.io/transformer-explainer/)
-
-Ce site illustre de manière visuelle la façon dont les mots d’une phrase sont analysés et mis en relation les uns avec les autres dans un modèle Transformer.
+![Analyse de sentiment via Transformers](diagramme_transformers1.png)
 
 ---
 
-Dans la section suivante, nous utiliserons ces scores pour explorer les liens entre sentiment agrégé et performance boursière.
+## 4. Comparaison des deux approches
+
+| Critère                        | VADER                     | Transformers financiers         |
+|-------------------------------|---------------------------|---------------------------------|
+| Approche                      | Lexicale (basée sur règles) | Apprentissage profond (NLP)    |
+| Données requises              | Aucune                    | Corpus pré-entraînés massifs    |
+| Vitesse                       | Très rapide               | Plus lente                      |
+| Capacité à comprendre le contexte | Limitée                 | Élevée                          |
+| Adaptation au domaine financier| Faible                    | Excellente                      |
+| Interprétabilité              | Très bonne                | Moyenne à faible                |
+
+Nous avons utilisé VADER comme **point de référence rapide** et facilement interprétable, tandis que les Transformers ont été mobilisés pour fournir une **analyse fine**, tenant compte du langage spécifique à la finance.
+
+---
+
+## 5. Pour aller plus loin
+
+Pour comprendre plus en détail le fonctionnement des Transformers et du mécanisme d’attention, nous recommandons cette visualisation interactive :
+
+🔗 [Transformer Visualizer – Polo Club](https://poloclub.github.io/transformer-explainer/)
+
+Ce site permet d’explorer les flux d’attention et la façon dont chaque mot est influencé par les autres dans une phrase.
+
+---
+
+Dans la section suivante, nous analyserons comment les scores de sentiment obtenus évoluent dans le temps et comment ils sont corrélés avec les cours boursiers de Tesla.
