@@ -1,111 +1,98 @@
-## 🤖 Comprendre les Transformers
-
-Les modèles utilisés dans notre analyse sont basés sur l’architecture Transformer, une technologie révolutionnaire introduite en 2017 (Vaswani et al.).  
-Contrairement aux RNNs ou LSTMs, ils traitent l’ensemble d’un texte en parallèle grâce à un mécanisme d’**attention**.
-
-
-Dans notre projet, nous utilisons des versions spécialisées du Transformer, préentraînées sur des textes financiers (ex. : FinancialBERT, DeBERTa-v3-fin) pour analyser les tweets liés à Tesla.
-
-# Explication de l'utilisation des modèles Transformers
-
-Dans notre projet, les modèles Transformers ont été utilisés pour analyser le sentiment des tweets collectés au sujet de Tesla (TSLA).  
-Chaque tweet a été passé dans un ou plusieurs modèles pré-entraînés afin d'évaluer s’il exprimait une opinion positive, neutre ou négative.
-
----
-![Analyse de sentiment via Transformers](diagramme_transformers1.png)
-
-
-
-
----
-
-## Ressource pour mieux comprendre les Transformers
-
-Pour mieux comprendre le fonctionnement des modèles Transformers et le principe de l'attention, nous recommandons la ressource suivante, particulièrement claire et interactive :
-
-[Transformer Visualizer – Polo Club](https://poloclub.github.io/transformer-explainer/)
-
-Ce site illustre de manière visuelle la façon dont les mots d’une phrase sont analysés et mis en relation les uns avec les autres dans un modèle Transformer.
-
----
 # Analyse des modèles de sentiment
 
-Dans cette partie, nous revenons en détail sur les **modèles de sentiment utilisés dans notre projet**, en nous concentrant sur leur fonctionnement théorique.  
-Une présentation générale des modèles (VADER, Transformers financiers, etc.) est déjà proposée dans la section précédente :  
-➡️ Voir : [Collecte & Préparation des Tweets](tweet_collection.md)
-
-Ici, nous approfondissons deux aspects essentiels :
-
-1. Le fonctionnement lexical et mathématique de **VADER**  
-2. Le principe général des **Transformers**, en lien avec leur usage pour l’analyse de sentiment
+Dans ce chapitre, nous détaillons les modèles d’analyse de sentiment utilisés pour enrichir les tweets relatifs à Tesla.  
+Nous présentons d’abord **VADER**, une approche lexicale basée sur des règles, puis les **modèles Transformers** pré-entraînés adaptés au langage financier.
 
 ---
 
-## 1. VADER : un modèle lexical basé sur des règles
+## 1. VADER : une approche lexicale basée sur des règles
 
-**VADER** (Valence Aware Dictionary and sEntiment Reasoner) est un outil conçu pour détecter l’opinion exprimée dans des textes courts comme les tweets.  
-Il ne repose pas sur l’apprentissage automatique, mais sur un **dictionnaire de mots pré-scorés** et un ensemble de **règles linguistiques**.
+**VADER** (Valence Aware Dictionary and sEntiment Reasoner) est un outil conçu pour l’analyse de sentiment dans des textes courts tels que les tweets.  
+Il repose sur un **lexique de mots scorés** et un ensemble de **règles linguistiques** sans apprentissage automatique.
 
-### Principes de base
+### Fonctionnement
 
-Chaque mot du texte est comparé à un lexique contenant des scores allant de −4 à +4, selon leur charge émotionnelle.  
-Des règles modifient ce score selon :
+Chaque mot est associé à un score de valence compris entre −4 et +4.  
+Ce score peut être modulé par :
 
-- les majuscules (`GOOD` est plus fort que `good`) ;
-- la ponctuation (`!!` augmente l’intensité) ;
-- les mots modificateurs (`very`, `kind of`, etc.) ;
-- les négations (`not good` devient négatif).
+- des majuscules (`GREAT` est plus fort que `great`) ;
+- des ponctuations (`!!!`) ;
+- des modificateurs d’intensité (`very`, `slightly`, etc.) ;
+- des négations (`not good`, `isn't bad`).
 
 ### Formule utilisée
 
-Le score final composé (entre −1 et +1) est calculé selon une formule de normalisation :
+Le score final (appelé *compound*) est normalisé dans l’intervalle [−1, +1] à l’aide de la formule :
 
-![Formule compound de VADER](formule_vader.png)
-Le résultat donne un score continu, facile à interpréter.
+![Formule compound de VADER](formule_vader_fond_blanc.png)
+
+Où :
+- \( s_i \) est le score de chaque mot ou expression ;
+- \( \alpha \) est une constante (par défaut : 15).
+
+Le résultat donne un score unique reflétant la tonalité globale du tweet.
 
 ---
 
-## 2. Les Transformers : modèles à attention
+## 2. Les Transformers : modèles contextuels par attention
 
-Les modèles Transformers sont des réseaux de neurones profonds introduits par Vaswani et al. (2017).  
-Ils sont devenus la base des systèmes modernes de traitement automatique du langage (NLP).
+Les **Transformers** sont des modèles de langage introduits par Vaswani et al. (2017), fondés sur le mécanisme d’**attention**.  
+Contrairement aux approches séquentielles (RNN, LSTM), ils traitent l’ensemble du texte en parallèle et captent les dépendances entre mots, même distants.
 
-Contrairement aux approches lexicale ou séquentielle (comme RNN), les Transformers traitent tout le texte **en parallèle**, en captant les relations entre les mots grâce au mécanisme d’**attention**.
+### Fonctionnement général
 
-Dans notre projet, nous avons utilisé des versions préentraînées et spécialisées en finance :
+Chaque mot est converti en un vecteur, puis comparé aux autres mots du texte via des **poids d’attention**.  
+Cela permet de modéliser le contexte d’un mot selon sa relation avec les autres termes.
+
+### Modèles utilisés dans notre projet
+
+Nous avons appliqué plusieurs Transformers spécialisés dans le domaine financier :
 
 - `ProsusAI/finbert`
 - `deberta-v3-financial-news-sentiment`
 - `distilroberta-financial-news-sentiment`
 
-Ces modèles attribuent à chaque tweet une prédiction (`POSITIVE`, `NEUTRAL`, `NEGATIVE`), que nous avons convertie en :  
-**+1**, **0** ou **−1** pour les traitements ultérieurs.
+Chaque tweet est analysé individuellement, et le modèle retourne une **classe de sentiment** :
+
+- `POSITIVE` → **+1**  
+- `NEUTRAL` → **0**  
+- `NEGATIVE` → **−1**
+
+Ces scores sont ensuite intégrés dans notre base de données.
 
 ---
 
-## 3. Comparaison VADER vs Transformers
+## 3. Schéma de traitement appliqué aux tweets
 
-| Critère | VADER | Transformers financiers |
-|--------|-------|--------------------------|
-| Approche | Lexicale (basée règles) | Apprentissage profond |
-| Données requises | Aucune | Modèles pré-entraînés |
-| Vitesse | Très rapide | Plus lente à l’inférence |
-| Capacité contextuelle | Limitée | Élevée |
-| Adaptation au langage boursier | Faible | Excellente |
-| Interprétabilité | Très bonne | Moyenne |
+Le diagramme suivant illustre l’enchaînement des étapes dans notre pipeline de traitement du sentiment à partir des tweets collectés :
 
-Nous avons utilisé VADER comme point de référence simple, et les Transformers pour une analyse plus fine et spécialisée.
+![Analyse de sentiment via Transformers](images/diagramme_transformers1.png)
 
 ---
 
-## 4. Pour aller plus loin
+## 4. Comparaison des deux approches
 
-Pour mieux comprendre le fonctionnement des Transformers, nous recommandons cette ressource interactive :
+| Critère                        | VADER                     | Transformers financiers         |
+|-------------------------------|---------------------------|---------------------------------|
+| Approche                      | Lexicale (basée sur règles) | Apprentissage profond (NLP)    |
+| Données requises              | Aucune                    | Corpus pré-entraînés massifs    |
+| Vitesse                       | Très rapide               | Plus lente                      |
+| Capacité à comprendre le contexte | Limitée                 | Élevée                          |
+| Adaptation au domaine financier| Faible                    | Excellente                      |
+| Interprétabilité              | Très bonne                | Moyenne à faible                |
 
-[Visualisation interactive des Transformers (Polo Club)](https://poloclub.github.io/transformer-explainer/)
+Nous avons utilisé VADER comme **point de référence rapide** et facilement interprétable, tandis que les Transformers ont été mobilisés pour fournir une **analyse fine**, tenant compte du langage spécifique à la finance.
 
 ---
 
-Dans la section suivante, nous utiliserons ces scores pour explorer les liens entre sentiment agrégé et performance boursière.
+## 5. Pour aller plus loin
 
+Pour comprendre plus en détail le fonctionnement des Transformers et du mécanisme d’attention, nous recommandons cette visualisation interactive :
 
+🔗 [Transformer Visualizer – Polo Club](https://poloclub.github.io/transformer-explainer/)
+
+Ce site permet d’explorer les flux d’attention et la façon dont chaque mot est influencé par les autres dans une phrase.
+
+---
+
+Dans la section suivante, nous analyserons comment les scores de sentiment obtenus évoluent dans le temps et comment ils sont corrélés avec les cours boursiers de Tesla.
