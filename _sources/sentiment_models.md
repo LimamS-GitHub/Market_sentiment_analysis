@@ -24,7 +24,7 @@ Ce score peut être modulé par :
 
 Le score final (appelé *compound*) est normalisé dans l’intervalle [−1, +1] à l’aide de la formule :
 
-compound = ( Σ sᵢ ) / √( Σ sᵢ² + α )
+$$\text{compound} = \frac{\sum s_i}{\sqrt{\sum s_i^2 + \alpha}}$$
 
 Où :
 - sᵢ est le score de chaque mot ou modificateur
