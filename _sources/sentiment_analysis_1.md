@@ -47,6 +47,8 @@ La meilleure configuration obtenue avec cette stratégie simple est :
 
 ## Bilan du prototype
 
+![Evol cour sentiment](prix_tesla_2022.png)
+
 Cette première stratégie, bien que simple et statique, parvient à générer un rendement positif sur l’année étudiée, malgré la tendance baissière de l’action Tesla sur cette période.
 Elle démontre qu’un signal de sentiment, correctement filtré et agrégé, peut servir de base à une prise de décision en trading.
 
