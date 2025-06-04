@@ -24,7 +24,7 @@ Ce score peut être modulé par :
 
 Le score final (appelé *compound*) est normalisé dans l’intervalle [−1, +1] à l’aide de la formule :
 
-![Formule compound de VADER](formule_vaderc.png)
+![Formule compound de VADER](formule_vader.png)
 
 Où :
 - \( s_i \) est le score de chaque mot ou expression ;
