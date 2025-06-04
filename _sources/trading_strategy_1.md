@@ -13,6 +13,17 @@ Chaque simulation a produit un ensemble de KPIs (Key Performance Indicators) : r
 
 ---
 
+### Impact de la fenêtre d'entraînement
+
+Le graphique suivant illustre l’impact du **nombre de mois utilisés pour entraîner le modèle** sur la qualité du résultat.
+
+![Écart moyen par tranche d’itérations](Ecart_moyen_par_mois.png)
+
+> Les fenêtres courtes (1 mois) donnent les meilleurs résultats.  
+Quand la fenêtre est trop longue, les signaux deviennent moins réactifs ou trop dilués.
+
+---
+
 ### Écart moyen vs stratégie passive (selon le nombre d’itérations)
 
 L’histogramme ci-dessous montre l'**écart moyen de performance** entre la stratégie et un buy & hold passif, en fonction du nombre d'itérations par jour.
@@ -22,17 +33,6 @@ L’histogramme ci-dessous montre l'**écart moyen de performance** entre la str
 > Les performances s’améliorent clairement jusqu’à **1500 itérations** environ.  
 > Au-delà, les gains se stabilisent, avec une variabilité qui reste notable.  
 > Les faibles nombres d’itérations (< 300) donnent de moins bons résultats, suggérant un manque d’exploration des paramètres.
-
----
-
-### Impact de la fenêtre d'entraînement
-
-Le graphique suivant illustre l’impact du **nombre de mois utilisés pour entraîner le modèle** sur la qualité du résultat.
-
-![Écart moyen par tranche d’itérations](Ecart_moyen_par_mois.png)
-
-> Les fenêtres courtes (1 mois) donnent les meilleurs résultats.  
-Quand la fenêtre est trop longue, les signaux deviennent moins réactifs ou trop dilués.
 
 ---
 
