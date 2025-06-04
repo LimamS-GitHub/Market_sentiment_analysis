@@ -63,15 +63,7 @@ Des règles modifient ce score selon :
 
 Le score final composé (entre −1 et +1) est calculé selon une formule de normalisation :
 
-\\[
-\text{compound} = \frac{\sum_{i=1}^{n} s_i}{\sqrt{\sum_{i=1}^{n} s_i^2 + \alpha}}
-\\]
-
-où :
-
-- \( s_i \) est le score (positif ou négatif) de chaque élément du tweet ;
-- \( \alpha \) est un facteur de normalisation (valeur par défaut : 15).
-
+![Formule compound de VADER](images/formule_vader.png)
 Le résultat donne un score continu, facile à interpréter.
 
 ---
