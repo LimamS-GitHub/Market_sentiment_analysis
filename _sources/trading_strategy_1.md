@@ -63,7 +63,7 @@ Cela signifie que le modèle génère bien un **alpha** exploitable à partir du
 
 - La stratégie adaptative surperforme **clairement** une approche passive, surtout lorsqu’elle est recalibrée fréquemment.
 - Des **fenêtres d’entraînement courtes (1 mois)** permettent au modèle de mieux capter l’évolution rapide du sentiment social.
-- L’impact du nombre d’itérations est réel mais **non linéaire** : un minimum est nécessaire pour que la recherche d’hyperparamètres soit efficace, mais au-delà d’un certain seuil, les gains se stabilisent.
+- L’impact du nombre d’itérations est réel : un minimum est nécessaire pour que la recherche d’hyperparamètres soit efficace, mais au-delà d’un certain seuil, les gains ont tendance à se stabiliser.
 
 Le bruit collectif (def : l’ensemble des opinions, réactions, émotions ou rumeurs exprimées par la foule) devient ainsi un indicateur exploitable, à condition d’être combiné à un cadre adaptatif rigoureux.
 
