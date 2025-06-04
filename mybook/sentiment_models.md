@@ -17,9 +17,6 @@ Chaque tweet a été passé dans un ou plusieurs modèles pré-entraînés afin 
 ---
 ![Analyse de sentiment via Transformers](diagramme_transformers.png)
 
-
-
-
 ## Étapes d'utilisation
 
 ### 1. Prétraitement des tweets
