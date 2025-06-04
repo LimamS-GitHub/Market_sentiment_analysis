@@ -16,7 +16,7 @@ Puis ajuster automatiquement les paramètres pour maximiser la performance de la
 Chaque décision est prise à la clôture du jour, en fonction du score de sentiment observé dans la même journée.
 On suppose que les données de sentiment ont été collectées et traitées suffisamment tôt pour pouvoir être utilisées avant la fin de séance.
 
--> Avec cette stratégie rudimentaire, on obtient une performance annuelle de +0.67 %, sans frais de transaction ni levier.
+    Avec cette stratégie rudimentaire, on obtient une performance annuelle de +0.67 % sans frais de transaction.
 ---
 
 ## Recherche d’hyperparamètres
