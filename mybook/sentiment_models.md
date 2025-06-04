@@ -89,5 +89,66 @@ Pour mieux comprendre le fonctionnement des modèles Transformers et le principe
 Ce site illustre de manière visuelle la façon dont les mots d’une phrase sont analysés et mis en relation les uns avec les autres dans un modèle Transformer.
 
 ---
+## Le modèle VADER : une approche lexicale
+
+Avant d’aborder les modèles Transformers, nous avons utilisé un modèle plus simple : **VADER (Valence Aware Dictionary and sEntiment Reasoner)**.  
+C’est un outil d’analyse de sentiment spécialement conçu pour les **textes courts**, comme les tweets, et qui fonctionne sans apprentissage supervisé.
+
+---
+
+### Fonctionnement général
+
+VADER repose sur une **liste de mots** associée à des scores de sentiment prédéfinis.  
+À chaque mot est attribué un **score de valence** compris entre −4 (très négatif) et +4 (très positif).  
+Exemples :
+
+| Mot          | Score de VADER |
+|--------------|----------------|
+| good         | +1.9           |
+| amazing      | +3.1           |
+| bad          | −2.5           |
+| terrible     | −3.6           |
+
+VADER tient également compte de plusieurs **règles linguistiques** :
+
+- **Majuscules** (ex. : “GOOD” est plus fort que “good”)
+- **Ponctuation** (ex. : “great!!!” est renforcé)
+- **Négation** (ex. : “not good” inverse le score)
+- **Modificateurs d’intensité** (ex. : “very good” > “good”)
+
+---
+
+### Formule mathématique simplifiée
+
+L’idée principale est de **calculer un score composé** :
+
+\[
+\text{compound} = \frac{\sum_{i=1}^{n} s_i}{\sqrt{\sum_{i=1}^{n} s_i^2 + \alpha}}
+\]
+
+où :
+
+- \( s_i \) est le score (positif ou négatif) du i-ème mot ou modificateur,
+- \( \alpha \) est une constante d’ajustement (par défaut : 15),
+- Le résultat est un **score normalisé** entre −1 et +1.
+
+---
+
+### Avantages et limites
+
+**Avantages :**
+- Très rapide à exécuter (pas de modèle à charger),
+- Interprétable : chaque mot contribue de façon claire,
+- Adapté aux textes courts comme les tweets.
+
+**Limites :**
+- Ne comprend pas le contexte global ou l’ironie,
+- N’évolue pas avec de nouveaux mots ou expressions,
+- Moins performant sur des textes financiers techniques.
+
+---
+
+Dans notre projet, VADER est utilisé **en parallèle** des modèles Transformers.  
+Il fournit une **mesure de référence rapide**, que nous comparons aux scores plus complexes générés par FinBERT, DeBERTa, etc.
 
 Dans la section suivante, nous utiliserons ces scores pour explorer les liens entre sentiment agrégé et performance boursière.
