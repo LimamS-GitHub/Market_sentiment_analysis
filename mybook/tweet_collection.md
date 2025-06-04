@@ -68,9 +68,9 @@ Le diagramme ci-dessous illustre le processus complet de collecte et de traiteme
 
 ---
 
-## 🧠 Détail conceptuel des étapes
+##  Détail conceptuel des étapes
 
-### 🔍 1. Scraping sans API
+###  1. Scraping sans API
 
 Nous avons choisi **Nitter**, une interface alternative à Twitter, pour contourner les restrictions de l’API officielle (limites, coût, authentification).  
 Le scraping consiste à :
@@ -83,7 +83,7 @@ Pour automatiser cela, nous utilisons un outil de navigation sans interface visu
 
 ---
 
-### 🧼 2. Nettoyage et filtrage linguistique
+###  2. Nettoyage et filtrage linguistique
 
 Les tweets récupérés sont très bruts : liens, mentions, hashtags, emojis, etc.  
 Avant toute analyse, chaque texte est **nettoyé** pour retirer ces éléments parasites.
@@ -92,7 +92,7 @@ Ensuite, un filtre de langue est appliqué pour ne garder que les tweets **en an
 
 ---
 
-### 🧪 3. Analyse de sentiment multi-modèle
+###  3. Analyse de sentiment multi-modèle
 
 Chaque tweet nettoyé est passé à travers plusieurs modèles de **sentiment analysis** :
 
@@ -106,7 +106,7 @@ Chaque modèle attribue un **score de polarité** : positif, neutre ou négatif 
 
 ---
 
-### 📦 4. Stockage mensuel et structuration
+###  4. Stockage mensuel et structuration
 
 Les résultats sont organisés :
 
@@ -117,7 +117,7 @@ Chaque ligne de ce fichier correspond à un tweet unique enrichi de métadonnée
 
 ---
 
-## ⚠️ Limites rencontrées
+##  Limites rencontrées
 
 - **Qualité des tweets** : bruit, ironie, contenu peu informatif, spam…
 - **Langue détectée automatiquement** → erreurs possibles.
@@ -126,7 +126,7 @@ Chaque ligne de ce fichier correspond à un tweet unique enrichi de métadonnée
 
 ---
 
-## 🔗 Pour aller plus loin
+##  Pour aller plus loin
 
 👉 Dans la prochaine section, nous croiserons ces tweets enrichis avec les **cours boursiers de Tesla** pour étudier les corrélations et construire des indicateurs de sentiment agrégé.
 
