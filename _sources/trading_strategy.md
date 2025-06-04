@@ -1,58 +1,48 @@
 # 📈 Présentation du modèle de trading adaptatif
 
-## Introduction à l’étude
+## 🎯 Objectif de cette partie
 
-Cette section présente le **fonctionnement interne du modèle de trading adaptatif** développé dans le projet.  
-L’objectif est de comprendre **comment les signaux de sentiment sont transformés en décisions d’achat ou de vente**, puis traduits en actions concrètes sur un portefeuille virtuel.
+Dans cette section, on présente la **logique de fonctionnement** du modèle de trading développé dans ce projet.
 
-Nous allons décomposer :
-- la manière dont les signaux sont construits,
-- le processus d’optimisation des paramètres,
-- la boucle journalière d'entraînement et d’exécution.
+L’idée principale est simple :  
+> Chaque jour, le modèle s’adapte aux données les plus récentes pour décider s’il faut acheter, vendre ou rester neutre.
 
-Un schéma explicatif illustre ce fonctionnement.
-
----
-
-## ⚙️ Fonctionnement général du modèle
-
-Le modèle repose sur l’analyse quotidienne du **sentiment extrait de Twitter** via 4 modèles différents :
-
-- **VADER** : modèle classique de sentiment
-- **FinBERT**, **DistilRoBERTa**, **DeBERTa** : modèles de langage spécialisés ou pré-entraînés sur du contenu financier ou généraliste.
-
-Chaque jour, on cherche la **meilleure combinaison de poids** entre ces modèles pour prédire l’évolution du cours de l’action TSLA.
+On va donc expliquer :
+- comment la stratégie s’ajuste dans le temps,
+- quels paramètres sont recalibrés quotidiennement,
+- et comment tout cela s’inscrit dans une boucle de décision automatisée.
 
 ---
 
-### 🔁 Boucle adaptative quotidienne
+## 🔁 La boucle quotidienne
 
-Chaque jour de trading suit les étapes suivantes :
+Chaque jour, le modèle suit les étapes suivantes :
 
-1. **Sélection des données d'entraînement** sur les *N derniers mois*
-2. **Recherche aléatoire des meilleurs paramètres** :
-   - poids des modèles de sentiment
-   - seuil d'achat (`buy_threshold`)
-   - seuil de vente (`sell_threshold`)
-   - facteur d’importance des comptes vérifiés (`weight_verified`)
-3. **Sélection de la combinaison qui maximise le gain**
-4. **Exécution du signal** (achat, vente ou attente)
-5. **Mise à jour du portefeuille**
-6. **Journalisation des décisions et performances**
-
----
-
-### Paramètres optimisés chaque jour
-
-| Paramètre             | Description                                |
-|-----------------------|--------------------------------------------|
-| `weights`             | Poids attribués à chaque modèle de sentiment |
-| `buy_threshold`       | Seuil au-dessus duquel un achat est déclenché |
-| `sell_threshold`      | Seuil en dessous duquel une vente est déclenchée |
-| `weight_verified`     | Importance accordée aux tweets vérifiés     |
+1. Il s'entraîne sur les données des **N dernières périodes** (souvent 1 ou 2 mois).
+2. Il teste **plusieurs combinaisons de paramètres** via une recherche aléatoire :
+   - poids appliqués aux scores de sentiment,
+   - seuils d’achat et de vente,
+   - pondération des tweets vérifiés.
+3. Il sélectionne la configuration qui aurait donné le meilleur résultat sur l’historique.
+4. Il utilise cette configuration pour **générer un signal** pour la journée en cours.
+5. Il **exécute le trade** (achat, vente ou rien).
+6. Il met à jour le portefeuille et **enregistre les résultats**.
 
 ---
 
-## Schéma du processus
+## ⚙️ Ce que le modèle ajuste chaque jour
+
+| Élément optimisé       | Rôle dans la décision                      |
+|------------------------|--------------------------------------------|
+| `weights`              | Poids appliqués aux différents scores de sentiment |
+| `buy_threshold`        | Seuil au-dessus duquel un achat est déclenché |
+| `sell_threshold`       | Seuil en dessous duquel une vente est déclenchée |
+| `weight_verified`      | Pondération supplémentaire pour les tweets vérifiés |
+
+---
+
+## 🔄 Schéma du processus
 
 ![Process adaptatif](Process_adaptatif.svg)
+
+> Ce schéma résume la boucle quotidienne : entraînement, optimisation, décision, exécution — puis on passe au jour suivant.
