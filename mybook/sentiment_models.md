@@ -63,9 +63,9 @@ Des règles modifient ce score selon :
 
 Le score final composé (entre −1 et +1) est calculé selon une formule de normalisation :
 
-\[
+\\[
 \text{compound} = \frac{\sum_{i=1}^{n} s_i}{\sqrt{\sum_{i=1}^{n} s_i^2 + \alpha}}
-\]
+\\]
 
 où :
 
