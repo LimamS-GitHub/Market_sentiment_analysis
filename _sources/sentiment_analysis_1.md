@@ -16,7 +16,8 @@ Puis ajuster automatiquement les paramètres pour maximiser la performance de la
 Chaque décision est prise à la clôture du jour, en fonction du score de sentiment observé dans la même journée.
 On suppose que les données de sentiment ont été collectées et traitées suffisamment tôt pour pouvoir être utilisées avant la fin de séance.
 
-    Avec cette stratégie rudimentaire, on obtient une performance annuelle de +0.67 % sans frais de transaction.
+
+> Avec cette stratégie rudimentaire, on obtient une performance annuelle de +0.67 % sans frais de transaction.
 ---
 
 ## Recherche d’hyperparamètres
@@ -46,6 +47,8 @@ La meilleure configuration obtenue avec cette stratégie simple est :
 ---
 
 ## Courbe de capital
+
+![Evol cour sentiment](Prix_fermeture_valeur_portefeuille.png)
 
 L’évolution du portefeuille montre une croissance progressive corrélée au sentiment dominant.  
 Malgré sa simplicité, cette approche démontre que le signal issu de Twitter contient **déjà un potentiel exploitable**.

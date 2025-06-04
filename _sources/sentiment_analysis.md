@@ -61,7 +61,7 @@ Les courbes en **gris** représentent le **prix de clôture standardisé**, tand
 ![Evol cour sentiment](Evol_cour_sentiment.png)
 
 
-On observe que certains signaux haussiers (vert) ou baissiers (rouge) **précèdent ou accompagnent des mouvements de prix**, ce qui constitue une première indication de potentiel informatif à exploiter dans la stratégie.
+Même si l’on observe quelques coïncidences ponctuelles entre variations de sentiment et mouvements du prix, aucune relation claire ou systématique ne se dégage visuellement.
 
 ---
 

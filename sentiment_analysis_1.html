@@ -411,9 +411,9 @@ Puis ajuster automatiquement les paramètres pour maximiser la performance de la
 </ul>
 <p>Chaque décision est prise à la clôture du jour, en fonction du score de sentiment observé dans la même journée.
 On suppose que les données de sentiment ont été collectées et traitées suffisamment tôt pour pouvoir être utilisées avant la fin de séance.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Avec cette stratégie rudimentaire, on obtient une performance annuelle de +0.67 % sans frais de transaction.
-</pre></div>
-</div>
+<blockquote>
+<div><p>Avec cette stratégie rudimentaire, on obtient une performance annuelle de +0.67 % sans frais de transaction.</p>
+</div></blockquote>
 </section>
 <hr class="docutils" />
 <section id="recherche-dhyperparametres">
@@ -459,6 +459,7 @@ On suppose que les données de sentiment ont été collectées et traitées suff
 <hr class="docutils" />
 <section id="courbe-de-capital">
 <h2>Courbe de capital<a class="headerlink" href="#courbe-de-capital" title="Link to this heading">#</a></h2>
+<p><img alt="Evol cour sentiment" src="_images/Prix_fermeture_valeur_portefeuille.png" /></p>
 <p>L’évolution du portefeuille montre une croissance progressive corrélée au sentiment dominant.<br />
 Malgré sa simplicité, cette approche démontre que le signal issu de Twitter contient <strong>déjà un potentiel exploitable</strong>.</p>
 <p>➡️ Dans la prochaine section, nous allons concevoir un modèle <strong>plus adaptatif</strong>, capable de réajuster ses paramètres jour après jour.</p>
