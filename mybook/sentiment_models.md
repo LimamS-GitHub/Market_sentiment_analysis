@@ -27,8 +27,8 @@ Le score final (appelé *compound*) est normalisé dans l’intervalle [−1, +1
 compound = ( Σ sᵢ ) / √( Σ sᵢ² + α )
 
 Où :
-- \( s_i \) est le score de chaque mot ou expression ;
-- \( \alpha \) est une constante (par défaut : 15).
+- sᵢ est le score de chaque mot ou modificateur
+- α est une constante (valeur par défaut : 15)
 
 Le résultat donne un score unique reflétant la tonalité globale du tweet.
 
