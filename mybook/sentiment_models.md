@@ -63,7 +63,7 @@ Des règles modifient ce score selon :
 
 Le score final composé (entre −1 et +1) est calculé selon une formule de normalisation :
 
-![Formule compound de VADER](images/formule_vader.png)
+![Formule compound de VADER](formule_vader.png)
 Le résultat donne un score continu, facile à interpréter.
 
 ---
