@@ -24,7 +24,7 @@ Ce score peut être modulé par :
 
 Le score final (appelé *compound*) est normalisé dans l’intervalle [−1, +1] à l’aide de la formule :
 
-![Formule compound de VADER](formule_vader_fond_blanc.png)
+![Formule compound de VADER](formule_vaderc.png)
 
 Où :
 - \( s_i \) est le score de chaque mot ou expression ;
@@ -66,7 +66,7 @@ Ces scores sont ensuite intégrés dans notre base de données.
 
 Le diagramme suivant illustre l’enchaînement des étapes dans notre pipeline de traitement du sentiment à partir des tweets collectés :
 
-![Analyse de sentiment via Transformers](images/diagramme_transformers1.png)
+![Analyse de sentiment via Transformers](diagramme_transformers1.png)
 
 ---
 
