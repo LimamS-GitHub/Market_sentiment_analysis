@@ -27,7 +27,7 @@ Dans ce chapitre, nous allons :
 
 Le scraping est réalisé en Python avec **Selenium**, accompagné d'une **rotation de proxies HTTPS** pour contourner les limitations d'accès.
 
-Chaque tweet est enrichi par **5 scores de sentiment** :
+Chaque tweet est enrichi par **4 scores de sentiment** :
 - 1 issu de **VADER** (modèle lexical basé sur des règles),
 - 3 issus de **Transformers spécialisés dans la finance**.
 
