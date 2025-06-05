@@ -381,8 +381,8 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resultats-globaux">1. Résultats globaux</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ecart-moyen-vs-strategie-passive-selon-le-nombre-diterations">Écart moyen vs stratégie passive (selon le nombre d’itérations)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#impact-de-la-fenetre-d-entrainement">Impact de la fenêtre d’entraînement</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ecart-moyen-vs-strategie-passive-selon-le-nombre-diterations">Écart moyen vs stratégie passive (selon le nombre d’itérations)</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exemple-dun-run-gagnant">2. Exemple d’un run gagnant</a></li>
@@ -416,19 +416,20 @@ document.write(`
 <div><p>Pour comparer les différentes configurations de manière simple et directe, nous utilisons comme indicateur principal <strong>l’écart moyen par jour entre la stratégie et la stratégie passive (buy &amp; hold)</strong>, exprimé en pourcentage du capital initial.</p>
 </div></blockquote>
 <hr class="docutils" />
-<section id="ecart-moyen-vs-strategie-passive-selon-le-nombre-diterations">
-<h3>Écart moyen vs stratégie passive (selon le nombre d’itérations)<a class="headerlink" href="#ecart-moyen-vs-strategie-passive-selon-le-nombre-diterations" title="Link to this heading">#</a></h3>
-<p>L’histogramme ci-dessous montre l’<strong>écart moyen de performance</strong> entre la stratégie et un buy &amp; hold passif, en fonction du nombre d’itérations par jour.</p>
-<p><img alt="Écart moyen par tranche d’itérations" src="_images/ecart_moyen_evolution.png" /></p>
-<blockquote>
-<div><p><strong>Observation</strong> : plus le nombre d’itérations augmente, plus la stratégie génère un écart positif stable.</p>
-</div></blockquote>
-</section>
-<hr class="docutils" />
 <section id="impact-de-la-fenetre-d-entrainement">
 <h3>Impact de la fenêtre d’entraînement<a class="headerlink" href="#impact-de-la-fenetre-d-entrainement" title="Link to this heading">#</a></h3>
 <p>Le graphique suivant illustre l’impact du <strong>nombre de mois utilisés pour entraîner le modèle</strong> sur la qualité du résultat.</p>
 <p><img alt="Écart moyen par tranche d’itérations" src="_images/Ecart_moyen_par_mois.png" /></p>
+<blockquote>
+<div><p>Les fenêtres courtes (1 mois) donnent les meilleurs résultats.<br />
+Quand la fenêtre est trop longue, les signaux deviennent moins réactifs ou trop dilués.</p>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="ecart-moyen-vs-strategie-passive-selon-le-nombre-diterations">
+<h3>Écart moyen vs stratégie passive (selon le nombre d’itérations)<a class="headerlink" href="#ecart-moyen-vs-strategie-passive-selon-le-nombre-diterations" title="Link to this heading">#</a></h3>
+<p>L’histogramme ci-dessous montre l’<strong>écart moyen de performance</strong> entre la stratégie et un buy &amp; hold passif, en fonction du nombre d’itérations par jour.</p>
+<p><img alt="Écart moyen par tranche d’itérations" src="_images/ecart_moyen_evolution.png" /></p>
 <blockquote>
 <div><p>Les performances s’améliorent clairement jusqu’à <strong>1500 itérations</strong> environ.<br />
 Au-delà, les gains se stabilisent, avec une variabilité qui reste notable.<br />
@@ -463,7 +464,7 @@ Elle aboutit à un capital final nettement supérieur à la stratégie passive.<
 <ul class="simple">
 <li><p>La stratégie adaptative surperforme <strong>clairement</strong> une approche passive, surtout lorsqu’elle est recalibrée fréquemment.</p></li>
 <li><p>Des <strong>fenêtres d’entraînement courtes (1 mois)</strong> permettent au modèle de mieux capter l’évolution rapide du sentiment social.</p></li>
-<li><p>L’impact du nombre d’itérations est réel mais <strong>non linéaire</strong> : un minimum est nécessaire pour que la recherche d’hyperparamètres soit efficace, mais au-delà d’un certain seuil, les gains se stabilisent.</p></li>
+<li><p>L’impact du nombre d’itérations est réel : un minimum est nécessaire pour que la recherche d’hyperparamètres soit efficace, mais au-delà d’un certain seuil, les gains ont tendance à se stabiliser.</p></li>
 </ul>
 <p>Le bruit collectif (def : l’ensemble des opinions, réactions, émotions ou rumeurs exprimées par la foule) devient ainsi un indicateur exploitable, à condition d’être combiné à un cadre adaptatif rigoureux.</p>
 <hr class="docutils" />
@@ -534,8 +535,8 @@ Elle aboutit à un capital final nettement supérieur à la stratégie passive.<
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resultats-globaux">1. Résultats globaux</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ecart-moyen-vs-strategie-passive-selon-le-nombre-diterations">Écart moyen vs stratégie passive (selon le nombre d’itérations)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#impact-de-la-fenetre-d-entrainement">Impact de la fenêtre d’entraînement</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ecart-moyen-vs-strategie-passive-selon-le-nombre-diterations">Écart moyen vs stratégie passive (selon le nombre d’itérations)</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exemple-dun-run-gagnant">2. Exemple d’un run gagnant</a></li>

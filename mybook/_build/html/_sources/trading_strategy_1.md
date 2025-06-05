@@ -13,21 +13,22 @@ Chaque simulation a produit un ensemble de KPIs (Key Performance Indicators) : r
 
 ---
 
-### Écart moyen vs stratégie passive (selon le nombre d’itérations)
-
-L’histogramme ci-dessous montre l'**écart moyen de performance** entre la stratégie et un buy & hold passif, en fonction du nombre d'itérations par jour.
-
-![Écart moyen par tranche d’itérations](ecart_moyen_evolution.png)
-
-> **Observation** : plus le nombre d’itérations augmente, plus la stratégie génère un écart positif stable.  
-
----
-
 ### Impact de la fenêtre d'entraînement
 
 Le graphique suivant illustre l’impact du **nombre de mois utilisés pour entraîner le modèle** sur la qualité du résultat.
 
 ![Écart moyen par tranche d’itérations](Ecart_moyen_par_mois.png)
+
+> Les fenêtres courtes (1 mois) donnent les meilleurs résultats.  
+Quand la fenêtre est trop longue, les signaux deviennent moins réactifs ou trop dilués.
+
+---
+
+### Écart moyen vs stratégie passive (selon le nombre d’itérations)
+
+L’histogramme ci-dessous montre l'**écart moyen de performance** entre la stratégie et un buy & hold passif, en fonction du nombre d'itérations par jour.
+
+![Écart moyen par tranche d’itérations](ecart_moyen_evolution.png)
 
 > Les performances s’améliorent clairement jusqu’à **1500 itérations** environ.  
 > Au-delà, les gains se stabilisent, avec une variabilité qui reste notable.  
@@ -62,7 +63,7 @@ Cela signifie que le modèle génère bien un **alpha** exploitable à partir du
 
 - La stratégie adaptative surperforme **clairement** une approche passive, surtout lorsqu’elle est recalibrée fréquemment.
 - Des **fenêtres d’entraînement courtes (1 mois)** permettent au modèle de mieux capter l’évolution rapide du sentiment social.
-- L’impact du nombre d’itérations est réel mais **non linéaire** : un minimum est nécessaire pour que la recherche d’hyperparamètres soit efficace, mais au-delà d’un certain seuil, les gains se stabilisent.
+- L’impact du nombre d’itérations est réel : un minimum est nécessaire pour que la recherche d’hyperparamètres soit efficace, mais au-delà d’un certain seuil, les gains ont tendance à se stabiliser.
 
 Le bruit collectif (def : l’ensemble des opinions, réactions, émotions ou rumeurs exprimées par la foule) devient ainsi un indicateur exploitable, à condition d’être combiné à un cadre adaptatif rigoureux.
 

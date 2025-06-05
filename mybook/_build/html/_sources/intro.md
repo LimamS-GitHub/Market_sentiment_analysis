@@ -1,4 +1,4 @@
-# Bienvenue sur notre projet : *Market Sentiment & Trading*
+# Bienvenue sur notre projet : **Market Sentiment 😊😐😡 & Trading**
 
 ## Contexte
 
