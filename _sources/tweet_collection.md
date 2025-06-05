@@ -33,6 +33,18 @@ Chaque tweet est enrichi par **4 scores de sentiment** :
 
 Les résultats sont sauvegardés en **CSV mensuels**, ainsi qu’un fichier global agrégé.
 
+
+## Scraping sans API
+
+Utilisation de **Nitter**, une interface alternative à Twitter, pour contourner les limites de l’API officielle.  
+Processus :
+
+- Requête par mot-clé et par jour (`Tesla`, `TSLA`, etc.).
+- Navigation automatique dans les pages pour extraire les tweets.
+- Stockage brut avec métadonnées (date, utilisateur, texte…).
+
+Scraping automatisé via un navigateur headless, avec gestion des délais et **rotation de proxies**.
+
 ---
 
 ## Schéma des données exportées
@@ -59,27 +71,14 @@ Le diagramme ci-dessous illustre le processus complet, du scraping à la sauvega
 
 ## 🧠 Étapes conceptuelles
 
-### 1. Scraping sans API
-
-Utilisation de **Nitter**, une interface alternative à Twitter, pour contourner les limites de l’API officielle.  
-Processus :
-
-- Requête par mot-clé et par jour (`Tesla`, `TSLA`, etc.).
-- Navigation automatique dans les pages pour extraire les tweets.
-- Stockage brut avec métadonnées (date, utilisateur, texte…).
-
-Scraping automatisé via un navigateur headless, avec gestion des délais et **rotation de proxies**.
-
----
-
-### 2. Nettoyage et filtrage linguistique
+### 1. Nettoyage et filtrage linguistique
 
 Les tweets sont nettoyés pour retirer liens, mentions, emojis, etc.  
 Un filtre de langue permet de ne garder que les **tweets en anglais**, compatibles avec les modèles NLP utilisés.
 
 ---
 
-### 3. Analyse de sentiment multi-modèle
+### 2. Analyse de sentiment multi-modèle
 
 Chaque tweet nettoyé est évalué par plusieurs modèles :
 
@@ -93,7 +92,7 @@ Chaque modèle attribue un **score de polarité** : positif (+1), neutre (0), ou
 
 ---
 
-### 4. Stockage structuré
+### 3. Stockage structuré
 
 Les résultats sont organisés :
 
