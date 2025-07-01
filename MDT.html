@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Bienvenue sur notre projet : Market Sentiment 😊😐😡 &amp; Trading &#8212; My sample book</title>
+    <title>Méthode de travail &#8212; My sample book</title>
   
   
   
@@ -57,12 +57,10 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'intro';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'MDT';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="🐦 Collecte &amp; Préparation des Tweets" href="tweet_collection.html" />
+    <link rel="prev" title="📊 Analyse des performances" href="trading_strategy_1.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -125,8 +123,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -145,7 +141,7 @@
     
   
 
-<a class="navbar-brand logo" href="#">
+<a class="navbar-brand logo" href="intro.html">
   
   
   
@@ -176,20 +172,20 @@
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1 current active">
-                <a class="reference internal" href="#">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
                     Bienvenue sur notre projet : Market Sentiment 😊😐😡 & Trading
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="tweet_collection.html">🐦 Collecte &amp; Préparation des Tweets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sentiment_models.html">🧠 Explication des modèles de sentiment utilisés</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sentiment_analysis.html">📊 Analyse exploratoire du sentiment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sentiment_analysis_1.html">🚶‍♂️ Vers une stratégie de trading simple</a></li>
 <li class="toctree-l1"><a class="reference internal" href="trading_strategy.html">📈 Présentation du modèle de trading adaptatif</a></li>
 <li class="toctree-l1"><a class="reference internal" href="trading_strategy_1.html">📊 Analyse des performances</a></li>
-<li class="toctree-l1"><a class="reference internal" href="MDT.html">Méthode de travail</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Méthode de travail</a></li>
 </ul>
 
     </div>
@@ -261,7 +257,7 @@
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fintro.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FMDT.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -291,7 +287,7 @@
       
       
       
-      <li><a href="_sources/intro.md" target="_blank"
+      <li><a href="_sources/MDT.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -375,7 +371,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Bienvenue sur notre projet : Market Sentiment 😊😐😡 & Trading</h1>
+    <h1>Méthode de travail</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -385,8 +381,14 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contexte">Contexte</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contenu-du-livre">Contenu du livre</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definir-un-objectif-clair">1. Définir un objectif clair</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#se-documenter-et-analyser-lexistant">2. Se documenter et analyser l’existant</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decouper-le-projet-en-sous-problemes">3. Découper le projet en sous-problèmes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#commencer-par-des-prototypes-simples-dans-des-notebooks">4. Commencer par des prototypes simples dans des notebooks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#passer-en-mode-production-des-quun-bloc-devient-stable">5. Passer en mode production dès qu’un bloc devient stable</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tester-la-relation-sentiment-marche">6. Tester la relation sentiment ↔ marché</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#passer-a-une-strategie-concrete-de-signaux">7. Passer à une stratégie concrète de signaux</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iterations-et-extensions">8. Itérations et extensions</a></li>
 </ul>
             </nav>
         </div>
@@ -398,34 +400,95 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="bienvenue-sur-notre-projet-market-sentiment-trading">
-<h1>Bienvenue sur notre projet : <strong>Market Sentiment 😊😐😡 &amp; Trading</strong><a class="headerlink" href="#bienvenue-sur-notre-projet-market-sentiment-trading" title="Link to this heading">#</a></h1>
-<section id="contexte">
-<h2>Contexte<a class="headerlink" href="#contexte" title="Link to this heading">#</a></h2>
-<p>Aujourd’hui, investir en bourse est devenu un véritable casse-tête.<br />
-Les marchés sont volatils, souvent influencés par bien plus que les seuls résultats économiques.<br />
-L’actualité, les réseaux sociaux, et les émotions collectives jouent un rôle grandissant dans les mouvements de prix.</p>
-<p>Parmi ces canaux, <strong>Twitter</strong> s’impose comme un thermomètre de l’opinion publique : chaque jour, des milliers de tweets commentent les entreprises, leurs dirigeants et leurs produits.</p>
-<p>Alors, une question se pose :</p>
-<p><strong>Et si on transformait l’humeur collective en indicateur de trading ?</strong></p>
+  <section class="tex2jax_ignore mathjax_ignore" id="methode-de-travail">
+<h1>Méthode de travail<a class="headerlink" href="#methode-de-travail" title="Link to this heading">#</a></h1>
+<p>Ce projet a été mené selon une approche structurée, progressive et orientée expérimentation. Chaque étape a été pensée pour construire un pipeline robuste, itératif et réutilisable. Voici la démarche suivie :</p>
+<section id="definir-un-objectif-clair">
+<h2>1. Définir un objectif clair<a class="headerlink" href="#definir-un-objectif-clair" title="Link to this heading">#</a></h2>
+<p>L’objectif initial était de tester une hypothèse simple mais ambitieuse :<br />
+<strong>peut-on exploiter le sentiment exprimé sur Twitter pour anticiper le mouvement d’un actif financier, et générer des signaux de trading ?</strong></p>
+<p>Cet objectif, bien qu’audacieux, a guidé toutes les décisions méthodologiques prises par la suite.</p>
 </section>
-<section id="contenu-du-livre">
-<h2>Contenu du livre<a class="headerlink" href="#contenu-du-livre" title="Link to this heading">#</a></h2>
-<p>Ce Jupyter Book est structuré en 5 grandes parties :</p>
+<section id="se-documenter-et-analyser-lexistant">
+<h2>2. Se documenter et analyser l’existant<a class="headerlink" href="#se-documenter-et-analyser-lexistant" title="Link to this heading">#</a></h2>
+<p>Avant toute implémentation, une phase de <strong>recherche exploratoire</strong> a été menée pour :</p>
+<ul class="simple">
+<li><p>Comprendre les travaux académiques et industriels sur le <strong>sentiment analysis appliqué aux marchés financiers</strong>.</p></li>
+<li><p>Comparer les approches existantes : lexicon-based (VADER), transformer-based (FinBERT, DeBERTa…), ou hybrides.</p></li>
+<li><p>Identifier les limites (bruit, ironie, bulles spéculatives, sur-apprentissage) et les bonnes pratiques (agrégation temporelle, filtrage de bruit, tests robustes).</p></li>
+</ul>
+</section>
+<section id="decouper-le-projet-en-sous-problemes">
+<h2>3. Découper le projet en sous-problèmes<a class="headerlink" href="#decouper-le-projet-en-sous-problemes" title="Link to this heading">#</a></h2>
+<p>Le projet a été scindé en modules indépendants mais complémentaires :</p>
 <ol class="arabic simple">
-<li><p><strong>Collecte &amp; préparation des tweets</strong></p></li>
-<li><p><strong>Explication des modèles utilisés</strong></p></li>
-<li><p><strong>Analyse exploratoire du sentiment</strong></p></li>
-<li><p><strong>Développement de la stratégie de trading</strong></p></li>
-<li><p><strong>Résultats, visualisations &amp; perspectives</strong></p></li>
+<li><p><strong>Collecte des données Twitter</strong> via Nitter + Selenium</p></li>
+<li><p><strong>Nettoyage et scoring des textes</strong> avec VADER et 3 modèles spécialisés</p></li>
+<li><p><strong>Agrégation journalière des scores</strong></p></li>
+<li><p><strong>Téléchargement des prix marchés (<a class="reference external" href="http://Investing.com">Investing.com</a>)</strong></p></li>
+<li><p><strong>Mise en relation Sentiment ↔ Variation de l’actif</strong></p></li>
+<li><p><strong>Génération de signaux d’achat/vente</strong></p></li>
+<li><p><strong>Backtesting et évaluation de la performance</strong></p></li>
 </ol>
-<hr class="docutils" />
-<blockquote>
-<div><p>Bonne lecture, et bienvenue dans l’univers du trading piloté par le sentiment social !</p>
-</div></blockquote>
 </section>
-<div class="toctree-wrapper compound">
-</div>
+<section id="commencer-par-des-prototypes-simples-dans-des-notebooks">
+<h2>4. Commencer par des prototypes simples dans des notebooks<a class="headerlink" href="#commencer-par-des-prototypes-simples-dans-des-notebooks" title="Link to this heading">#</a></h2>
+<p>Chaque bloc a été initialement développé dans un <strong>Jupyter Notebook</strong> pour :</p>
+<ul class="simple">
+<li><p>Pouvoir tester rapidement des idées.</p></li>
+<li><p>Visualiser les outputs à chaque étape.</p></li>
+<li><p>Corriger plus facilement les erreurs.</p></li>
+<li><p>Itérer vite sur les paramètres (fenêtre temporelle, poids, seuils…).</p></li>
+</ul>
+<p>Par exemple :</p>
+<ul class="simple">
+<li><p>Le scraping de Nitter a d’abord été testé sur un seul actif et une seule journée.</p></li>
+<li><p>Le scoring a été validé manuellement sur un petit set de tweets.</p></li>
+</ul>
+</section>
+<section id="passer-en-mode-production-des-quun-bloc-devient-stable">
+<h2>5. Passer en mode production dès qu’un bloc devient stable<a class="headerlink" href="#passer-en-mode-production-des-quun-bloc-devient-stable" title="Link to this heading">#</a></h2>
+<p>Une fois une partie du pipeline validée (fonctionnelle, utile, robuste), elle a été <strong>restructurée dans un fichier Python autonome</strong> (<code class="docutils literal notranslate"><span class="pre">.py</span></code>), avec :</p>
+<ul class="simple">
+<li><p>Gestion des erreurs,</p></li>
+<li><p>Logs clairs,</p></li>
+<li><p>Modularisation (fonctions réutilisables),</p></li>
+<li><p>Intégration dans un pipeline quotidien (scraping + scoring + agrégation).</p></li>
+</ul>
+<p>Exemple :<br />
+Le module de collecte des tweets fonctionne de manière automatisée avec rotation de proxies, gestion des captchas et filtrage de langue.</p>
+</section>
+<section id="tester-la-relation-sentiment-marche">
+<h2>6. Tester la relation sentiment ↔ marché<a class="headerlink" href="#tester-la-relation-sentiment-marche" title="Link to this heading">#</a></h2>
+<p>Une fois les séries temporelles en main, plusieurs tests statistiques ont été menés :</p>
+<ul class="simple">
+<li><p><strong>Corrélation linéaire</strong> (Pearson, Spearman) entre le score de sentiment journalier et la variation de prix du lendemain.</p></li>
+<li><p><strong>Cross-correlation</strong> avec différents décalages temporels.</p></li>
+<li><p><strong>Tests de causalité de Granger</strong> pour évaluer la prédictivité.</p></li>
+</ul>
+<p>Résultat :<br />
+Aucune <strong>corrélation directe robuste</strong> n’a été observée de manière stable sur la période étudiée.</p>
+</section>
+<section id="passer-a-une-strategie-concrete-de-signaux">
+<h2>7. Passer à une stratégie concrète de signaux<a class="headerlink" href="#passer-a-une-strategie-concrete-de-signaux" title="Link to this heading">#</a></h2>
+<p>Face à l’absence de lien direct, une approche plus pragmatique a été adoptée :</p>
+<ul class="simple">
+<li><p>Générer un <strong>signal Buy/Sell</strong> lorsque le score agrégé dépasse certains seuils (optimisés par random search).</p></li>
+<li><p>Simuler une stratégie de trading où l’on achète ou vend l’actif à l’ouverture du lendemain.</p></li>
+<li><p>Réévaluer les seuils et poids chaque jour via <strong>une fenêtre glissante d’entraînement</strong> (stratégie adaptative).</p></li>
+</ul>
+</section>
+<section id="iterations-et-extensions">
+<h2>8. Itérations et extensions<a class="headerlink" href="#iterations-et-extensions" title="Link to this heading">#</a></h2>
+<p>Le pipeline a ensuite été étendu :</p>
+<ul class="simple">
+<li><p>Ajout de lissage, normalisation, distinction utilisateurs vérifiés / non vérifiés.</p></li>
+<li><p>Log systématique des performances (rendement, volatilité, Sharpe ratio, drawdown).</p></li>
+<li><p>Réflexion sur la généralisation à un <strong>portefeuille multi-actifs</strong>.</p></li>
+</ul>
+<hr class="docutils" />
+<p>Cette méthode de travail a permis d’avancer de manière incrémentale, en assurant la robustesse de chaque étape avant de passer à la suivante. Elle laisse aussi place à l’expérimentation et à l’amélioration continue.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -458,14 +521,14 @@ L’actualité, les réseaux sociaux, et les émotions collectives jouent un rô
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
-    <a class="right-next"
-       href="tweet_collection.html"
-       title="next page">
+    <a class="left-prev"
+       href="trading_strategy_1.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">🐦 Collecte &amp; Préparation des Tweets</p>
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">📊 Analyse des performances</p>
       </div>
-      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
@@ -483,8 +546,14 @@ L’actualité, les réseaux sociaux, et les émotions collectives jouent un rô
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contexte">Contexte</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contenu-du-livre">Contenu du livre</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definir-un-objectif-clair">1. Définir un objectif clair</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#se-documenter-et-analyser-lexistant">2. Se documenter et analyser l’existant</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decouper-le-projet-en-sous-problemes">3. Découper le projet en sous-problèmes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#commencer-par-des-prototypes-simples-dans-des-notebooks">4. Commencer par des prototypes simples dans des notebooks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#passer-en-mode-production-des-quun-bloc-devient-stable">5. Passer en mode production dès qu’un bloc devient stable</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tester-la-relation-sentiment-marche">6. Tester la relation sentiment ↔ marché</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#passer-a-une-strategie-concrete-de-signaux">7. Passer à une stratégie concrète de signaux</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iterations-et-extensions">8. Itérations et extensions</a></li>
 </ul>
   </nav></div>
 
