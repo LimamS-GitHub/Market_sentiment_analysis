@@ -74,3 +74,4 @@ Le bruit collectif (def : l’ensemble des opinions, réactions, émotions ou ru
 - Étendre la méthode à un **portefeuille multi-actifs**
 - Remplacer la random search par une **optimisation bayésienne (Optuna)**
 - Tester un modèle qui s’entraîne chaque jour sur les **N dernières semaines** au lieu des N derniers mois, pour voir si cela améliore la réactivité et la performance.
+- Rajouter d'autres données dans le modèle telles que les volumes de recherche Google Trends, les flux RSS de news financières, ou encore les métriques techniques de marché (volatilité implicite, RSI, momentum), afin d’enrichir la prise de décision et de détecter des signaux convergents.
