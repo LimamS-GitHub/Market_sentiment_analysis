@@ -1,4 +1,4 @@
-# Méthode de travail
+# 🧩 Méthode de travail
 
 Ce projet a été mené selon une approche structurée, progressive et orientée expérimentation. Chaque étape a été pensée pour construire un pipeline robuste, itératif et réutilisable. Voici la démarche suivie :
 
@@ -67,8 +67,8 @@ Aucune **corrélation directe robuste** n’a été observée de manière stable
 ## 7. Passer à une stratégie concrète de signaux
 
 Face à l'absence de lien direct, une approche plus pragmatique a été adoptée :
-- Générer un **signal Buy/Sell** lorsque le score agrégé dépasse certains seuils (optimisés par random search).
-- Simuler une stratégie de trading où l’on achète ou vend l’actif à l’ouverture du lendemain.
+- Générer un **signal Buy/Sell** lorsque le score agrégé dépasse certains seuils.
+- Simuler une stratégie de trading où l’on achète ou vend l’actif à la fermeture de l'actif.
 - Réévaluer les seuils et poids chaque jour via **une fenêtre glissante d'entraînement** (stratégie adaptative).
 
 ## 8. Itérations et extensions
