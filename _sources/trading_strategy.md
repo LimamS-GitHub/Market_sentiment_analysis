@@ -1,6 +1,6 @@
 # 📈 Présentation du modèle de trading adaptatif
 
-## 🎯 Objectif de cette partie
+## Objectif de cette partie
 
 Dans cette section, on présente la **logique de fonctionnement** du modèle de trading développé dans ce projet.
 
@@ -14,7 +14,7 @@ On va donc expliquer :
 
 ---
 
-## 🔁 La boucle quotidienne
+## La boucle quotidienne
 
 Chaque jour, le modèle suit les étapes suivantes :
 
@@ -30,7 +30,7 @@ Chaque jour, le modèle suit les étapes suivantes :
 
 ---
 
-## ⚙️ Ce que le modèle ajuste chaque jour
+## Ce que le modèle ajuste chaque jour
 
 | Élément optimisé       | Rôle dans la décision                      |
 |------------------------|--------------------------------------------|
@@ -41,7 +41,7 @@ Chaque jour, le modèle suit les étapes suivantes :
 
 ---
 
-## 🔄 Schéma du processus
+## Schéma du processus
 
 ![Process adaptatif](Process_adaptatif.svg)
 
