@@ -383,7 +383,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pourquoi-twitter">Pourquoi Twitter ?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pourquoi-x">Pourquoi X ?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objectif-de-cette-section">Objectif de cette section</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apercu-technique">Aperçu technique</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scraping-sans-api">Scraping sans API</a></li>
@@ -409,9 +409,9 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="collecte-preparation-des-tweets">
 <h1>🐦 Collecte &amp; Préparation des Tweets<a class="headerlink" href="#collecte-preparation-des-tweets" title="Link to this heading">#</a></h1>
-<section id="pourquoi-twitter">
-<h2>Pourquoi Twitter ?<a class="headerlink" href="#pourquoi-twitter" title="Link to this heading">#</a></h2>
-<p>Twitter est une plateforme où l’information circule rapidement et massivement.<br />
+<section id="pourquoi-x">
+<h2>Pourquoi X ?<a class="headerlink" href="#pourquoi-x" title="Link to this heading">#</a></h2>
+<p>X est une plateforme où l’information circule rapidement et massivement.<br />
 C’est un flux continu d’opinions, de réactions et de spéculations, souvent en lien direct avec l’actualité économique et les entreprises cotées.</p>
 <p>Nous nous intéressons ici à <strong>Tesla ($TSLA)</strong>.<br />
 Hypothèse : les tweets quotidiens à son sujet pourraient refléter ou anticiper les variations de son cours boursier.</p>
@@ -422,7 +422,7 @@ Hypothèse : les tweets quotidiens à son sujet pourraient refléter ou anticipe
 <p>Avant toute modélisation, il faut construire une base de données <strong>propre, fiable et exploitable</strong>.<br />
 Dans ce chapitre, nous allons :</p>
 <ul class="simple">
-<li><p><strong>Scraper automatiquement</strong> des tweets via <a class="reference external" href="https://nitter.net">Nitter</a>, une alternative à Twitter sans JavaScript ni authentification.</p></li>
+<li><p><strong>Scraper automatiquement</strong> des tweets via <a class="reference external" href="https://nitter.net">Nitter</a>, une alternative à X sans JavaScript ni authentification.</p></li>
 <li><p><strong>Nettoyer</strong> les textes (liens, mentions, ponctuation…).</p></li>
 <li><p><strong>Filtrer</strong> pour ne garder que les tweets en anglais.</p></li>
 <li><p><strong>Analyser le sentiment</strong> avec plusieurs modèles NLP.</p></li>
@@ -441,7 +441,7 @@ Dans ce chapitre, nous allons :</p>
 </section>
 <section id="scraping-sans-api">
 <h2>Scraping sans API<a class="headerlink" href="#scraping-sans-api" title="Link to this heading">#</a></h2>
-<p>Utilisation de <strong>Nitter</strong>, une interface alternative à Twitter, pour contourner les limites de l’API officielle.<br />
+<p>Utilisation de <strong>Nitter</strong>, une interface alternative à X, pour contourner les limites de l’API officielle.<br />
 Processus :</p>
 <ul class="simple">
 <li><p>Requête par mot-clé et par jour (<code class="docutils literal notranslate"><span class="pre">Tesla</span></code>, <code class="docutils literal notranslate"><span class="pre">TSLA</span></code>, etc.).</p></li>
@@ -625,7 +625,7 @@ Un filtre de langue permet de ne garder que les <strong>tweets en anglais</stron
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pourquoi-twitter">Pourquoi Twitter ?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pourquoi-x">Pourquoi X ?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objectif-de-cette-section">Objectif de cette section</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apercu-technique">Aperçu technique</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scraping-sans-api">Scraping sans API</a></li>

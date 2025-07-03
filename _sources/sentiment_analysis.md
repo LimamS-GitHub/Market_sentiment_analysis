@@ -12,7 +12,7 @@ Elle repose sur trois axes principaux :
 - **Ajuster les hyperparamètres clés** de cette stratégie :  
   choix du modèle, fenêtre de lissage, seuils d’achat et de vente.
 
-Ce travail exploratoire nous permet d’évaluer si le signal issu de Twitter peut, même de façon rudimentaire, générer un comportement de marché exploitable.
+Ce travail exploratoire nous permet d’évaluer si le signal issu de X peut, même de façon rudimentaire, générer un comportement de marché exploitable.
 
 
 ---

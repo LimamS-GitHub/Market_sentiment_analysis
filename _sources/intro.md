@@ -6,7 +6,7 @@ Aujourd’hui, investir en bourse est devenu un véritable casse-tête.
 Les marchés sont volatils, souvent influencés par bien plus que les seuls résultats économiques.  
 L’actualité, les réseaux sociaux, et les émotions collectives jouent un rôle grandissant dans les mouvements de prix.
 
-Parmi ces canaux, **Twitter** s’impose comme un thermomètre de l’opinion publique : chaque jour, des milliers de tweets commentent les entreprises, leurs dirigeants et leurs produits.
+Parmi ces canaux, **X anciennement Twitter** s’impose comme un thermomètre de l’opinion publique : chaque jour, des milliers de tweets commentent les entreprises, leurs dirigeants et leurs produits.
 
 Alors, une question se pose :
 
