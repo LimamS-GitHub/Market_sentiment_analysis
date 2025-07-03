@@ -5,9 +5,7 @@
 Nous souhaitons remercier chaleureusement toutes les personnes qui ont contribué à la réalisation de ce projet :
 
 - **M. Lacaille**, notre enseignant encadrant, pour son accompagnement, ses retours et ses conseils tout au long du semestre.
-- L’ensemble de l’équipe pédagogique du parcours MACS pour la qualité de l’enseignement.
-- Nos camarades de promotion pour les échanges et les idées partagées.
-- La communauté open-source pour la mise à disposition des bibliothèques et outils utilisés.
+
 
 ---
 
