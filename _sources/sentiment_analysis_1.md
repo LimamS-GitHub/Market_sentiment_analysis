@@ -20,13 +20,17 @@ Chaque décision est prise à la clôture du jour, en fonction du score de senti
 
 ## Recherche d’hyperparamètres
 
-Pour améliorer les performances de la stratégie, nous effectuons une **recherche exhaustive (grid search)** sur les éléments suivants :
+Dans cette section, nous ne cherchons pas à améliorer la stratégie en production, mais à **évaluer son potentiel maximal** :  
+> *Quelle performance pourrait-on obtenir si l’on optimisait parfaitement les paramètres sur une période donnée ?*
+
+Pour cela, nous effectuons une **recherche exhaustive (grid search)** sur les éléments suivants :
 
 - Le **modèle de sentiment** utilisé (parmi les 4 testés),
 - Le **niveau de lissage** appliqué au score (fenêtre mobile de 1 à 7 jours),
 - Les **seuils d’achat et de vente**, explorés respectivement entre `0.1` et `1.0` pour l’achat, et entre `-0.1` et `-1.0` pour la vente.
 
-Chaque combinaison est évaluée sur l’année 2022, et nous retenons celle qui maximise la performance du portefeuille.
+Chaque combinaison est évaluée **a posteriori** sur l’année 2022.  
+Nous ne cherchons donc pas ici à créer un modèle généralisable, mais à identifier une **borne supérieure de performance**, c’est-à-dire **le rendement maximum théorique que l'on aurait pu obtenir si l’on avait su choisir les bons hyperparamètres à l’avance**.
 
 ---
 
