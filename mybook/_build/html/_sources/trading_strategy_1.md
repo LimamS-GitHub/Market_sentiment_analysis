@@ -2,7 +2,7 @@
 
 ## 1. Résultats globaux
 
-Afin d’évaluer la qualité de la stratégie, plusieurs simulations ont été réalisées en faisant varier deux paramètres clés :
+Afin d’évaluer la qualité de la stratégie, plusieurs simulations (144) ont été réalisées en faisant varier deux paramètres clés :
 - le **nombre d'itérations** de la recherche aléatoire chaque jour,
 - la **taille de la fenêtre d'entraînement** (en mois).
 
