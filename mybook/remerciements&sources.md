@@ -1,0 +1,40 @@
+# 🙏 Remerciements et Sources
+
+## Remerciements
+
+Nous souhaitons remercier chaleureusement toutes les personnes qui ont contribué à la réalisation de ce projet :
+
+- **M. Lacaille**, notre enseignant encadrant, pour son accompagnement, ses retours et ses conseils tout au long du semestre.
+- L’ensemble de l’équipe pédagogique du parcours MACS pour la qualité de l’enseignement.
+- Nos camarades de promotion pour les échanges et les idées partagées.
+- La communauté open-source pour la mise à disposition des bibliothèques et outils utilisés.
+
+---
+
+## Sources et Références
+
+### Données et APIs
+- [Yahoo Finance](https://finance.yahoo.com) – pour l’historique des prix boursiers de Tesla.
+- [Nitter](https://nitter.net) – interface alternative à Twitter utilisée pour le scraping.
+- [Twitter](https://twitter.com) – source principale des tweets liés à $TSLA.
+
+### Modèles de traitement du langage
+- [VADER Sentiment Analysis](https://github.com/cjhutto/vaderSentiment) — modèle lexical basé sur des règles.
+- [HuggingFace Transformers](https://huggingface.co/models) — bibliothèque et modèles préentraînés :
+  - `ProsusAI/finbert`
+  - `mrm8488/deberta-v3-ft-financial-news-sentiment-analysis`
+  - `mrm8488/distilroberta-finetuned-financial-news-sentiment-analysis`
+
+### Ressources explicatives
+- [Transformer Explainer – Polo Club](https://poloclub.github.io/transformer-explainer/)
+- Vaswani et al., *“Attention is All You Need”*, NeurIPS 2017.
+
+---
+
+## Droit d'utilisation
+
+Ce projet a été réalisé dans un cadre pédagogique, sans objectif commercial.  
+Les contenus produits (scripts, schémas, analyses) peuvent être librement réutilisés à des fins éducatives, avec citation du projet d’origine.
+
+---
+
