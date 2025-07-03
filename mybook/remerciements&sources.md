@@ -2,8 +2,7 @@
 
 ## Remerciements
 
-Nous souhaitons remercier chaleureusement toutes les personnes qui ont contribué à la réalisation de ce projet :
-
+Nous souhaitons remercier chaleureusement :
 - **M. Lacaille**, notre enseignant encadrant, pour son accompagnement, ses retours et ses conseils tout au long du semestre.
 
 
