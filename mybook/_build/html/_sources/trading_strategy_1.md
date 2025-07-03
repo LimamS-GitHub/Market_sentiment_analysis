@@ -79,3 +79,8 @@ Le bruit collectif (def : l’ensemble des opinions, réactions, émotions ou ru
   - les **indicateurs techniques de marché** (RSI, momentum, volatilité implicite, etc.), pour intégrer la dynamique des prix,
   - ainsi que des **données fondamentales d'entreprise**, telles que les **rapports financiers trimestriels**, les **prévisions de résultats**, ou les **changements dans la gouvernance**.  
   L’objectif est de construire un cadre décisionnel plus robuste, en combinant **bruit social**, **réalité économique** et **comportement de marché**.
+
+
+### Codes + Notebooks 
+
+> Vous retrouverez les code et les notebooks dans ce lien github : [text](https://github.com/LimamS-GitHub/Market_sentiment_analysis/tree/main)
