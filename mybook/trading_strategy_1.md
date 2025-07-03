@@ -83,4 +83,4 @@ Le bruit collectif (def : l’ensemble des opinions, réactions, émotions ou ru
 
 ### Codes + Notebooks 
 
-> Vous retrouverez les code et les notebooks dans ce lien github : [text](https://github.com/LimamS-GitHub/Market_sentiment_analysis/tree/main)
+> Vous retrouverez les code et les notebooks dans ce lien github : [Cliquez ici](https://github.com/LimamS-GitHub/Market_sentiment_analysis/tree/main)
