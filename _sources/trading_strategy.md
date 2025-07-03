@@ -16,16 +16,16 @@ On va donc expliquer :
 
 ## La boucle quotidienne
 
-Chaque jour, le modèle suit les étapes suivantes :
+Chaque jour t, le modèle suit les étapes suivantes :
 
-1. Il sélectionne une **fenêtre glissante** des **N derniers mois** pour disposer d’un historique récent.
-2. Sur cette fenêtre, il applique une série de **simulations de trading**, en testant plusieurs combinaisons de paramètres via une **recherche aléatoire** :
+1. Il sélectionne une **fenêtre historique couvrant les N derniers mois jusqu’au jour t-1**, afin de disposer d’un historique récent et pertinent.
+2. Sur cette fenêtre, il applique une série de **simulations de trading**, en testant différentes combinaisons de paramètres via une **recherche aléatoire** :
    - les **poids** appliqués aux différents scores de sentiment,
    - les **seuils d’achat et de vente**,
-   - la **pondération attribuée aux tweets vérifiés**.
-3. Pour chaque combinaison, il **simule le comportement de la stratégie** sur la période d'entraînement.
-4. Il sélectionne la configuration ayant généré le **meilleur rendement** ajusté au risque.
-5. Il utilise ces **paramètres optimaux** pour produire un **signal de décision pour la journée** (achat, vente ou neutre).
+   - la **pondération donnée aux tweets vérifiés**.
+3. Pour chaque combinaison, il **simule la performance de la stratégie** sur la période considérée.
+4. Il identifie la configuration ayant généré le **meilleur rendement cumulé** (ou ajusté au risque).
+5. Il utilise ces **paramètres optimaux** pour produire un **signal de décision pour la journée en cours** : achat, vente ou position neutre.
 6. Il exécute le trade correspondant à la **fermeture du marché**.
 7. Il met à jour le portefeuille et **enregistre les performances** dans les logs.
 
