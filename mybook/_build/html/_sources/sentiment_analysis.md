@@ -54,9 +54,13 @@ Cette distribution justifie notre décision de **filtrer les tweets jugés trop 
 
 5. **Corrélation visuelle : sentiment vs prix**
 
-Nous comparons ici l’évolution standardisée des scores de sentiment à celle du cours de clôture de l’action Tesla.
+Nous comparons ici l’évolution normalisée des scores de sentiment à celle du cours de clôture de l’action Tesla.
 
-Les courbes en **gris** représentent le **prix de clôture standardisé**, tandis que les traits colorés représentent le sentiment journalier, lissé par moyenne mobile.
+La courbe **grise** représente le **cours de clôture standardisé**, tandis que les traits colorés indiquent le **sentiment agrégé quotidien**. La couleur du trait varie en fonction de l’intensité du sentiment :
+
+- **Rouge** : sentiment négatif (score < -0.2)  
+- **Jaune** : sentiment neutre (entre -0.2 et 0.2)  
+- **Vert** : sentiment positif (score > 0.2)
 
 ![Evol cour sentiment](Evol_cour_sentiment.png)
 

@@ -61,7 +61,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="🚶‍♂️ Vers une stratégie de trading simple" href="sentiment_analysis_1.html" />
-    <link rel="prev" title="Analyse des modèles de sentiment" href="sentiment_models.html" />
+    <link rel="prev" title="🧠 Explication des modèles de sentiment utilisés" href="sentiment_models.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -175,17 +175,19 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="intro.html">
-                    Bienvenue sur notre projet : Market Sentiment & Trading
+                    Bienvenue sur notre projet : Market Sentiment 😊😐😡 & Trading
                 </a>
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="tweet_collection.html">🐦 Collecte &amp; Préparation des Tweets</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sentiment_models.html">Analyse des modèles de sentiment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sentiment_models.html">🧠 Explication des modèles de sentiment utilisés</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">📊 Analyse exploratoire du sentiment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sentiment_analysis_1.html">🚶‍♂️ Vers une stratégie de trading simple</a></li>
 <li class="toctree-l1"><a class="reference internal" href="trading_strategy.html">📈 Présentation du modèle de trading adaptatif</a></li>
 <li class="toctree-l1"><a class="reference internal" href="trading_strategy_1.html">📊 Analyse des performances</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MDT.html">🧩 Méthode de travail</a></li>
+<li class="toctree-l1"><a class="reference internal" href="remerciements%26sources.html">🙏 Remerciements et Sources</a></li>
 </ul>
 
     </div>
@@ -444,8 +446,13 @@ Les scores sont ensuite moyennés <strong>par jour</strong>, séparément pour :
 </li>
 <li><p><strong>Corrélation visuelle : sentiment vs prix</strong></p></li>
 </ol>
-<p>Nous comparons ici l’évolution standardisée des scores de sentiment à celle du cours de clôture de l’action Tesla.</p>
-<p>Les courbes en <strong>gris</strong> représentent le <strong>prix de clôture standardisé</strong>, tandis que les traits colorés représentent le sentiment journalier, lissé par moyenne mobile.</p>
+<p>Nous comparons ici l’évolution normalisée des scores de sentiment à celle du cours de clôture de l’action Tesla.</p>
+<p>La courbe <strong>grise</strong> représente le <strong>cours de clôture standardisé</strong>, tandis que les traits colorés indiquent le <strong>sentiment agrégé quotidien</strong>. La couleur du trait varie en fonction de l’intensité du sentiment :</p>
+<ul class="simple">
+<li><p><strong>Rouge</strong> : sentiment négatif (score &lt; -0.2)</p></li>
+<li><p><strong>Jaune</strong> : sentiment neutre (entre -0.2 et 0.2)</p></li>
+<li><p><strong>Vert</strong> : sentiment positif (score &gt; 0.2)</p></li>
+</ul>
 <p><img alt="Evol cour sentiment" src="_images/Evol_cour_sentiment.png" /></p>
 <p>Même si l’on observe quelques coïncidences ponctuelles entre variations de sentiment et mouvements du prix, aucune relation claire ou systématique ne se dégage visuellement.</p>
 <hr class="docutils" />
@@ -489,7 +496,7 @@ Les scores sont ensuite moyennés <strong>par jour</strong>, séparément pour :
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Analyse des modèles de sentiment</p>
+        <p class="prev-next-title">🧠 Explication des modèles de sentiment utilisés</p>
       </div>
     </a>
     <a class="right-next"

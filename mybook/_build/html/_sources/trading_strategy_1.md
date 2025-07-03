@@ -74,3 +74,8 @@ Le bruit collectif (def : l’ensemble des opinions, réactions, émotions ou ru
 - Étendre la méthode à un **portefeuille multi-actifs**
 - Remplacer la random search par une **optimisation bayésienne (Optuna)**
 - Tester un modèle qui s’entraîne chaque jour sur les **N dernières semaines** au lieu des N derniers mois, pour voir si cela améliore la réactivité et la performance.
+- **Enrichir le modèle avec des données complémentaires** : intégrer d'autres sources d'information pour croiser les signaux de sentiment avec des éléments factuels et comportementaux. Cela inclut :
+  - les **volumes de recherche Google Trends**, pour mesurer l'intérêt public sur un actif,
+  - les **indicateurs techniques de marché** (RSI, momentum, volatilité implicite, etc.), pour intégrer la dynamique des prix,
+  - ainsi que des **données fondamentales d'entreprise**, telles que les **rapports financiers trimestriels**, les **prévisions de résultats**, ou les **changements dans la gouvernance**.  
+  L’objectif est de construire un cadre décisionnel plus robuste, en combinant **bruit social**, **réalité économique** et **comportement de marché**.

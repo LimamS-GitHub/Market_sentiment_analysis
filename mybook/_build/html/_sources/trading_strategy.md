@@ -1,11 +1,11 @@
 # 📈 Présentation du modèle de trading adaptatif
 
-## 🎯 Objectif de cette partie
+## Objectif de cette partie
 
 Dans cette section, on présente la **logique de fonctionnement** du modèle de trading développé dans ce projet.
 
 L’idée principale est simple :  
-> Chaque jour, le modèle s’adapte aux données les plus récentes pour décider s’il faut acheter, vendre ou rester neutre.
+> Chaque jour, le modèle s’adapte aux données précédentes pour décider s’il faut acheter, vendre ou rester neutre.
 
 On va donc expliquer :
 - comment la stratégie s’ajuste dans le temps,
@@ -14,23 +14,27 @@ On va donc expliquer :
 
 ---
 
-## 🔁 La boucle quotidienne
+## La boucle quotidienne
 
 Chaque jour, le modèle suit les étapes suivantes :
 
-1. Il s'entraîne sur les données des **N dernières périodes** (souvent 1 ou 2 mois).
-2. Il teste **plusieurs combinaisons de paramètres** via une recherche aléatoire :
+1. Il sélectionne une **fenêtre glissante** des **N derniers mois**.
+2. Sur cette fenêtre, il effectue une **recherche aléatoire de paramètres** :
    - poids appliqués aux scores de sentiment,
    - seuils d’achat et de vente,
    - pondération des tweets vérifiés.
-3. Il sélectionne la configuration qui aurait donné le meilleur résultat sur l’historique.
-4. Il utilise cette configuration pour **générer un signal** pour la journée en cours.
-5. Il **exécute le trade** (achat, vente ou rien).
-6. Il met à jour le portefeuille et **enregistre les résultats**.
+3. Pour chaque combinaison testée, il **simule la stratégie de trading** sur la période passée.
+4. Il identifie la configuration ayant obtenu le **meilleur rendement**.
+5. Il utilise ces **paramètres optimaux** pour générer le **signal du jour** (achat, vente ou neutre).
+6. Il exécute le trade correspondant à la fermeture du marché.
+7. Il met à jour le portefeuille et **log les performances**.
+
+> Cette approche n’est pas un entraînement au sens machine learning, mais une **optimisation adaptative basée sur backtests répétés**. Elle permet au modèle de s’ajuster chaque jour aux nouvelles dynamiques du marché.
+
 
 ---
 
-## ⚙️ Ce que le modèle ajuste chaque jour
+## Ce que le modèle ajuste chaque jour
 
 | Élément optimisé       | Rôle dans la décision                      |
 |------------------------|--------------------------------------------|
@@ -41,7 +45,7 @@ Chaque jour, le modèle suit les étapes suivantes :
 
 ---
 
-## 🔄 Schéma du processus
+## Schéma du processus
 
 ![Process adaptatif](Process_adaptatif.svg)
 

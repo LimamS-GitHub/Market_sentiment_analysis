@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>🐦 Collecte &amp; Préparation des Tweets &#8212; My sample book</title>
+    <title>🧩 Méthode de travail &#8212; My sample book</title>
   
   
   
@@ -57,11 +57,10 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'tweet_collection';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'MDT';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="🧠 Explication des modèles de sentiment utilisés" href="sentiment_models.html" />
-    <link rel="prev" title="Bienvenue sur notre projet : Market Sentiment 😊😐😡 &amp; Trading" href="intro.html" />
+    <link rel="prev" title="📊 Analyse des performances" href="trading_strategy_1.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -180,14 +179,13 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">🐦 Collecte &amp; Préparation des Tweets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tweet_collection.html">🐦 Collecte &amp; Préparation des Tweets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sentiment_models.html">🧠 Explication des modèles de sentiment utilisés</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sentiment_analysis.html">📊 Analyse exploratoire du sentiment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sentiment_analysis_1.html">🚶‍♂️ Vers une stratégie de trading simple</a></li>
 <li class="toctree-l1"><a class="reference internal" href="trading_strategy.html">📈 Présentation du modèle de trading adaptatif</a></li>
 <li class="toctree-l1"><a class="reference internal" href="trading_strategy_1.html">📊 Analyse des performances</a></li>
-<li class="toctree-l1"><a class="reference internal" href="MDT.html">🧩 Méthode de travail</a></li>
-<li class="toctree-l1"><a class="reference internal" href="remerciements%26sources.html">🙏 Remerciements et Sources</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">🧩 Méthode de travail</a></li>
 </ul>
 
     </div>
@@ -259,7 +257,7 @@
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Ftweet_collection.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FMDT.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -289,7 +287,7 @@
       
       
       
-      <li><a href="_sources/tweet_collection.md" target="_blank"
+      <li><a href="_sources/MDT.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -373,7 +371,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>🐦 Collecte & Préparation des Tweets</h1>
+    <h1>🧩 Méthode de travail</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -383,19 +381,14 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pourquoi-twitter">Pourquoi Twitter ?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objectif-de-cette-section">Objectif de cette section</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apercu-technique">Aperçu technique</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scraping-sans-api">Scraping sans API</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#schema-des-donnees-exportees">Schéma des données exportées</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#schema-de-recuperation-des-donnees">Schéma de récupération des données</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#etapes-conceptuelles">🧠 Étapes conceptuelles</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nettoyage-et-filtrage-linguistique">1. Nettoyage et filtrage linguistique</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analyse-de-sentiment-multi-modele">2. Analyse de sentiment multi-modèle</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stockage-structure">3. Stockage structuré</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limites">⚠️ Limites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definir-un-objectif-clair">1. Définir un objectif clair</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#se-documenter-et-analyser-lexistant">2. Se documenter et analyser l’existant</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decouper-le-projet-en-sous-problemes">3. Découper le projet en sous-problèmes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#commencer-par-des-prototypes-simples-dans-des-notebooks">4. Commencer par des prototypes simples dans des notebooks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#passer-en-mode-production-des-quun-bloc-devient-stable">5. Passer en mode production dès qu’un bloc devient stable</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tester-la-relation-sentiment-marche">6. Tester la relation sentiment ↔ marché</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#passer-a-une-strategie-concrete-de-signaux">7. Passer à une stratégie concrète de signaux</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iterations-et-extensions">8. Itérations et extensions</a></li>
 </ul>
             </nav>
         </div>
@@ -407,157 +400,94 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="collecte-preparation-des-tweets">
-<h1>🐦 Collecte &amp; Préparation des Tweets<a class="headerlink" href="#collecte-preparation-des-tweets" title="Link to this heading">#</a></h1>
-<section id="pourquoi-twitter">
-<h2>Pourquoi Twitter ?<a class="headerlink" href="#pourquoi-twitter" title="Link to this heading">#</a></h2>
-<p>Twitter est une plateforme où l’information circule rapidement et massivement.<br />
-C’est un flux continu d’opinions, de réactions et de spéculations, souvent en lien direct avec l’actualité économique et les entreprises cotées.</p>
-<p>Nous nous intéressons ici à <strong>Tesla ($TSLA)</strong>.<br />
-Hypothèse : les tweets quotidiens à son sujet pourraient refléter ou anticiper les variations de son cours boursier.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="methode-de-travail">
+<h1>🧩 Méthode de travail<a class="headerlink" href="#methode-de-travail" title="Link to this heading">#</a></h1>
+<p>Ce projet a été mené selon une approche structurée, progressive et orientée expérimentation. Chaque étape a été pensée pour construire un pipeline robuste, itératif et réutilisable. Voici la démarche suivie :</p>
+<section id="definir-un-objectif-clair">
+<h2>1. Définir un objectif clair<a class="headerlink" href="#definir-un-objectif-clair" title="Link to this heading">#</a></h2>
+<p>L’objectif initial était de tester une hypothèse simple mais ambitieuse :<br />
+<strong>peut-on exploiter le sentiment exprimé sur Twitter pour anticiper le mouvement d’un actif financier, et générer des signaux de trading ?</strong></p>
+<p>Cet objectif, bien qu’audacieux, a guidé toutes les décisions méthodologiques prises par la suite.</p>
 </section>
-<hr class="docutils" />
-<section id="objectif-de-cette-section">
-<h2>Objectif de cette section<a class="headerlink" href="#objectif-de-cette-section" title="Link to this heading">#</a></h2>
-<p>Avant toute modélisation, il faut construire une base de données <strong>propre, fiable et exploitable</strong>.<br />
-Dans ce chapitre, nous allons :</p>
+<section id="se-documenter-et-analyser-lexistant">
+<h2>2. Se documenter et analyser l’existant<a class="headerlink" href="#se-documenter-et-analyser-lexistant" title="Link to this heading">#</a></h2>
+<p>Avant toute implémentation, une phase de <strong>recherche exploratoire</strong> a été menée pour :</p>
 <ul class="simple">
-<li><p><strong>Scraper automatiquement</strong> des tweets via <a class="reference external" href="https://nitter.net">Nitter</a>, une alternative à Twitter sans JavaScript ni authentification.</p></li>
-<li><p><strong>Nettoyer</strong> les textes (liens, mentions, ponctuation…).</p></li>
-<li><p><strong>Filtrer</strong> pour ne garder que les tweets en anglais.</p></li>
-<li><p><strong>Analyser le sentiment</strong> avec plusieurs modèles NLP.</p></li>
-<li><p><strong>Sauvegarder</strong> les données pour les étapes suivantes.</p></li>
+<li><p>Comprendre les travaux académiques et industriels sur le <strong>sentiment analysis appliqué aux marchés financiers</strong>.</p></li>
+<li><p>Comparer les approches existantes : lexicon-based (VADER), transformer-based (FinBERT, DeBERTa…), ou hybrides.</p></li>
+<li><p>Identifier les limites (bruit, ironie, bulles spéculatives, sur-apprentissage) et les bonnes pratiques (agrégation temporelle, filtrage de bruit, tests robustes).</p></li>
 </ul>
 </section>
-<hr class="docutils" />
-<section id="apercu-technique">
-<h2>Aperçu technique<a class="headerlink" href="#apercu-technique" title="Link to this heading">#</a></h2>
-<p>Le scraping est réalisé en Python avec <strong>Selenium</strong>, accompagné d’une <strong>rotation de proxies HTTPS</strong> pour contourner les limitations d’accès.</p>
-<p>Chaque tweet est enrichi par <strong>4 scores de sentiment</strong> :</p>
+<section id="decouper-le-projet-en-sous-problemes">
+<h2>3. Découper le projet en sous-problèmes<a class="headerlink" href="#decouper-le-projet-en-sous-problemes" title="Link to this heading">#</a></h2>
+<p>Le projet a été scindé en modules indépendants mais complémentaires :</p>
+<ol class="arabic simple">
+<li><p><strong>Collecte des données Twitter</strong> via Nitter + Selenium</p></li>
+<li><p><strong>Nettoyage et scoring des textes</strong> avec VADER et 3 modèles spécialisés</p></li>
+<li><p><strong>Agrégation journalière des scores</strong></p></li>
+<li><p><strong>Téléchargement des prix marchés (<a class="reference external" href="http://Investing.com">Investing.com</a>)</strong></p></li>
+<li><p><strong>Mise en relation Sentiment ↔ Variation de l’actif</strong></p></li>
+<li><p><strong>Génération de signaux d’achat/vente</strong></p></li>
+<li><p><strong>Backtesting et évaluation de la performance</strong></p></li>
+</ol>
+</section>
+<section id="commencer-par-des-prototypes-simples-dans-des-notebooks">
+<h2>4. Commencer par des prototypes simples dans des notebooks<a class="headerlink" href="#commencer-par-des-prototypes-simples-dans-des-notebooks" title="Link to this heading">#</a></h2>
+<p>Chaque bloc a été initialement développé dans un <strong>Jupyter Notebook</strong> pour :</p>
 <ul class="simple">
-<li><p>1 issu de <strong>VADER</strong> (modèle lexical basé sur des règles),</p></li>
-<li><p>3 issus de <strong>Transformers spécialisés dans la finance</strong>.</p></li>
+<li><p>Pouvoir tester rapidement des idées.</p></li>
+<li><p>Visualiser les outputs à chaque étape.</p></li>
+<li><p>Corriger plus facilement les erreurs.</p></li>
+<li><p>Itérer vite sur les paramètres (fenêtre temporelle, poids, seuils…).</p></li>
+</ul>
+<p>Par exemple :</p>
+<ul class="simple">
+<li><p>Le scraping de Nitter a d’abord été testé sur un seul actif et une seule journée.</p></li>
+<li><p>Le scoring a été validé manuellement sur un petit set de tweets.</p></li>
 </ul>
 </section>
-<section id="scraping-sans-api">
-<h2>Scraping sans API<a class="headerlink" href="#scraping-sans-api" title="Link to this heading">#</a></h2>
-<p>Utilisation de <strong>Nitter</strong>, une interface alternative à Twitter, pour contourner les limites de l’API officielle.<br />
-Processus :</p>
+<section id="passer-en-mode-production-des-quun-bloc-devient-stable">
+<h2>5. Passer en mode production dès qu’un bloc devient stable<a class="headerlink" href="#passer-en-mode-production-des-quun-bloc-devient-stable" title="Link to this heading">#</a></h2>
+<p>Une fois une partie du pipeline validée (fonctionnelle, utile, robuste), elle a été <strong>restructurée dans un fichier Python autonome</strong> (<code class="docutils literal notranslate"><span class="pre">.py</span></code>), avec :</p>
 <ul class="simple">
-<li><p>Requête par mot-clé et par jour (<code class="docutils literal notranslate"><span class="pre">Tesla</span></code>, <code class="docutils literal notranslate"><span class="pre">TSLA</span></code>, etc.).</p></li>
-<li><p>Navigation automatique dans les pages pour extraire les tweets.</p></li>
-<li><p>Stockage brut avec métadonnées (date, utilisateur, texte…).</p></li>
+<li><p>Gestion des erreurs,</p></li>
+<li><p>Logs clairs,</p></li>
+<li><p>Modularisation (fonctions réutilisables),</p></li>
+<li><p>Intégration dans un pipeline quotidien (scraping + scoring + agrégation).</p></li>
 </ul>
-<p>Scraping automatisé via un navigateur headless, avec gestion des délais et <strong>rotation de proxies</strong>.</p>
+<p>Exemple :<br />
+Le module de collecte des tweets fonctionne de manière automatisée avec rotation de proxies, gestion des captchas et filtrage de langue.</p>
 </section>
-<hr class="docutils" />
-<section id="schema-des-donnees-exportees">
-<h2>Schéma des données exportées<a class="headerlink" href="#schema-des-donnees-exportees" title="Link to this heading">#</a></h2>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Colonne</p></th>
-<th class="head"><p>Exemple</p></th>
-<th class="head"><p>Description</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">id</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">1658327123456789</span></code></p></td>
-<td><p>Identifiant unique du tweet</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">query_date</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">2025-04-15</span></code></p></td>
-<td><p>Date de récupération</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
-<td><p>Texte brut</p></td>
-<td><p>Contenu original du tweet</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">verified</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
-<td><p>Statut vérifié du compte</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cleaned_tweet</span></code></p></td>
-<td><p>Texte nettoyé</p></td>
-<td><p>Sans liens, mentions, ponctuation, etc.</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sentiment_vader</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">0.63</span></code></p></td>
-<td><p>Score composé selon VADER</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">sentiment_{hf_model}</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">-1</span></code>, <code class="docutils literal notranslate"><span class="pre">0</span></code> ou <code class="docutils literal notranslate"><span class="pre">1</span></code></p></td>
-<td><p>Score par modèle HF :<br>• <code class="docutils literal notranslate"><span class="pre">financialbert</span></code><br>• <code class="docutils literal notranslate"><span class="pre">distilroberta_fin</span></code><br>• <code class="docutils literal notranslate"><span class="pre">deberta_v3_fin</span></code></p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
-<hr class="docutils" />
-<section id="schema-de-recuperation-des-donnees">
-<h2>Schéma de récupération des données<a class="headerlink" href="#schema-de-recuperation-des-donnees" title="Link to this heading">#</a></h2>
-<p>Le diagramme ci-dessous illustre le processus complet, du scraping à la sauvegarde des fichiers CSV :</p>
-<p><img alt="Distribution sentiment" src="_images/schema_scraping.svg" /></p>
-</section>
-<hr class="docutils" />
-<section id="etapes-conceptuelles">
-<h2>🧠 Étapes conceptuelles<a class="headerlink" href="#etapes-conceptuelles" title="Link to this heading">#</a></h2>
-<section id="nettoyage-et-filtrage-linguistique">
-<h3>1. Nettoyage et filtrage linguistique<a class="headerlink" href="#nettoyage-et-filtrage-linguistique" title="Link to this heading">#</a></h3>
-<p>Les tweets sont nettoyés pour retirer liens, mentions, emojis, etc.<br />
-Un filtre de langue permet de ne garder que les <strong>tweets en anglais</strong>, compatibles avec les modèles NLP utilisés.</p>
-</section>
-<hr class="docutils" />
-<section id="analyse-de-sentiment-multi-modele">
-<h3>2. Analyse de sentiment multi-modèle<a class="headerlink" href="#analyse-de-sentiment-multi-modele" title="Link to this heading">#</a></h3>
-<p>Chaque tweet nettoyé est évalué par plusieurs modèles :</p>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Type de modèle</p></th>
-<th class="head"><p>Exemple utilisé</p></th>
-<th class="head"><p>Caractéristiques</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><strong>Lexical</strong></p></td>
-<td><p>VADER</p></td>
-<td><p>Rapide, basé sur des règles, mais limité pour les nuances</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>Transformers généralistes</strong></p></td>
-<td><p>DistilRoBERTa</p></td>
-<td><p>Plus fins, mais moins adaptés au contexte financier</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>Transformers spécialisés</strong></p></td>
-<td><p>FinancialBERT, DeBERTa-v3</p></td>
-<td><p>Entraînés sur des textes financiers, plus pertinents ici</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>Chaque modèle attribue un <strong>score de polarité</strong> : positif (+1), neutre (0), ou négatif (−1).</p>
-</section>
-<hr class="docutils" />
-<section id="stockage-structure">
-<h3>3. Stockage structuré<a class="headerlink" href="#stockage-structure" title="Link to this heading">#</a></h3>
-<p>Les résultats sont organisés :</p>
+<section id="tester-la-relation-sentiment-marche">
+<h2>6. Tester la relation sentiment ↔ marché<a class="headerlink" href="#tester-la-relation-sentiment-marche" title="Link to this heading">#</a></h2>
+<p>Une fois les séries temporelles en main, plusieurs tests statistiques ont été menés :</p>
 <ul class="simple">
-<li><p>Par <strong>mois civil</strong> (<code class="docutils literal notranslate"><span class="pre">tweets_2022_01.csv</span></code>) pour les analyses temporelles,</p></li>
-<li><p>Dans un <strong>fichier global</strong> (<code class="docutils literal notranslate"><span class="pre">tweets_with_sentiment.csv</span></code>) pour les analyses agrégées.</p></li>
+<li><p><strong>Corrélation linéaire</strong> (Pearson, Spearman) entre le score de sentiment journalier et la variation de prix du lendemain.</p></li>
+<li><p><strong>Cross-correlation</strong> avec différents décalages temporels.</p></li>
+<li><p><strong>Tests de causalité de Granger</strong> pour évaluer la prédictivité.</p></li>
 </ul>
-<p>Chaque ligne correspond à un tweet enrichi de métadonnées et de scores.</p>
+<p>Résultat :<br />
+Aucune <strong>corrélation directe robuste</strong> n’a été observée de manière stable sur la période étudiée.</p>
 </section>
-</section>
-<hr class="docutils" />
-<section id="limites">
-<h2>⚠️ Limites<a class="headerlink" href="#limites" title="Link to this heading">#</a></h2>
+<section id="passer-a-une-strategie-concrete-de-signaux">
+<h2>7. Passer à une stratégie concrète de signaux<a class="headerlink" href="#passer-a-une-strategie-concrete-de-signaux" title="Link to this heading">#</a></h2>
+<p>Face à l’absence de lien direct, une approche plus pragmatique a été adoptée :</p>
 <ul class="simple">
-<li><p><strong>Qualité des tweets</strong> : spam, ironie, langage implicite…</p></li>
-<li><p><strong>Détection linguistique</strong> : erreurs possibles sur des tweets courts.</p></li>
-<li><p><strong>Modèles parfois divergents</strong> : résultats incohérents pour certains tweets ambigus.</p></li>
-<li><p><strong>Instabilité de Nitter</strong> : interruptions occasionnelles, nécessitant des contournements.</p></li>
+<li><p>Générer un <strong>signal Buy/Sell</strong> lorsque le score agrégé dépasse certains seuils.</p></li>
+<li><p>Simuler une stratégie de trading où l’on achète ou vend l’actif à la fermeture de l’actif.</p></li>
+<li><p>Réévaluer les seuils et poids chaque jour via <strong>une fenêtre glissante d’entraînement</strong> (stratégie adaptative).</p></li>
+</ul>
+</section>
+<section id="iterations-et-extensions">
+<h2>8. Itérations et extensions<a class="headerlink" href="#iterations-et-extensions" title="Link to this heading">#</a></h2>
+<p>Le pipeline a ensuite été étendu :</p>
+<ul class="simple">
+<li><p>Ajout de lissage, normalisation, distinction utilisateurs vérifiés / non vérifiés.</p></li>
+<li><p>Log systématique des performances (rendement, volatilité, Sharpe ratio, drawdown).</p></li>
+<li><p>Réflexion sur la généralisation à un <strong>portefeuille multi-actifs</strong>.</p></li>
 </ul>
 <hr class="docutils" />
-<p>👉 Prochaine étape : croiser les tweets avec les <strong>cours boursiers de Tesla</strong> pour étudier les corrélations et construire des indicateurs de sentiment.</p>
+<p>Cette méthode de travail a permis d’avancer de manière incrémentale, en assurant la robustesse de chaque étape avant de passer à la suivante. Elle laisse aussi place à l’expérimentation et à l’amélioration continue.</p>
 </section>
 </section>
 
@@ -592,22 +522,13 @@ Un filtre de langue permet de ne garder que les <strong>tweets en anglais</stron
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="intro.html"
+       href="trading_strategy_1.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Bienvenue sur notre projet : <strong>Market Sentiment 😊😐😡 &amp; Trading</strong></p>
+        <p class="prev-next-title">📊 Analyse des performances</p>
       </div>
-    </a>
-    <a class="right-next"
-       href="sentiment_models.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">🧠 Explication des modèles de sentiment utilisés</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
@@ -625,19 +546,14 @@ Un filtre de langue permet de ne garder que les <strong>tweets en anglais</stron
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pourquoi-twitter">Pourquoi Twitter ?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objectif-de-cette-section">Objectif de cette section</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apercu-technique">Aperçu technique</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scraping-sans-api">Scraping sans API</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#schema-des-donnees-exportees">Schéma des données exportées</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#schema-de-recuperation-des-donnees">Schéma de récupération des données</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#etapes-conceptuelles">🧠 Étapes conceptuelles</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nettoyage-et-filtrage-linguistique">1. Nettoyage et filtrage linguistique</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analyse-de-sentiment-multi-modele">2. Analyse de sentiment multi-modèle</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stockage-structure">3. Stockage structuré</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limites">⚠️ Limites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definir-un-objectif-clair">1. Définir un objectif clair</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#se-documenter-et-analyser-lexistant">2. Se documenter et analyser l’existant</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decouper-le-projet-en-sous-problemes">3. Découper le projet en sous-problèmes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#commencer-par-des-prototypes-simples-dans-des-notebooks">4. Commencer par des prototypes simples dans des notebooks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#passer-en-mode-production-des-quun-bloc-devient-stable">5. Passer en mode production dès qu’un bloc devient stable</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tester-la-relation-sentiment-marche">6. Tester la relation sentiment ↔ marché</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#passer-a-une-strategie-concrete-de-signaux">7. Passer à une stratégie concrète de signaux</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iterations-et-extensions">8. Itérations et extensions</a></li>
 </ul>
   </nav></div>
 
