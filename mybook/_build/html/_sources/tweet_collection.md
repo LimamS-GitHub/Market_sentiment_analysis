@@ -1,8 +1,8 @@
 # 🐦 Collecte & Préparation des Tweets
 
-## Pourquoi Twitter ?
+## Pourquoi X ?
 
-Twitter est une plateforme où l'information circule rapidement et massivement.  
+X est une plateforme où l'information circule rapidement et massivement.  
 C’est un flux continu d’opinions, de réactions et de spéculations, souvent en lien direct avec l’actualité économique et les entreprises cotées.
 
 Nous nous intéressons ici à **Tesla ($TSLA)**.  
@@ -15,7 +15,7 @@ Hypothèse : les tweets quotidiens à son sujet pourraient refléter ou anticipe
 Avant toute modélisation, il faut construire une base de données **propre, fiable et exploitable**.  
 Dans ce chapitre, nous allons :
 
-- **Scraper automatiquement** des tweets via [Nitter](https://nitter.net), une alternative à Twitter sans JavaScript ni authentification.
+- **Scraper automatiquement** des tweets via [Nitter](https://nitter.net), une alternative à X sans JavaScript ni authentification.
 - **Nettoyer** les textes (liens, mentions, ponctuation…).
 - **Filtrer** pour ne garder que les tweets en anglais.
 - **Analyser le sentiment** avec plusieurs modèles NLP.
@@ -36,7 +36,7 @@ Chaque tweet est enrichi par **4 scores de sentiment** :
 
 ## Scraping sans API
 
-Utilisation de **Nitter**, une interface alternative à Twitter, pour contourner les limites de l’API officielle.  
+Utilisation de **Nitter**, une interface alternative à X, pour contourner les limites de l’API officielle.  
 Processus :
 
 - Requête par mot-clé et par jour (`Tesla`, `TSLA`, etc.).
