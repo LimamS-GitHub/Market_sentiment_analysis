@@ -30,7 +30,7 @@ Nous souhaitons remercier chaleureusement :
 
 ## Droit d'utilisation
 
-Ce projet a été réalisé dans un cadre pédagogique, sans objectif commercial(pour le moment) .  
+Ce projet a été réalisé dans un cadre pédagogique, sans objectif commercial (pour le moment) .  
 Les contenus produits (scripts, schémas, analyses) peuvent être librement réutilisés à des fins éducatives, avec citation du projet d’origine.
 
 ---
