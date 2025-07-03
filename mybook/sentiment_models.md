@@ -71,9 +71,17 @@ Cela repose sur trois vecteurs :
 - **V (Value)** : les informations que ces mots contiennent
 
 Le poids d’attention entre deux mots est calculé par :
-```math
+
+$$
 \text{Attention}(Q_i, K_j) = \frac{Q_i \cdot K_j}{\sqrt{d_k}}
----
+$$
+
+où :
+
+- \( Q_i \cdot K_j \) est le produit scalaire entre les vecteurs de requête et de clé,
+- \( d_k \) est la dimension des vecteurs clés, utilisée comme facteur de normalisation.
+
+Ensuite, une **fonction softmax** est appliquée pour convertir les scores en **poids positifs** dont la somme est égale à 1 (distribution de probabilité).
 
 ## 3. Comparaison des deux approches
 
