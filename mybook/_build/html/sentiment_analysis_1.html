@@ -419,13 +419,18 @@ Puis ajuster automatiquement les paramètres pour maximiser la performance de la
 <hr class="docutils" />
 <section id="recherche-dhyperparametres">
 <h2>Recherche d’hyperparamètres<a class="headerlink" href="#recherche-dhyperparametres" title="Link to this heading">#</a></h2>
-<p>Pour améliorer les performances de la stratégie, nous effectuons une <strong>recherche exhaustive (grid search)</strong> sur les éléments suivants :</p>
+<p>Dans cette section, nous ne cherchons pas à améliorer la stratégie en production, mais à <strong>évaluer son potentiel maximal</strong> :</p>
+<blockquote>
+<div><p><em>Quelle performance pourrait-on obtenir si l’on optimisait parfaitement les paramètres sur une période donnée ?</em></p>
+</div></blockquote>
+<p>Pour cela, nous effectuons une <strong>recherche exhaustive (grid search)</strong> sur les éléments suivants :</p>
 <ul class="simple">
 <li><p>Le <strong>modèle de sentiment</strong> utilisé (parmi les 4 testés),</p></li>
 <li><p>Le <strong>niveau de lissage</strong> appliqué au score (fenêtre mobile de 1 à 7 jours),</p></li>
 <li><p>Les <strong>seuils d’achat et de vente</strong>, explorés respectivement entre <code class="docutils literal notranslate"><span class="pre">0.1</span></code> et <code class="docutils literal notranslate"><span class="pre">1.0</span></code> pour l’achat, et entre <code class="docutils literal notranslate"><span class="pre">-0.1</span></code> et <code class="docutils literal notranslate"><span class="pre">-1.0</span></code> pour la vente.</p></li>
 </ul>
-<p>Chaque combinaison est évaluée sur l’année 2022, et nous retenons celle qui maximise la performance du portefeuille.</p>
+<p>Chaque combinaison est évaluée <strong>a posteriori</strong> sur l’année 2022.<br />
+Nous ne cherchons donc pas ici à créer un modèle généralisable, mais à identifier une <strong>borne supérieure de performance</strong>, c’est-à-dire <strong>le rendement maximum théorique que l’on aurait pu obtenir si l’on avait su choisir les bons hyperparamètres à l’avance</strong>.</p>
 </section>
 <hr class="docutils" />
 <section id="meilleur-resultat-obtenu-2022">
