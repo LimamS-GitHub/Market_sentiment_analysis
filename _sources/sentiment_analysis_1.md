@@ -15,7 +15,7 @@ Puis ajuster automatiquement les paramètres pour maximiser la performance de la
 
 Chaque décision est prise à la clôture du jour, en fonction du score de sentiment observé dans la même journée.
 
-> Avec cette stratégie rudimentaire, on obtient une performance annuelle de +0.67 % sans frais de transaction.
+> Avec cette stratégie rudimentaire, on obtient une performance annuelle de +0,67 % (hors frais de transaction), alors que l'action a baissé d'environ 68 % cette année-là.
 ---
 
 ## Recherche d’hyperparamètres
