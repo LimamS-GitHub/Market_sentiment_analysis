@@ -43,8 +43,11 @@ Contrairement aux approches séquentielles (RNN, LSTM), ils traitent l’ensembl
 
 Chaque mot est converti en un vecteur, puis comparé aux autres mots du texte via des **poids d’attention**.  
 Cela permet de modéliser le contexte d’un mot selon sa relation avec les autres termes.
+
+
 ---
 ### 🎯 Le principe de l’attention
+
 
 Chaque mot dans une phrase va chercher à comprendre **à quels autres mots il doit faire attention** pour bien interpréter le sens global.  
 Cela repose sur trois vecteurs :
