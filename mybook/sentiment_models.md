@@ -43,23 +43,6 @@ Contrairement aux approches séquentielles (RNN, LSTM), ils traitent l’ensembl
 
 Chaque mot est converti en un vecteur, puis comparé aux autres mots du texte via des **poids d’attention**.  
 Cela permet de modéliser le contexte d’un mot selon sa relation avec les autres termes.
-
-### Modèles utilisés dans notre projet
-
-Nous avons appliqué plusieurs Transformers spécialisés dans le domaine financier :
-
-- `ProsusAI/finbert`
-- `deberta-v3-financial-news-sentiment`
-- `distilroberta-financial-news-sentiment`
-
-Chaque tweet est analysé individuellement, et le modèle retourne une **classe de sentiment** :
-
-- `POSITIVE` → **+1**  
-- `NEUTRAL` → **0**  
-- `NEGATIVE` → **−1**
-
-Ces scores sont ensuite intégrés dans notre base de données.
-
 ---
 ### 🎯 Le principe de l’attention
 
@@ -82,6 +65,24 @@ où :
 - `dₖ`est la dimension des vecteurs clés, utilisée comme facteur de normalisation.
 
 Ensuite, une **fonction softmax** est appliquée pour convertir les scores en **poids positifs** dont la somme est égale à 1 (distribution de probabilité).
+
+
+### Modèles utilisés dans notre projet
+
+Nous avons appliqué plusieurs Transformers spécialisés dans le domaine financier :
+
+- `ProsusAI/finbert`
+- `deberta-v3-financial-news-sentiment`
+- `distilroberta-financial-news-sentiment`
+
+Chaque tweet est analysé individuellement, et le modèle retourne une **classe de sentiment** :
+
+- `POSITIVE` → **+1**  
+- `NEUTRAL` → **0**  
+- `NEGATIVE` → **−1**
+
+Ces scores sont ensuite intégrés dans notre base de données.
+
 
 ## 3. Comparaison des deux approches
 
