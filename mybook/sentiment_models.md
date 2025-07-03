@@ -61,16 +61,21 @@ Chaque tweet est analysé individuellement, et le modèle retourne une **classe 
 Ces scores sont ensuite intégrés dans notre base de données.
 
 ---
+### 🎯 Le principe de l’attention
 
-## 3. Schéma de traitement appliqué aux tweets
+Chaque mot dans une phrase va chercher à comprendre **à quels autres mots il doit faire attention** pour bien interpréter le sens global.  
+Cela repose sur trois vecteurs :
 
-Le diagramme suivant illustre l’enchaînement des étapes dans notre pipeline de traitement du sentiment à partir des tweets collectés :
+- **Q (Query)** : ce que le mot cherche à comprendre
+- **K (Key)** : les mots potentiellement utiles
+- **V (Value)** : les informations que ces mots contiennent
 
-![Analyse de sentiment via Transformers](diagramme_transformers1.png)
-
+Le poids d’attention entre deux mots est calculé par :
+```math
+\text{Attention}(Q_i, K_j) = \frac{Q_i \cdot K_j}{\sqrt{d_k}}
 ---
 
-## 4. Comparaison des deux approches
+## 3. Comparaison des deux approches
 
 | Critère                        | VADER                     | Transformers financiers         |
 |-------------------------------|---------------------------|---------------------------------|
@@ -85,14 +90,5 @@ Nous avons utilisé VADER comme **point de référence rapide** et facilement in
 
 ---
 
-## 5. Pour aller plus loin
-
-Pour comprendre plus en détail le fonctionnement des Transformers et du mécanisme d’attention, nous recommandons cette visualisation interactive :
-
-🔗 [Transformer Visualizer – Polo Club](https://poloclub.github.io/transformer-explainer/)
-
-Ce site permet d’explorer les flux d’attention et la façon dont chaque mot est influencé par les autres dans une phrase.
-
----
 
 Dans la section suivante, nous analyserons comment les scores de sentiment obtenus évoluent dans le temps et comment ils sont corrélés avec les cours boursiers de Tesla.
