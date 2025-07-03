@@ -16,20 +16,20 @@ On va donc expliquer :
 
 ## La boucle quotidienne
 
-Chaque jour, le modèle suit les étapes suivantes :
+Chaque jour t, le modèle suit les étapes suivantes :
 
-1. Il sélectionne une **fenêtre glissante** des **N derniers mois**.
-2. Sur cette fenêtre, il effectue une **recherche aléatoire de paramètres** :
-   - poids appliqués aux scores de sentiment,
-   - seuils d’achat et de vente,
-   - pondération des tweets vérifiés.
-3. Pour chaque combinaison testée, il **simule la stratégie de trading** sur la période passée.
-4. Il identifie la configuration ayant obtenu le **meilleur rendement**.
-5. Il utilise ces **paramètres optimaux** pour générer le **signal du jour** (achat, vente ou neutre).
-6. Il exécute le trade correspondant à la fermeture du marché.
-7. Il met à jour le portefeuille et **log les performances**.
+1. Il sélectionne une **fenêtre historique couvrant les N derniers mois jusqu’au jour t-1**, afin de disposer d’un historique récent et pertinent.
+2. Sur cette fenêtre, il applique une série de **simulations de trading**, en testant différentes combinaisons de paramètres via une **recherche aléatoire** :
+   - les **poids** appliqués aux différents scores de sentiment,
+   - les **seuils d’achat et de vente**,
+   - la **pondération donnée aux tweets vérifiés**.
+3. Pour chaque combinaison, il **simule la performance de la stratégie** sur la période considérée.
+4. Il identifie la configuration ayant généré le **meilleur rendement cumulé** (ou ajusté au risque).
+5. Il utilise ces **paramètres optimaux** pour produire un **signal de décision pour la journée en cours** : achat, vente ou position neutre.
+6. Il exécute le trade correspondant à la **fermeture du marché**.
+7. Il met à jour le portefeuille et **enregistre les performances** dans les logs.
 
-> Cette approche n’est pas un entraînement au sens machine learning, mais une **optimisation adaptative basée sur backtests répétés**. Elle permet au modèle de s’ajuster chaque jour aux nouvelles dynamiques du marché.
+> Cette approche permet à la stratégie de s’adapter continuellement à l'évolution du sentiment collectif et des conditions de marché, tout en intégrant un processus d’optimisation léger mais réactif.
 
 
 ---

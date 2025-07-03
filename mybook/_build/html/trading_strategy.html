@@ -417,24 +417,24 @@ document.write(`
 <hr class="docutils" />
 <section id="la-boucle-quotidienne">
 <h2>La boucle quotidienne<a class="headerlink" href="#la-boucle-quotidienne" title="Link to this heading">#</a></h2>
-<p>Chaque jour, le modèle suit les étapes suivantes :</p>
+<p>Chaque jour t, le modèle suit les étapes suivantes :</p>
 <ol class="arabic simple">
-<li><p>Il sélectionne une <strong>fenêtre glissante</strong> des <strong>N derniers mois</strong>.</p></li>
-<li><p>Sur cette fenêtre, il effectue une <strong>recherche aléatoire de paramètres</strong> :</p>
+<li><p>Il sélectionne une <strong>fenêtre historique couvrant les N derniers mois jusqu’au jour t-1</strong>, afin de disposer d’un historique récent et pertinent.</p></li>
+<li><p>Sur cette fenêtre, il applique une série de <strong>simulations de trading</strong>, en testant différentes combinaisons de paramètres via une <strong>recherche aléatoire</strong> :</p>
 <ul class="simple">
-<li><p>poids appliqués aux scores de sentiment,</p></li>
-<li><p>seuils d’achat et de vente,</p></li>
-<li><p>pondération des tweets vérifiés.</p></li>
+<li><p>les <strong>poids</strong> appliqués aux différents scores de sentiment,</p></li>
+<li><p>les <strong>seuils d’achat et de vente</strong>,</p></li>
+<li><p>la <strong>pondération donnée aux tweets vérifiés</strong>.</p></li>
 </ul>
 </li>
-<li><p>Pour chaque combinaison testée, il <strong>simule la stratégie de trading</strong> sur la période passée.</p></li>
-<li><p>Il identifie la configuration ayant obtenu le <strong>meilleur rendement</strong>.</p></li>
-<li><p>Il utilise ces <strong>paramètres optimaux</strong> pour générer le <strong>signal du jour</strong> (achat, vente ou neutre).</p></li>
-<li><p>Il exécute le trade correspondant à la fermeture du marché.</p></li>
-<li><p>Il met à jour le portefeuille et <strong>log les performances</strong>.</p></li>
+<li><p>Pour chaque combinaison, il <strong>simule la performance de la stratégie</strong> sur la période considérée.</p></li>
+<li><p>Il identifie la configuration ayant généré le <strong>meilleur rendement cumulé</strong> (ou ajusté au risque).</p></li>
+<li><p>Il utilise ces <strong>paramètres optimaux</strong> pour produire un <strong>signal de décision pour la journée en cours</strong> : achat, vente ou position neutre.</p></li>
+<li><p>Il exécute le trade correspondant à la <strong>fermeture du marché</strong>.</p></li>
+<li><p>Il met à jour le portefeuille et <strong>enregistre les performances</strong> dans les logs.</p></li>
 </ol>
 <blockquote>
-<div><p>Cette approche n’est pas un entraînement au sens machine learning, mais une <strong>optimisation adaptative basée sur backtests répétés</strong>. Elle permet au modèle de s’ajuster chaque jour aux nouvelles dynamiques du marché.</p>
+<div><p>Cette approche permet à la stratégie de s’adapter continuellement à l’évolution du sentiment collectif et des conditions de marché, tout en intégrant un processus d’optimisation léger mais réactif.</p>
 </div></blockquote>
 </section>
 <hr class="docutils" />
