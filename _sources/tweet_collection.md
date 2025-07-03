@@ -31,7 +31,7 @@ Chaque tweet est enrichi par **4 scores de sentiment** :
 - 1 issu de **VADER** (modèle lexical basé sur des règles),
 - 3 issus de **Transformers spécialisés dans la finance**.
 
-Les résultats sont sauvegardés en **CSV mensuels**, ainsi qu’un fichier global agrégé.
+
 
 
 ## Scraping sans API
@@ -112,6 +112,6 @@ Chaque ligne correspond à un tweet enrichi de métadonnées et de scores.
 
 ---
 
-## 🔗 Pour aller plus loin
+
 
 👉 Prochaine étape : croiser les tweets avec les **cours boursiers de Tesla** pour étudier les corrélations et construire des indicateurs de sentiment.

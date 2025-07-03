@@ -186,6 +186,8 @@
 <li class="toctree-l1"><a class="reference internal" href="sentiment_analysis_1.html">🚶‍♂️ Vers une stratégie de trading simple</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">📈 Présentation du modèle de trading adaptatif</a></li>
 <li class="toctree-l1"><a class="reference internal" href="trading_strategy_1.html">📊 Analyse des performances</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MDT.html">🧩 Méthode de travail</a></li>
+<li class="toctree-l1"><a class="reference internal" href="remerciements%26sources.html">🙏 Remerciements et Sources</a></li>
 </ul>
 
     </div>
@@ -403,7 +405,7 @@ document.write(`
 <p>Dans cette section, on présente la <strong>logique de fonctionnement</strong> du modèle de trading développé dans ce projet.</p>
 <p>L’idée principale est simple :</p>
 <blockquote>
-<div><p>Chaque jour, le modèle s’adapte aux données les plus récentes pour décider s’il faut acheter, vendre ou rester neutre.</p>
+<div><p>Chaque jour, le modèle s’adapte aux données précédentes pour décider s’il faut acheter, vendre ou rester neutre.</p>
 </div></blockquote>
 <p>On va donc expliquer :</p>
 <ul class="simple">
@@ -417,19 +419,23 @@ document.write(`
 <h2>La boucle quotidienne<a class="headerlink" href="#la-boucle-quotidienne" title="Link to this heading">#</a></h2>
 <p>Chaque jour, le modèle suit les étapes suivantes :</p>
 <ol class="arabic simple">
-<li><p>Il s’entraîne sur les données des <strong>N dernières périodes</strong> (souvent 1 ou 2 mois).</p></li>
-<li><p>Il teste <strong>plusieurs combinaisons de paramètres</strong> via une recherche aléatoire :</p>
+<li><p>Il sélectionne une <strong>fenêtre glissante</strong> des <strong>N derniers mois</strong>.</p></li>
+<li><p>Sur cette fenêtre, il effectue une <strong>recherche aléatoire de paramètres</strong> :</p>
 <ul class="simple">
 <li><p>poids appliqués aux scores de sentiment,</p></li>
 <li><p>seuils d’achat et de vente,</p></li>
 <li><p>pondération des tweets vérifiés.</p></li>
 </ul>
 </li>
-<li><p>Il sélectionne la configuration qui aurait donné le meilleur résultat sur l’historique.</p></li>
-<li><p>Il utilise cette configuration pour <strong>générer un signal</strong> pour la journée en cours.</p></li>
-<li><p>Il <strong>exécute le trade</strong> (achat, vente ou rien).</p></li>
-<li><p>Il met à jour le portefeuille et <strong>enregistre les résultats</strong>.</p></li>
+<li><p>Pour chaque combinaison testée, il <strong>simule la stratégie de trading</strong> sur la période passée.</p></li>
+<li><p>Il identifie la configuration ayant obtenu le <strong>meilleur rendement</strong>.</p></li>
+<li><p>Il utilise ces <strong>paramètres optimaux</strong> pour générer le <strong>signal du jour</strong> (achat, vente ou neutre).</p></li>
+<li><p>Il exécute le trade correspondant à la fermeture du marché.</p></li>
+<li><p>Il met à jour le portefeuille et <strong>log les performances</strong>.</p></li>
 </ol>
+<blockquote>
+<div><p>Cette approche n’est pas un entraînement au sens machine learning, mais une <strong>optimisation adaptative basée sur backtests répétés</strong>. Elle permet au modèle de s’ajuster chaque jour aux nouvelles dynamiques du marché.</p>
+</div></blockquote>
 </section>
 <hr class="docutils" />
 <section id="ce-que-le-modele-ajuste-chaque-jour">
