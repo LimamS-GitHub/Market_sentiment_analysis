@@ -392,12 +392,11 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comprendre-les-transformers-modeles-contextuels-par-attention">2. comprendre Les Transformers : modèles contextuels par attention</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fonctionnement-general">Fonctionnement général</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#le-principe-de-lattention">🎯 Le principe de l’attention</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modeles-utilises-dans-notre-projet">Modèles utilisés dans notre projet</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#schema-de-traitement-applique-aux-tweets">3. Schéma de traitement appliqué aux tweets</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparaison-des-deux-approches">4. Comparaison des deux approches</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pour-aller-plus-loin">5. Pour aller plus loin</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparaison-des-deux-approches">3. Comparaison des deux approches</a></li>
 </ul>
             </nav>
         </div>
@@ -452,6 +451,28 @@ Contrairement aux approches séquentielles (RNN, LSTM), ils traitent l’ensembl
 <p>Chaque mot est converti en un vecteur, puis comparé aux autres mots du texte via des <strong>poids d’attention</strong>.<br />
 Cela permet de modéliser le contexte d’un mot selon sa relation avec les autres termes.</p>
 </section>
+<hr class="docutils" />
+<section id="le-principe-de-lattention">
+<h3>🎯 Le principe de l’attention<a class="headerlink" href="#le-principe-de-lattention" title="Link to this heading">#</a></h3>
+<p>Chaque mot dans une phrase va chercher à comprendre <strong>à quels autres mots il doit faire attention</strong> pour bien interpréter le sens global.<br />
+Cela repose sur trois vecteurs :</p>
+<ul class="simple">
+<li><p><strong>Q (Query)</strong> : ce que le mot cherche à comprendre</p></li>
+<li><p><strong>K (Key)</strong> : les mots potentiellement utiles</p></li>
+<li><p><strong>V (Value)</strong> : les informations que ces mots contiennent</p></li>
+</ul>
+<p>Le poids d’attention entre deux mots est calculé par :</p>
+<div class="math notranslate nohighlight">
+\[
+\text{Attention}(Q_i, K_j) = \frac{Q_i \cdot K_j}{\sqrt{d_k}}
+\]</div>
+<p>où :</p>
+<p>-( <code class="docutils literal notranslate"><span class="pre">Qᵢ</span> <span class="pre">⋅</span> <span class="pre">Kⱼ</span></code> ) est le produit scalaire entre les vecteurs de requête et de clé,</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">dₖ</span></code>est la dimension des vecteurs clés, utilisée comme facteur de normalisation.</p></li>
+</ul>
+<p>Ensuite, une <strong>fonction softmax</strong> est appliquée pour convertir les scores en <strong>poids positifs</strong> dont la somme est égale à 1 (distribution de probabilité).</p>
+</section>
 <section id="modeles-utilises-dans-notre-projet">
 <h3>Modèles utilisés dans notre projet<a class="headerlink" href="#modeles-utilises-dans-notre-projet" title="Link to this heading">#</a></h3>
 <p>Nous avons appliqué plusieurs Transformers spécialisés dans le domaine financier :</p>
@@ -469,15 +490,8 @@ Cela permet de modéliser le contexte d’un mot selon sa relation avec les autr
 <p>Ces scores sont ensuite intégrés dans notre base de données.</p>
 </section>
 </section>
-<hr class="docutils" />
-<section id="schema-de-traitement-applique-aux-tweets">
-<h2>3. Schéma de traitement appliqué aux tweets<a class="headerlink" href="#schema-de-traitement-applique-aux-tweets" title="Link to this heading">#</a></h2>
-<p>Le diagramme suivant illustre l’enchaînement des étapes dans notre pipeline de traitement du sentiment à partir des tweets collectés :</p>
-<p><img alt="Analyse de sentiment via Transformers" src="_images/diagramme_transformers1.png" /></p>
-</section>
-<hr class="docutils" />
 <section id="comparaison-des-deux-approches">
-<h2>4. Comparaison des deux approches<a class="headerlink" href="#comparaison-des-deux-approches" title="Link to this heading">#</a></h2>
+<h2>3. Comparaison des deux approches<a class="headerlink" href="#comparaison-des-deux-approches" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Critère</p></th>
@@ -514,13 +528,6 @@ Cela permet de modéliser le contexte d’un mot selon sa relation avec les autr
 </table>
 </div>
 <p>Nous avons utilisé VADER comme <strong>point de référence rapide</strong> et facilement interprétable, tandis que les Transformers ont été mobilisés pour fournir une <strong>analyse fine</strong>, tenant compte du langage spécifique à la finance.</p>
-</section>
-<hr class="docutils" />
-<section id="pour-aller-plus-loin">
-<h2>5. Pour aller plus loin<a class="headerlink" href="#pour-aller-plus-loin" title="Link to this heading">#</a></h2>
-<p>Pour comprendre plus en détail le fonctionnement des Transformers et du mécanisme d’attention, nous recommandons cette visualisation interactive :</p>
-<p>🔗 <a class="reference external" href="https://poloclub.github.io/transformer-explainer/">Transformer Visualizer – Polo Club</a></p>
-<p>Ce site permet d’explorer les flux d’attention et la façon dont chaque mot est influencé par les autres dans une phrase.</p>
 <hr class="docutils" />
 <p>Dans la section suivante, nous analyserons comment les scores de sentiment obtenus évoluent dans le temps et comment ils sont corrélés avec les cours boursiers de Tesla.</p>
 </section>
@@ -597,12 +604,11 @@ Cela permet de modéliser le contexte d’un mot selon sa relation avec les autr
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comprendre-les-transformers-modeles-contextuels-par-attention">2. comprendre Les Transformers : modèles contextuels par attention</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fonctionnement-general">Fonctionnement général</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#le-principe-de-lattention">🎯 Le principe de l’attention</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modeles-utilises-dans-notre-projet">Modèles utilisés dans notre projet</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#schema-de-traitement-applique-aux-tweets">3. Schéma de traitement appliqué aux tweets</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparaison-des-deux-approches">4. Comparaison des deux approches</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pour-aller-plus-loin">5. Pour aller plus loin</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparaison-des-deux-approches">3. Comparaison des deux approches</a></li>
 </ul>
   </nav></div>
 

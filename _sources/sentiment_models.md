@@ -44,6 +44,32 @@ Contrairement aux approches séquentielles (RNN, LSTM), ils traitent l’ensembl
 Chaque mot est converti en un vecteur, puis comparé aux autres mots du texte via des **poids d’attention**.  
 Cela permet de modéliser le contexte d’un mot selon sa relation avec les autres termes.
 
+
+---
+### 🎯 Le principe de l’attention
+
+
+Chaque mot dans une phrase va chercher à comprendre **à quels autres mots il doit faire attention** pour bien interpréter le sens global.  
+Cela repose sur trois vecteurs :
+
+- **Q (Query)** : ce que le mot cherche à comprendre
+- **K (Key)** : les mots potentiellement utiles
+- **V (Value)** : les informations que ces mots contiennent
+
+Le poids d’attention entre deux mots est calculé par :
+
+$$
+\text{Attention}(Q_i, K_j) = \frac{Q_i \cdot K_j}{\sqrt{d_k}}
+$$
+
+où :
+
+-( `Qᵢ ⋅ Kⱼ` ) est le produit scalaire entre les vecteurs de requête et de clé,
+- `dₖ`est la dimension des vecteurs clés, utilisée comme facteur de normalisation.
+
+Ensuite, une **fonction softmax** est appliquée pour convertir les scores en **poids positifs** dont la somme est égale à 1 (distribution de probabilité).
+
+
 ### Modèles utilisés dans notre projet
 
 Nous avons appliqué plusieurs Transformers spécialisés dans le domaine financier :
@@ -60,17 +86,8 @@ Chaque tweet est analysé individuellement, et le modèle retourne une **classe 
 
 Ces scores sont ensuite intégrés dans notre base de données.
 
----
 
-## 3. Schéma de traitement appliqué aux tweets
-
-Le diagramme suivant illustre l’enchaînement des étapes dans notre pipeline de traitement du sentiment à partir des tweets collectés :
-
-![Analyse de sentiment via Transformers](diagramme_transformers1.png)
-
----
-
-## 4. Comparaison des deux approches
+## 3. Comparaison des deux approches
 
 | Critère                        | VADER                     | Transformers financiers         |
 |-------------------------------|---------------------------|---------------------------------|
@@ -85,14 +102,5 @@ Nous avons utilisé VADER comme **point de référence rapide** et facilement in
 
 ---
 
-## 5. Pour aller plus loin
-
-Pour comprendre plus en détail le fonctionnement des Transformers et du mécanisme d’attention, nous recommandons cette visualisation interactive :
-
-🔗 [Transformer Visualizer – Polo Club](https://poloclub.github.io/transformer-explainer/)
-
-Ce site permet d’explorer les flux d’attention et la façon dont chaque mot est influencé par les autres dans une phrase.
-
----
 
 Dans la section suivante, nous analyserons comment les scores de sentiment obtenus évoluent dans le temps et comment ils sont corrélés avec les cours boursiers de Tesla.
