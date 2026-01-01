@@ -81,5 +81,5 @@ flowchart TD
 * **FinancialBERT-SA** – <https://huggingface.co/ahmedrachid/FinancialBERT-Sentiment-Analysis>  
 * **DistilRoBERTa-FinNews** – <https://huggingface.co/mrm8488/distilroberta-finetuned-financial-news-sentiment-analysis>  
 * **DeBERTa v3-FinNews** – <https://huggingface.co/mrm8488/deberta-v3-ft-financial-news-sentiment-analysis>  
-
+* **Report with more explanation in french** - <https://limams-github.github.io/Market_sentiment_analysis/>
 > **Disclaimer:** Educational use only. Nothing here is financial advice.
